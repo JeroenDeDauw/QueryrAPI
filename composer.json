@@ -55,7 +55,7 @@
 			"composer cs"
 		],
 		"phpcs": [
-			"vendor/bin/phpcs src/* tests/* --standard=phpcs.xml --extensions=php -sp"
+			"vendor/bin/phpcs src/* tests/* app/* web/* --standard=phpcs.xml --extensions=php -sp"
 		],
 		"phpmd": [
 			"vendor/bin/phpmd src/,tests/ text phpmd.xml"
