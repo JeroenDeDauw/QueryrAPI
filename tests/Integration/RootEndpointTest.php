@@ -1,18 +1,14 @@
 <?php
 
-use Silex\Application;
-use Silex\WebTestCase;
+namespace Queryr\WebApi\Tests\Integration;
 
-class ContactFormTest extends WebTestCase {
+use Queryr\WebApi\Tests\ApiTestCase;
 
-	public function createApplication() : Application {
-		$app = require __DIR__. ' /../../web/index.php';
-
-		$app['debug'] = true;
-		unset( $app['exception_handler'] );
-
-		return $app;
-	}
+/**
+ * @licence GNU GPL v2+
+ * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ */
+class ContactFormTest extends ApiTestCase {
 
 	public function testRootReturnsJson() {
 		$client = $this->createClient();

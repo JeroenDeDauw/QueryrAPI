@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * @licence GNU GPL v2+
+ * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ */
+
+/**
  * @var \Silex\Application $app
  */
 $app = require __DIR__ . '/../app/bootstrap.php';
