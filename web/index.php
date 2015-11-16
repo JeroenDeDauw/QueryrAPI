@@ -8,9 +8,7 @@ $app = require_once __DIR__ . '/../app/bootstrap.php';
 $app->get(
 	'/',
 	function() use ($app) {
-		$urlBuilder = new \Queryr\WebApi\UrlBuilder(
-			array_key_exists( 'HTTP_HOST', $_SERVER ) ? 'http://' . $_SERVER['HTTP_HOST'] : 'testurl'
-		);
+		$urlBuilder = $app['url_builder'];
 
 		$api = [
 			'items_url' => $urlBuilder->getApiPath( 'items{/item_id}' ),
@@ -21,8 +19,5 @@ $app->get(
 		return $app->json( $api );
 	}
 );
-
-// TODO: disable
-$app['debug'] = true;
 
 $app->run();

@@ -16,6 +16,9 @@ $app->after( function( Request $request, Response $response ) {
 	return $response;
 } );
 
+// TODO: disable for production
+$app['debug'] = true;
+
 // TODO: enable for production
 //$app->error( function ( \Exception $e, $code ) {
 //	return new JsonResponse(
@@ -26,5 +29,11 @@ $app->after( function( Request $request, Response $response ) {
 //		$code
 //	);
 //} );
+
+$app['url_builder'] = function() {
+	return new \Queryr\WebApi\UrlBuilder(
+		array_key_exists( 'HTTP_HOST', $_SERVER ) ? 'http://' . $_SERVER['HTTP_HOST'] : 'testurl'
+	);
+};
 
 return $app;
