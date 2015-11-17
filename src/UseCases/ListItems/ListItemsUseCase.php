@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Queryr\WebApi\UseCases\ListItems;
 
 use Queryr\EntityStore\Data\ItemInfo;

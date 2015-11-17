@@ -50,8 +50,9 @@ $app->get(
 	'properties',
 		function( Request $request ) use ( $app, $apiFactory ) {
 			$listingRequest = new PropertyListingRequest();
-			// TODO: strict validation of per_page
+			// TODO: strict validation arguments
 			$listingRequest->setPerPage( (int)$request->get( 'per_page', 100 ) );
+			$listingRequest->setPage( (int)$request->get( 'page', 1 ) );
 
 			$items = $apiFactory->newListPropertiesUseCase()->listProperties( $listingRequest );
 

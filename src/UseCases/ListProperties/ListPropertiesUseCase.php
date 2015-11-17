@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Queryr\WebApi\UseCases\ListProperties;
 
 use Queryr\EntityStore\Data\PropertyInfo;
@@ -36,7 +38,7 @@ class ListPropertiesUseCase {
 	private function getPropertyInfo( PropertyListingRequest $request ) {
 		return $this->propertyStore->getPropertyInfo(
 			$request->getPerPage(),
-			0
+			( $request->getPage() - 1 ) * $request->getPerPage()
 		);
 	}
 

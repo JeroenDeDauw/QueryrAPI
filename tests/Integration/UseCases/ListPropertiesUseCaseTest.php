@@ -34,6 +34,7 @@ class ListPropertiesUseCaseTest extends \PHPUnit_Framework_TestCase {
 
 		$request = new PropertyListingRequest();
 		$request->setPerPage( 100 );
+		$request->setPage( 1 );
 
 		$this->assertEquals(
 			new PropertyList( [] ),
@@ -83,6 +84,7 @@ class ListPropertiesUseCaseTest extends \PHPUnit_Framework_TestCase {
 
 		$request = new PropertyListingRequest();
 		$request->setPerPage( 100 );
+		$request->setPage( 1 );
 
 		$this->assertEquals(
 			new PropertyList( [
@@ -103,6 +105,46 @@ class ListPropertiesUseCaseTest extends \PHPUnit_Framework_TestCase {
 					'wikibase-item',
 					'https://www.wikidata.org/entity/P3',
 					'http://test.url/properties/P3'
+				),
+			] ),
+			$this->apiFactory->newListPropertiesUseCase()->listProperties( $request )
+		);
+	}
+
+	public function testLimitIsApplied() {
+		$this->storeThreeProperties();
+
+		$request = new PropertyListingRequest();
+		$request->setPerPage( 1 );
+		$request->setPage( 1 );
+
+		$this->assertEquals(
+			new PropertyList( [
+				new PropertyListElement(
+					new PropertyId( 'P1' ),
+					'wikibase-item',
+					'https://www.wikidata.org/entity/P1',
+					'http://test.url/properties/P1'
+				),
+			] ),
+			$this->apiFactory->newListPropertiesUseCase()->listProperties( $request )
+		);
+	}
+
+	public function testOffsetIsApplied() {
+		$this->storeThreeProperties();
+
+		$request = new PropertyListingRequest();
+		$request->setPerPage( 1 );
+		$request->setPage( 2 );
+
+		$this->assertEquals(
+			new PropertyList( [
+				new PropertyListElement(
+					new PropertyId( 'P2' ),
+					'commonsMedia',
+					'https://www.wikidata.org/entity/P2',
+					'http://test.url/properties/P2'
 				),
 			] ),
 			$this->apiFactory->newListPropertiesUseCase()->listProperties( $request )

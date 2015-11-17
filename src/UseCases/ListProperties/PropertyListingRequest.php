@@ -11,6 +11,7 @@ namespace Queryr\WebApi\UseCases\ListProperties;
 class PropertyListingRequest {
 
 	private $limit;
+	private $page;
 
 	public function setPerPage( int $limit ) {
 		$this->limit = $limit;
@@ -18,6 +19,14 @@ class PropertyListingRequest {
 
 	public function getPerPage(): int {
 		return $this->limit;
+	}
+
+	public function setPage( int $page ) {
+		$this->page = $page;
+	}
+
+	public function getPage(): int {
+		return $this->page;
 	}
 
 }
