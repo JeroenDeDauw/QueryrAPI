@@ -7,6 +7,8 @@ use Doctrine\DBAL\DriverManager;
 use Queryr\EntityStore\EntityStoreConfig;
 use Queryr\EntityStore\EntityStoreFactory;
 use Queryr\EntityStore\EntityStoreInstaller;
+use Queryr\EntityStore\ItemStore;
+use Queryr\EntityStore\PropertyStore;
 use Queryr\TermStore\TermStoreConfig;
 use Queryr\TermStore\TermStoreInstaller;
 use Queryr\WebApi\UseCases\ListItems\ListItemsUseCase;
@@ -56,7 +58,7 @@ class ApiFactory {
 
 		$pimple['url_builder'] = $pimple->share( function() {
 			return new UrlBuilder(
-				array_key_exists( 'HTTP_HOST', $_SERVER ) ? 'http://' . $_SERVER['HTTP_HOST'] : 'testurl'
+				array_key_exists( 'HTTP_HOST', $_SERVER ) ? 'http://' . $_SERVER['HTTP_HOST'] : 'http://test.url'
 			);
 		} );
 
@@ -99,16 +101,24 @@ class ApiFactory {
 
 	public function newListItemsUseCase(): ListItemsUseCase {
 		return new ListItemsUseCase(
-			$this->pimple['item_store'],
-			$this->pimple['url_builder']
+			$this->getItemStore(),
+			$this->getUrlBuilder()
 		);
 	}
 
 	public function newListPropertiesUseCase(): ListPropertiesUseCase {
 		return new ListPropertiesUseCase(
-			$this->pimple['property_store'],
-			$this->pimple['url_builder']
+			$this->getPropertyStore(),
+			$this->getUrlBuilder()
 		);
+	}
+
+	public function getPropertyStore(): PropertyStore {
+		return $this->pimple['property_store'];
+	}
+
+	public function getItemStore(): ItemStore {
+		return $this->pimple['item_store'];
 	}
 
 	public function newItemListSerializer(): Serializer {

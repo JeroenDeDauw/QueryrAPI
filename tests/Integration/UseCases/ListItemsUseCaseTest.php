@@ -22,8 +22,8 @@ class ListItemsUseCaseTest extends \PHPUnit_Framework_TestCase {
 		$request->setPerPage( 100 );
 
 		$this->assertEquals(
-			new ItemList( [] ),
-			$useCase->listItems( $request )
+				new ItemList( [] ),
+				$useCase->listItems( $request )
 		);
 	}
 
