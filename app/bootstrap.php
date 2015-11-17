@@ -41,4 +41,4 @@ $app['url_builder'] = function() {
 	);
 };
 
-return $app;
+return require __DIR__ . '/routes.php';

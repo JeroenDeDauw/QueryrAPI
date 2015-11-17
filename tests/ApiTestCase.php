@@ -12,7 +12,7 @@ use Silex\WebTestCase;
 abstract class ApiTestCase extends WebTestCase {
 
 	public function createApplication() : Application {
-		$app = require __DIR__. ' /../web/index.php';
+		$app = require __DIR__. ' /../app/bootstrap.php';
 
 		$app['debug'] = true;
 		unset( $app['exception_handler'] );
