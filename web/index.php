@@ -7,6 +7,10 @@
 
 $_SERVER['REQUEST_URI'] = rtrim( $_SERVER['REQUEST_URI'], '/' );
 
+require_once __DIR__ . '/../vendor/autoload.php';
+
+$services = Queryr\WebApi\ApiServices::newFromConfig();
+
 /**
  * @var \Silex\Application $app
  */

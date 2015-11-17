@@ -6,7 +6,7 @@ namespace Queryr\WebApi\Tests\System\Endpoints;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ContactFormTest extends ApiTestCase {
+class RootEndpointTest extends ApiTestCase {
 
 	public function testRootReturnsJson() {
 		$client = $this->createClient();

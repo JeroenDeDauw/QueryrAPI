@@ -7,20 +7,20 @@
 
 declare(strict_types=1);
 
-use Queryr\WebApi\ApiServices;
 use Queryr\WebApi\UseCases\ListItems\ItemListingRequest;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
+ * These varisbles need to be in scope when this file is included:
+ *
  * @var \Silex\Application $app
+ * @var \Queryr\WebApi\ApiServices $services
  */
-
-$services = new ApiServices( $app );
 
 $app->get(
 	'/',
-	function() use ( $app ) {
-		$urlBuilder = $app['url_builder'];
+	function() use ( $app, $services ) {
+		$urlBuilder = $services->getUrlBuilder();
 
 		$api = [
 			'items_url' => $urlBuilder->getApiPath( 'items{/item_id}' ),

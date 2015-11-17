@@ -9,7 +9,11 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-require_once __DIR__ . '/../vendor/autoload.php';
+/**
+ * These variables need to be in scope when this file is included:
+ *
+ * @var \Queryr\WebApi\ApiServices $services
+ */
 
 $app = new \Silex\Application();
 
@@ -34,11 +38,5 @@ $app['debug'] = true;
 //		$code
 //	);
 //} );
-
-$app['url_builder'] = function() {
-	return new \Queryr\WebApi\UrlBuilder(
-		array_key_exists( 'HTTP_HOST', $_SERVER ) ? 'http://' . $_SERVER['HTTP_HOST'] : 'testurl'
-	);
-};
 
 return require __DIR__ . '/routes.php';
