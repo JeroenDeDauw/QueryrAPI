@@ -47,13 +47,6 @@ $app->get(
 );
 
 $app->get(
-	'items/types',
-	function() use ( $app ) {
-		return $app->json( [] );
-	}
-);
-
-$app->get(
 	'properties',
 		function( Request $request ) use ( $app, $services ) {
 			$listingRequest = new PropertyListingRequest();
