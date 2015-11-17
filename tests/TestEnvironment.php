@@ -2,7 +2,7 @@
 
 namespace Queryr\WebApi\Tests;
 
-use Queryr\WebApi\ApiServices;
+use Queryr\WebApi\ApiFactory;
 
 /**
  * @licence GNU GPL v2+
@@ -15,12 +15,12 @@ class TestEnvironment {
 	}
 
 	/**
-	 * @var ApiServices
+	 * @var ApiFactory
 	 */
 	private $factory;
 
 	private function __construct() {
-		$this->factory = ApiServices::newFromConnectionData( [
+		$this->factory = ApiFactory::newFromConnectionData( [
 			'driver' => 'pdo_sqlite',
 			'memory' => true,
 		] );
@@ -29,7 +29,7 @@ class TestEnvironment {
 		$this->factory->newTermStoreInstaller()->install();
 	}
 
-	public function getServices(): ApiServices {
+	public function getFactory(): ApiFactory {
 		return $this->factory;
 	}
 

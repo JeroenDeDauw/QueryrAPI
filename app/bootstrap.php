@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * These variables need to be in scope when this file is included:
  *
- * @var \Queryr\WebApi\ApiServices $services
+ * @var \Queryr\WebApi\ApiFactory $apiFactory
  */
 
 $app = new \Silex\Application();

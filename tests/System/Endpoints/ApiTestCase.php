@@ -13,7 +13,7 @@ use Silex\WebTestCase;
 abstract class ApiTestCase extends WebTestCase {
 
 	public function createApplication() : Application {
-		$services = TestEnvironment::newInstance()->getServices();
+		$apiFactory = TestEnvironment::newInstance()->getFactory();
 		$app = require __DIR__ . ' /../../../app/bootstrap.php';
 
 		$app['debug'] = true;

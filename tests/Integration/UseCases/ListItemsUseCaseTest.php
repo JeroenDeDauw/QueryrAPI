@@ -16,7 +16,7 @@ use Queryr\WebApi\Tests\TestEnvironment;
 class ListItemsUseCaseTest extends \PHPUnit_Framework_TestCase {
 
 	public function testWhenNoItems_emptyListIsReturned() {
-		$useCase = TestEnvironment::newInstance()->getServices()->newListItemsUseCase();
+		$useCase = TestEnvironment::newInstance()->getFactory()->newListItemsUseCase();
 
 		$request = new ItemListingRequest();
 		$request->setPerPage( 100 );

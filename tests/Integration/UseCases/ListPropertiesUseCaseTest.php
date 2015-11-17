@@ -16,7 +16,7 @@ use Queryr\WebApi\UseCases\ListProperties\PropertyListingRequest;
 class ListPropertiesUseCaseTest extends \PHPUnit_Framework_TestCase {
 
 	public function testWhenNoProperties_emptyListIsReturned() {
-		$useCase = TestEnvironment::newInstance()->getServices()->newListPropertiesUseCase();
+		$useCase = TestEnvironment::newInstance()->getFactory()->newListPropertiesUseCase();
 
 		$request = new PropertyListingRequest();
 		$request->setPerPage( 100 );
