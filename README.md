@@ -5,6 +5,16 @@
 * PHP 7
 * php5-sqlite (only needed for running the tests)
 
+## Installation
+
+    composer install
+    cp app/config/db-example.json app/config/db.json
+
+## Running the API
+
+	cd web
+	php -S localhost:8000
+
 ## Running the tests
 
 For tests only
