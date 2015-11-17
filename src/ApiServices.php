@@ -10,6 +10,7 @@ use Queryr\EntityStore\EntityStoreInstaller;
 use Queryr\TermStore\TermStoreConfig;
 use Queryr\TermStore\TermStoreInstaller;
 use Queryr\WebApi\UseCases\ListItems\ListItemsUseCase;
+use Queryr\WebApi\UseCases\ListProperties\ListPropertiesUseCase;
 use Serializers\Serializer;
 use Silex\Application;
 
@@ -49,6 +50,10 @@ class ApiServices {
 			return $this->getEntityStoreFactory()->newItemStore();
 		} );
 
+		$pimple['property_store'] = $pimple->share( function() use ( $pimple ) {
+			return $this->getEntityStoreFactory()->newPropertyStore();
+		} );
+
 		$pimple['url_builder'] = $pimple->share( function() {
 			return new UrlBuilder(
 				array_key_exists( 'HTTP_HOST', $_SERVER ) ? 'http://' . $_SERVER['HTTP_HOST'] : 'testurl'
@@ -56,17 +61,6 @@ class ApiServices {
 		} );
 
 		$this->pimple = $pimple;
-	}
-
-	public function newListItemsUseCase(): ListItemsUseCase {
-		return new ListItemsUseCase(
-			$this->pimple['item_store'],
-			$this->pimple['url_builder']
-		);
-	}
-
-	public function newItemListSerializer(): Serializer {
-		return ( new \Queryr\Serialization\SerializerFactory() )->newItemListSerializer();
 	}
 
 	public function newEntityStoreInstaller(): EntityStoreInstaller {
@@ -101,6 +95,28 @@ class ApiServices {
 
 	public function getUrlBuilder(): UrlBuilder {
 		return $this->pimple['url_builder'];
+	}
+
+	public function newListItemsUseCase(): ListItemsUseCase {
+		return new ListItemsUseCase(
+			$this->pimple['item_store'],
+			$this->pimple['url_builder']
+		);
+	}
+
+	public function newListPropertiesUseCase(): ListPropertiesUseCase {
+		return new ListPropertiesUseCase(
+			$this->pimple['property_store'],
+			$this->pimple['url_builder']
+		);
+	}
+
+	public function newItemListSerializer(): Serializer {
+		return ( new \Queryr\Serialization\SerializerFactory() )->newItemListSerializer();
+	}
+
+	public function newPropertyListSerializer() {
+		return ( new \Queryr\Serialization\SerializerFactory() )->newPropertyListSerializer();
 	}
 
 }

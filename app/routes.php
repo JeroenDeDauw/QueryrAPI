@@ -8,6 +8,7 @@
 declare(strict_types=1);
 
 use Queryr\WebApi\UseCases\ListItems\ItemListingRequest;
+use Queryr\WebApi\UseCases\ListProperties\PropertyListingRequest;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -54,9 +55,15 @@ $app->get(
 
 $app->get(
 	'properties',
-	function() use ( $app ) {
-		return $app->json( [] );
-	}
+		function( Request $request ) use ( $app, $services ) {
+			$listingRequest = new PropertyListingRequest();
+			// TODO: strict validation of per_page
+			$listingRequest->setPerPage( (int)$request->get( 'per_page', 100 ) );
+
+			$items = $services->newListPropertiesUseCase()->listProperties( $listingRequest );
+
+			return $app->json( $services->newPropertyListSerializer()->serialize( $items ) );
+		}
 );
 
 return $app;
