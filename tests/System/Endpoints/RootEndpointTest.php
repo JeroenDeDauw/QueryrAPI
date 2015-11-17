@@ -1,8 +1,6 @@
 <?php
 
-namespace Queryr\WebApi\Tests\Integration;
-
-use Queryr\WebApi\Tests\ApiTestCase;
+namespace Queryr\WebApi\Tests\System\Endpoints;
 
 /**
  * @licence GNU GPL v2+

@@ -1,19 +1,17 @@
 <?php
 
-namespace Queryr\WebApi\Tests\Integration;
-
-use Queryr\WebApi\Tests\ApiTestCase;
+namespace Queryr\WebApi\Tests\System\Endpoints;
 
 /**
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ItemsEndpointTest extends ApiTestCase {
+class PropertiesEndpointTest extends ApiTestCase {
 
-	public function testItemsEndpointReturnsEmptyJsonArray() {
+	public function testPropertiesEndpointReturnsEmptyJsonArray() {
 		$client = $this->createClient();
 
-		$client->request( 'GET', '/items' );
+		$client->request( 'GET', '/properties' );
 
 		$this->assertTrue( $client->getResponse()->isSuccessful(), 'request is successful' );
 		$this->assertJson( $client->getResponse()->getContent(), 'response is json' );

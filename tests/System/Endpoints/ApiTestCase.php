@@ -1,6 +1,6 @@
 <?php
 
-namespace Queryr\WebApi\Tests;
+namespace Queryr\WebApi\Tests\System\Endpoints;
 
 use Silex\Application;
 use Silex\WebTestCase;
@@ -12,7 +12,7 @@ use Silex\WebTestCase;
 abstract class ApiTestCase extends WebTestCase {
 
 	public function createApplication() : Application {
-		$app = require __DIR__. ' /../app/bootstrap.php';
+		$app = require __DIR__ . ' /../../../app/bootstrap.php';
 
 		$app['debug'] = true;
 		unset( $app['exception_handler'] );
