@@ -25,7 +25,6 @@ $app->get(
 
 		$api = [
 			'items_url' => $urlBuilder->getApiPath( 'items{/item_id}' ),
-			'item_types_url' => $urlBuilder->getApiPath( 'items/types' ),
 			'properties_url' => $urlBuilder->getApiPath( 'properties{/property_id}' )
 		];
 
