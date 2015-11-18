@@ -3,6 +3,9 @@
 namespace Queryr\WebApi\Tests\System\Endpoints;
 
 /**
+ * @covers Queryr\WebApi\UseCases\ListProperties\ListPropertiesUseCase
+ * @covers Queryr\WebApi\UseCases\ListProperties\PropertyListingRequest
+ *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */

@@ -8,6 +8,9 @@ use Wikibase\DataFixtures\Items\City;
 use Wikibase\DataFixtures\Items\Germany;
 
 /**
+ * @covers Queryr\WebApi\UseCases\ListItems\ListItemsUseCase
+ * @covers Queryr\WebApi\UseCases\ListItems\ItemListingRequest
+ *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
