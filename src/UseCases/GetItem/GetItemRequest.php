@@ -19,4 +19,9 @@ class GetItemRequest {
 	public function getItemId(): string {
 		return $this->itemId;
 	}
+
+	public function getLanguageCode(): string {
+		return 'en';
+	}
+
 }

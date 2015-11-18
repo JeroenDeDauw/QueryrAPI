@@ -38,4 +38,37 @@ class ItemEndpointTest extends ApiTestCase {
 		$this->assert404( $client->getResponse() );
 	}
 
+	public function testGivenKnownItemId_itemIsReturned() {
+		$this->storeThreeItems();
+		$client = $this->createClient();
+
+		$client->request( 'GET', '/items/Q64' );
+
+		$this->assertSuccessResponse(
+			(object)[
+				'id' => (object)[
+					'wikidata' => 'Q64',
+					'en_wikipedia' => 'Berlin'
+				],
+				'label' => 'Berlin',
+				'description' => 'capital city and state of Germany',
+				'data' => (object)[
+					'P17' => (object)[
+						'value' => 'Q183',
+						'type' => 'string'
+					],
+					'P31' => (object)[
+						'value' => 'Q515',
+						'type' => 'string'
+					],
+					'P281' => (object)[
+						'value' => '10115–14199',
+						'type' => 'string'
+					]
+				]
+			],
+			$client->getResponse()
+		);
+	}
+
 }
