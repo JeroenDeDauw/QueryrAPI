@@ -5,6 +5,7 @@ namespace Queryr\WebApi\Tests\System\Endpoints;
 use Wikibase\DataFixtures\Items\Berlin;
 use Wikibase\DataFixtures\Items\City;
 use Wikibase\DataFixtures\Items\Germany;
+use Wikibase\DataFixtures\Properties\PostalCodeProperty;
 
 /**
  * @covers Queryr\WebApi\UseCases\GetItem\GetItemUseCase
@@ -54,7 +55,7 @@ class ItemEndpointTest extends ApiTestCase {
 				'description' => 'capital city and state of Germany',
 				'data' => (object)[
 					'P17' => (object)[
-						'value' => 'Q183',
+						'value' => 'Q183', // TODO: denormalize
 						'type' => 'string'
 					],
 					'P31' => (object)[
@@ -70,5 +71,40 @@ class ItemEndpointTest extends ApiTestCase {
 			$client->getResponse()
 		);
 	}
+
+//	public function testGivenKnownItemIdWhenDependenciesAlsoKnown_denormalizedItemIsReturned() {
+//		$this->storeThreeItems();
+//		$this->testEnvironment->insertProperty( ( new PostalCodeProperty() )->newProperty() );
+//
+//		$client = $this->createClient();
+//
+//		$client->request( 'GET', '/items/Q64' );
+//
+//		$this->assertSuccessResponse(
+//			(object)[
+//				'id' => (object)[
+//					'wikidata' => 'Q64',
+//					'en_wikipedia' => 'Berlin'
+//				],
+//				'label' => 'Berlin',
+//				'description' => 'capital city and state of Germany',
+//				'data' => (object)[
+//					'P17' => (object)[ // TODO: denormalize
+//						'value' => 'Q183', // TODO: denormalize
+//						'type' => 'string'
+//					],
+//					'P31' => (object)[ // TODO: denormalize
+//						'value' => 'Q515',
+//						'type' => 'string'
+//					],
+//					'postal code' => (object)[
+//						'value' => '10115–14199',
+//						'type' => 'string'
+//					]
+//				]
+//			],
+//			$client->getResponse()
+//		);
+//	}
 
 }
