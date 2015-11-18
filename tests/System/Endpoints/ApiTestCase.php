@@ -2,6 +2,7 @@
 
 namespace Queryr\WebApi\Tests\System\Endpoints;
 
+use Queryr\WebApi\ApiFactory;
 use Queryr\WebApi\Tests\TestEnvironment;
 use Silex\Application;
 use Silex\WebTestCase;
@@ -12,8 +13,18 @@ use Silex\WebTestCase;
  */
 abstract class ApiTestCase extends WebTestCase {
 
+	/**
+	 * @var ApiFactory
+	 */
+	protected $apiFactory;
+
+	public function setUp() {
+		$this->apiFactory = TestEnvironment::newInstance()->getFactory();
+		parent::setUp();
+	}
+
 	public function createApplication() : Application {
-		$apiFactory = TestEnvironment::newInstance()->getFactory();
+		$apiFactory = $this->apiFactory;
 		$app = require __DIR__ . ' /../../../app/bootstrap.php';
 
 		$app['debug'] = true;
