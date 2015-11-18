@@ -41,7 +41,7 @@ class PropertyEndpointTest extends ApiTestCase {
 		);
 	}
 
-	public function testGivenLowercaseItemId_propertyIsReturned() {
+	public function testGivenLowercasePropertyId_propertyIsReturned() {
 		$this->testEnvironment->insertProperty( ( new CountryProperty() )->newProperty() );
 
 		$client = $this->createClient();
