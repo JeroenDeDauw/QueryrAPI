@@ -76,8 +76,8 @@ $app->get(
 		}
 		catch ( NoNullableReturnTypesException $ex ) {
 			return $app->json( [
+				'message' => 'Not Found',
 				'code' => 404,
-				'message' => 'Not Found'
 			], 404 );
 		}
 	}
@@ -95,8 +95,8 @@ $app->get(
 		}
 		catch ( NoNullableReturnTypesException $ex ) {
 			return $app->json( [
+				'message' => 'Not Found',
 				'code' => 404,
-				'message' => 'Not Found'
 			], 404 );
 		}
 	}

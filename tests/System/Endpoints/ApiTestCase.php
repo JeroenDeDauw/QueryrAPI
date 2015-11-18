@@ -47,14 +47,14 @@ abstract class ApiTestCase extends WebTestCase {
 		$this->assertJsonResponse( $expected, $response );
 	}
 
-	protected function assert404( Response $response ) {
+	protected function assert404( Response $response, $expectedMessage = 'Not Found' ) {
 		$this->assertSame( 404, $response->getStatusCode() );
 		$this->assertJson( $response->getContent(), 'response is json' );
 
 		$this->assertJsonResponse(
 			[
+				'message' => $expectedMessage,
 				'code' => 404,
-				'message' => 'Not Found'
 			],
 			$response
 		);
