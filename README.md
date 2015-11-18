@@ -15,6 +15,10 @@
 	cd web
 	php -S localhost:8000
 
+## API documentation
+
+This REST API is self documenting. Hit the root endpoint to get a list of available endpoints.
+
 ## Running the tests
 
 For tests only
