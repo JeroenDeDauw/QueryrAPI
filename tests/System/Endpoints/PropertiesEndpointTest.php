@@ -38,7 +38,7 @@ class PropertiesEndpointTest extends ApiTestCase {
 
 		$client->request( 'GET', '/properties?page=2' );
 
-		$this->assertJsonResponse( [], $client->getResponse() );
+		$this->assertSuccessResponse( [], $client->getResponse() );
 	}
 
 }

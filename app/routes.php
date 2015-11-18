@@ -7,6 +7,8 @@
 
 declare(strict_types=1);
 
+use Queryr\WebApi\NoNullableReturnTypesException;
+use Queryr\WebApi\UseCases\GetItem\GetItemRequest;
 use Queryr\WebApi\UseCases\ListItems\ItemListingRequest;
 use Queryr\WebApi\UseCases\ListProperties\PropertyListingRequest;
 use Symfony\Component\HttpFoundation\Request;
@@ -48,16 +50,35 @@ $app->get(
 
 $app->get(
 	'properties',
-		function( Request $request ) use ( $app, $apiFactory ) {
-			$listingRequest = new PropertyListingRequest();
-			// TODO: strict validation of arguments
-			$listingRequest->setPerPage( (int)$request->get( 'per_page', 100 ) );
-			$listingRequest->setPage( (int)$request->get( 'page', 1 ) );
+	function( Request $request ) use ( $app, $apiFactory ) {
+		$listingRequest = new PropertyListingRequest();
+		// TODO: strict validation of arguments
+		$listingRequest->setPerPage( (int)$request->get( 'per_page', 100 ) );
+		$listingRequest->setPage( (int)$request->get( 'page', 1 ) );
 
-			$items = $apiFactory->newListPropertiesUseCase()->listProperties( $listingRequest );
+		$items = $apiFactory->newListPropertiesUseCase()->listProperties( $listingRequest );
 
-			return $app->json( $apiFactory->newPropertyListSerializer()->serialize( $items ) );
+		return $app->json( $apiFactory->newPropertyListSerializer()->serialize( $items ) );
+	}
+);
+
+$app->get(
+	'items/{id}',
+	function( \Silex\Application $app, string $id ) use ( $apiFactory ) {
+		$listingRequest = new GetItemRequest( $id );
+
+		try {
+			$item = $apiFactory->newGetItemUseCase()->getItem( $listingRequest );
+			$json = $apiFactory->newSimpleItemSerializer()->serialize( $item );
+			return $app->json( $json, 200 );
 		}
+		catch ( NoNullableReturnTypesException $ex ) {
+			return $app->json( [
+				'code' => 404,
+				'message' => 'Not Found'
+			], 404 );
+		}
+	}
 );
 
 return $app;

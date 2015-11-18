@@ -25,18 +25,14 @@ $app->after( function( Request $request, Response $response ) {
 	return $response;
 } );
 
-// TODO: disable for production
-$app['debug'] = true;
-
-// TODO: enable for production
-//$app->error( function ( \Exception $e, $code ) {
-//	return new JsonResponse(
-//		[
-//			'message' => $e->getMessage(),
-//			'code' => $code
-//		],
-//		$code
-//	);
-//} );
+$app->error( function ( \Exception $e, $code ) {
+	return new JsonResponse(
+		[
+			'message' => $e->getMessage(),
+			'code' => $code
+		],
+		$code
+	);
+} );
 
 return require __DIR__ . '/routes.php';

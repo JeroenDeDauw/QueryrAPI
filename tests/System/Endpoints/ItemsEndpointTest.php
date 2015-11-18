@@ -20,7 +20,7 @@ class ItemsEndpointTest extends ApiTestCase {
 
 		$client->request( 'GET', '/items' );
 
-		$this->assertJsonResponse( [], $client->getResponse() );
+		$this->assertSuccessResponse( [], $client->getResponse() );
 	}
 
 	private function storeThreeItems() {
@@ -68,7 +68,7 @@ class ItemsEndpointTest extends ApiTestCase {
 
 		$client->request( 'GET', '/items' );
 
-		$this->assertJsonResponse(
+		$this->assertSuccessResponse(
 			[
 				$this->getBerlinPreJson(),
 				$this->getGermanyPreJson(),
@@ -84,7 +84,7 @@ class ItemsEndpointTest extends ApiTestCase {
 
 		$client->request( 'GET', '/items?per_page=2' );
 
-		$this->assertJsonResponse(
+		$this->assertSuccessResponse(
 			[
 				$this->getBerlinPreJson(),
 				$this->getGermanyPreJson(),
@@ -99,7 +99,7 @@ class ItemsEndpointTest extends ApiTestCase {
 
 		$client->request( 'GET', '/items?per_page=2&page=2' );
 
-		$this->assertJsonResponse(
+		$this->assertSuccessResponse(
 			[
 				$this->getCityPreJson(),
 			],
@@ -113,7 +113,7 @@ class ItemsEndpointTest extends ApiTestCase {
 
 		$client->request( 'GET', '/items?page=2' );
 
-		$this->assertJsonResponse( [], $client->getResponse() );
+		$this->assertSuccessResponse( [], $client->getResponse() );
 	}
 
 }

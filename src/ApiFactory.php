@@ -14,11 +14,13 @@ use Queryr\EntityStore\ItemStore;
 use Queryr\EntityStore\PropertyStore;
 use Queryr\TermStore\TermStoreConfig;
 use Queryr\TermStore\TermStoreInstaller;
+use Queryr\WebApi\UseCases\GetItem\GetItemUseCase;
 use Queryr\WebApi\UseCases\ListItems\ListItemsUseCase;
 use Queryr\WebApi\UseCases\ListProperties\ListPropertiesUseCase;
 use Serializers\Serializer;
 use Silex\Application;
 use Wikibase\DataModel\SerializerFactory;
+use Queryr\Serialization\SerializerFactory as QueryrSerializerFactory;
 
 /**
  * @licence GNU GPL v2+
@@ -117,6 +119,10 @@ class ApiFactory {
 		);
 	}
 
+	public function newGetItemUseCase(): GetItemUseCase {
+		return new GetItemUseCase();
+	}
+
 	public function getPropertyStore(): PropertyStore {
 		return $this->pimple['property_store'];
 	}
@@ -126,16 +132,20 @@ class ApiFactory {
 	}
 
 	public function newItemListSerializer(): Serializer {
-		return ( new \Queryr\Serialization\SerializerFactory() )->newItemListSerializer();
+		return ( new QueryrSerializerFactory() )->newItemListSerializer();
 	}
 
 	public function newPropertyListSerializer() {
-		return ( new \Queryr\Serialization\SerializerFactory() )->newPropertyListSerializer();
+		return ( new QueryrSerializerFactory() )->newPropertyListSerializer();
 	}
 
 	public function getEntitySerializer() {
 		$factory = new SerializerFactory( new DataValueSerializer() );
 		return $factory->newEntitySerializer();
+	}
+
+	public function newSimpleItemSerializer() {
+		return ( new QueryrSerializerFactory() )->newSimpleItemSerializer();
 	}
 
 }
