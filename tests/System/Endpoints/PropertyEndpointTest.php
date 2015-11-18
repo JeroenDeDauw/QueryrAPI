@@ -41,4 +41,23 @@ class PropertyEndpointTest extends ApiTestCase {
 		);
 	}
 
+	public function testGivenLowercaseItemId_propertyIsReturned() {
+		$this->testEnvironment->insertProperty( ( new CountryProperty() )->newProperty() );
+
+		$client = $this->createClient();
+
+		$client->request( 'GET', '/properties/p17' );
+
+		$this->assertTrue( $client->getResponse()->isSuccessful(), 'request is successful' );
+		$this->assertJson( $client->getResponse()->getContent(), 'response is json' );
+	}
+
+	public function testGivenNonPropertyId_404isReturned() {
+		$client = $this->createClient();
+
+		$client->request( 'GET', '/properties/YouMadBro' );
+
+		$this->assert404( $client->getResponse(), 'No route found for "GET /properties/YouMadBro"' );
+	}
+
 }

@@ -58,6 +58,17 @@ class ItemEndpointTest extends ApiTestCase {
 		);
 	}
 
+	public function testGivenLowercaseItemId_itemIsReturned() {
+		$this->testEnvironment->insertItem( ( new Berlin() )->newItem() );
+
+		$client = $this->createClient();
+
+		$client->request( 'GET', '/items/q64' );
+
+		$this->assertTrue( $client->getResponse()->isSuccessful(), 'request is successful' );
+		$this->assertJson( $client->getResponse()->getContent(), 'response is json' );
+	}
+
 	public function testWhenDependenciesKnown_denormalizedItemIsReturned() {
 		$this->testEnvironment->insertItem( ( new Berlin() )->newItem() );
 
@@ -94,6 +105,14 @@ class ItemEndpointTest extends ApiTestCase {
 			],
 			$client->getResponse()
 		);
+	}
+
+	public function testGivenNonItemId_404isReturned() {
+		$client = $this->createClient();
+
+		$client->request( 'GET', '/items/YouMadBro' );
+
+		$this->assert404( $client->getResponse(), 'No route found for "GET /items/YouMadBro"' );
 	}
 
 }

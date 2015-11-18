@@ -81,7 +81,7 @@ $app->get(
 			], 404 );
 		}
 	}
-);
+)->assert( 'id', '(Q|q)[1-9]\d*' );
 
 $app->get(
 	'properties/{id}',
@@ -100,6 +100,6 @@ $app->get(
 			], 404 );
 		}
 	}
-);
+)->assert( 'id', '(P|p)[1-9]\d*' );
 
 return $app;
