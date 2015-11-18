@@ -6,6 +6,7 @@ use Queryr\WebApi\ApiFactory;
 use Queryr\WebApi\Tests\TestEnvironment;
 use Silex\Application;
 use Silex\WebTestCase;
+use Symfony\Component\HttpKernel\Client;
 
 /**
  * @licence GNU GPL v2+
@@ -14,12 +15,18 @@ use Silex\WebTestCase;
 abstract class ApiTestCase extends WebTestCase {
 
 	/**
+	 * @var TestEnvironment
+	 */
+	protected $testEnvironment;
+
+	/**
 	 * @var ApiFactory
 	 */
 	protected $apiFactory;
 
 	public function setUp() {
-		$this->apiFactory = TestEnvironment::newInstance()->getFactory();
+		$this->testEnvironment = TestEnvironment::newInstance();
+		$this->apiFactory = $this->testEnvironment->getFactory();
 		parent::setUp();
 	}
 

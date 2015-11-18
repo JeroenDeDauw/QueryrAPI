@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Queryr\WebApi;
 
+use DataValues\Serializers\DataValueSerializer;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;
 use Queryr\EntityStore\EntityStoreConfig;
@@ -17,6 +18,7 @@ use Queryr\WebApi\UseCases\ListItems\ListItemsUseCase;
 use Queryr\WebApi\UseCases\ListProperties\ListPropertiesUseCase;
 use Serializers\Serializer;
 use Silex\Application;
+use Wikibase\DataModel\SerializerFactory;
 
 /**
  * @licence GNU GPL v2+
@@ -129,6 +131,11 @@ class ApiFactory {
 
 	public function newPropertyListSerializer() {
 		return ( new \Queryr\Serialization\SerializerFactory() )->newPropertyListSerializer();
+	}
+
+	public function getEntitySerializer() {
+		$factory = new SerializerFactory( new DataValueSerializer() );
+		return $factory->newEntitySerializer();
 	}
 
 }
