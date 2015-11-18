@@ -18,6 +18,7 @@ use Queryr\TermStore\LabelLookup;
 use Queryr\TermStore\TermStoreConfig;
 use Queryr\TermStore\TermStoreFactory;
 use Queryr\TermStore\TermStoreInstaller;
+use Queryr\TermStore\TermStoreWriter;
 use Queryr\WebApi\UseCases\GetItem\GetItemUseCase;
 use Queryr\WebApi\UseCases\ListItems\ListItemsUseCase;
 use Queryr\WebApi\UseCases\ListProperties\ListPropertiesUseCase;
@@ -112,6 +113,10 @@ class ApiFactory {
 
 	private function getConnection(): Connection {
 		return $this->pimple['dbal_connection'];
+	}
+
+	public function getTermStoreWriter(): TermStoreWriter {
+		return $this->getTermStoreFactory()->newTermStoreWriter();
 	}
 
 	private function getEntityStoreConfig(): EntityStoreConfig {

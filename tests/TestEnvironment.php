@@ -42,6 +42,10 @@ class TestEnvironment {
 
 	public function insertItem( Item $item ) {
 		$this->storeItemInEntityStore( $item );
+		$this->factory->getTermStoreWriter()->storeEntityFingerprint(
+			$item->getId(),
+			$item->getFingerprint()
+		);
 	}
 
 	private function storeItemInEntityStore( Item $item ) {
@@ -63,6 +67,10 @@ class TestEnvironment {
 
 	public function insertProperty( Property $property ) {
 		$this->storePropertyInEntityStore( $property );
+		$this->factory->getTermStoreWriter()->storeEntityFingerprint(
+			$property->getId(),
+			$property->getFingerprint()
+		);
 	}
 
 	private function storePropertyInEntityStore( Property $property ) {
