@@ -6,7 +6,7 @@ use Queryr\WebApi\ApiFactory;
 use Queryr\WebApi\Tests\TestEnvironment;
 use Silex\Application;
 use Silex\WebTestCase;
-use Symfony\Component\HttpKernel\Client;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @licence GNU GPL v2+
@@ -38,6 +38,16 @@ abstract class ApiTestCase extends WebTestCase {
 		unset( $app['exception_handler'] );
 
 		return $app;
+	}
+
+	protected function assertJsonResponse( $expected, Response $response ) {
+		$this->assertTrue( $response->isSuccessful(), 'request is successful' );
+		$this->assertJson( $response->getContent(), 'response is json' );
+
+		$this->assertSame(
+			json_encode( $expected, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES ),
+			$response->getContent()
+		);
 	}
 
 }

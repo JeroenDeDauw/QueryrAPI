@@ -2,7 +2,6 @@
 
 namespace Queryr\WebApi\Tests\System\Endpoints;
 
-use Symfony\Component\HttpFoundation\Response;
 use Wikibase\DataFixtures\Items\Berlin;
 use Wikibase\DataFixtures\Items\City;
 use Wikibase\DataFixtures\Items\Germany;
@@ -22,16 +21,6 @@ class ItemsEndpointTest extends ApiTestCase {
 		$client->request( 'GET', '/items' );
 
 		$this->assertJsonResponse( [], $client->getResponse() );
-	}
-
-	private function assertJsonResponse( $expected, Response $response ) {
-		$this->assertTrue( $response->isSuccessful(), 'request is successful' );
-		$this->assertJson( $response->getContent(), 'response is json' );
-
-		$this->assertSame(
-			json_encode( $expected, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES ),
-			$response->getContent()
-		);
 	}
 
 	private function storeThreeItems() {
