@@ -70,7 +70,7 @@ class ItemsEndpointTest extends ApiTestCase {
 		];
 	}
 
-	public function testWhenThreeItems_theyAreAllReturned() {
+	public function testWhenThreeItems_theyAreAllShown() {
 		$this->storeThreeItems();
 		$client = $this->createClient();
 
@@ -84,6 +84,44 @@ class ItemsEndpointTest extends ApiTestCase {
 			],
 			$client->getResponse()
 		);
+	}
+
+	public function testGivenPageSize_onlyThatManyItemsAreShown() {
+		$this->storeThreeItems();
+		$client = $this->createClient();
+
+		$client->request( 'GET', '/items?per_page=2' );
+
+		$this->assertJsonResponse(
+			[
+				$this->getBerlinPreJson(),
+				$this->getGermanyPreJson(),
+			],
+			$client->getResponse()
+		);
+	}
+
+	public function testGivenPageOffsetWhenFurtherItems_onlyFurtherItemsAreShown() {
+		$this->storeThreeItems();
+		$client = $this->createClient();
+
+		$client->request( 'GET', '/items?per_page=2&page=2' );
+
+		$this->assertJsonResponse(
+			[
+				$this->getCityPreJson(),
+			],
+			$client->getResponse()
+		);
+	}
+
+	public function testGivenPageOffsetBeyondLastItem_noItemsAreShown() {
+		$this->storeThreeItems();
+		$client = $this->createClient();
+
+		$client->request( 'GET', '/items?page=2' );
+
+		$this->assertJsonResponse( [], $client->getResponse() );
 	}
 
 }

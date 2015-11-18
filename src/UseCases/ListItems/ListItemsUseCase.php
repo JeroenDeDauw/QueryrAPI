@@ -38,7 +38,7 @@ class ListItemsUseCase {
 	private function getItemInfo( ItemListingRequest $request ) {
 		return $this->itemStore->getItemInfo(
 			$request->getPerPage(),
-			0
+			( $request->getPage() - 1 ) * $request->getPerPage()
 		);
 	}
 

@@ -37,8 +37,9 @@ $app->get(
 	'items',
 	function( Request $request ) use ( $app, $apiFactory ) {
 		$listingRequest = new ItemListingRequest();
-		// TODO: strict validation of per_page
+		// TODO: strict validation of arguments
 		$listingRequest->setPerPage( (int)$request->get( 'per_page', 100 ) );
+		$listingRequest->setPage( (int)$request->get( 'page', 1 ) );
 
 		$items = $apiFactory->newListItemsUseCase()->listItems( $listingRequest );
 
@@ -50,7 +51,7 @@ $app->get(
 	'properties',
 		function( Request $request ) use ( $app, $apiFactory ) {
 			$listingRequest = new PropertyListingRequest();
-			// TODO: strict validation arguments
+			// TODO: strict validation of arguments
 			$listingRequest->setPerPage( (int)$request->get( 'per_page', 100 ) );
 			$listingRequest->setPage( (int)$request->get( 'page', 1 ) );
 
