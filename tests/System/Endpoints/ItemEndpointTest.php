@@ -3,7 +3,6 @@
 namespace Queryr\WebApi\Tests\System\Endpoints;
 
 use Wikibase\DataFixtures\Items\Berlin;
-use Wikibase\DataFixtures\Items\City;
 use Wikibase\DataFixtures\Items\Germany;
 use Wikibase\DataFixtures\Properties\CountryProperty;
 use Wikibase\DataFixtures\Properties\PostalCodeProperty;
@@ -16,14 +15,6 @@ use Wikibase\DataFixtures\Properties\PostalCodeProperty;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class ItemEndpointTest extends ApiTestCase {
-
-	public function testItemsEndpointReturnsEmptyJsonArray() {
-		$client = $this->createClient();
-
-		$client->request( 'GET', '/items' );
-
-		$this->assertSuccessResponse( [], $client->getResponse() );
-	}
 
 	public function testGivenNotKnownItemId_404isReturned() {
 		$client = $this->createClient();
@@ -67,7 +58,7 @@ class ItemEndpointTest extends ApiTestCase {
 		);
 	}
 
-	public function testGivenKnownItemIdWhenDependenciesAlsoKnown_denormalizedItemIsReturned() {
+	public function testWhenDependenciesKnown_denormalizedItemIsReturned() {
 		$this->testEnvironment->insertItem( ( new Berlin() )->newItem() );
 
 		$this->testEnvironment->insertItem( ( new Germany() )->newItem() );

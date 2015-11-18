@@ -9,8 +9,10 @@ declare(strict_types=1);
 
 use Queryr\WebApi\NoNullableReturnTypesException;
 use Queryr\WebApi\UseCases\GetItem\GetItemRequest;
+use Queryr\WebApi\UseCases\GetProperty\GetPropertyRequest;
 use Queryr\WebApi\UseCases\ListItems\ItemListingRequest;
 use Queryr\WebApi\UseCases\ListProperties\PropertyListingRequest;
+use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -64,12 +66,31 @@ $app->get(
 
 $app->get(
 	'items/{id}',
-	function( \Silex\Application $app, string $id ) use ( $apiFactory ) {
+	function( Application $app, string $id ) use ( $apiFactory ) {
 		$listingRequest = new GetItemRequest( $id );
 
 		try {
 			$item = $apiFactory->newGetItemUseCase()->getItem( $listingRequest );
 			$json = $apiFactory->newSimpleItemSerializer()->serialize( $item );
+			return $app->json( $json, 200 );
+		}
+		catch ( NoNullableReturnTypesException $ex ) {
+			return $app->json( [
+				'code' => 404,
+				'message' => 'Not Found'
+			], 404 );
+		}
+	}
+);
+
+$app->get(
+	'properties/{id}',
+	function( Application $app, string $id ) use ( $apiFactory ) {
+		$listingRequest = new GetPropertyRequest( $id );
+
+		try {
+			$item = $apiFactory->newGetPropertyUseCase()->getProperty( $listingRequest );
+			$json = $apiFactory->newSimplePropertySerializer()->serialize( $item );
 			return $app->json( $json, 200 );
 		}
 		catch ( NoNullableReturnTypesException $ex ) {

@@ -20,6 +20,7 @@ use Queryr\TermStore\TermStoreFactory;
 use Queryr\TermStore\TermStoreInstaller;
 use Queryr\TermStore\TermStoreWriter;
 use Queryr\WebApi\UseCases\GetItem\GetItemUseCase;
+use Queryr\WebApi\UseCases\GetProperty\GetPropertyUseCase;
 use Queryr\WebApi\UseCases\ListItems\ListItemsUseCase;
 use Queryr\WebApi\UseCases\ListProperties\ListPropertiesUseCase;
 use Serializers\Serializer;
@@ -153,6 +154,13 @@ class ApiFactory {
 		);
 	}
 
+	public function newGetPropertyUseCase(): GetPropertyUseCase {
+		return new GetPropertyUseCase(
+			$this->getPropertyStore(),
+			$this->getEntityDeserializer()
+		);
+	}
+
 	public function getPropertyStore(): PropertyStore {
 		return $this->pimple['property_store'];
 	}
@@ -209,6 +217,10 @@ class ApiFactory {
 
 	public function newSimpleItemSerializer(): Serializer {
 		return ( new QueryrSerializerFactory() )->newSimpleItemSerializer();
+	}
+
+	public function newSimplePropertySerializer(): Serializer {
+		return ( new QueryrSerializerFactory() )->newSimplePropertySerializer();
 	}
 
 }

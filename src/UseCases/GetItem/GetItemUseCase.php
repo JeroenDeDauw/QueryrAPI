@@ -21,19 +21,19 @@ class GetItemUseCase {
 
 	private $itemStore;
 	private $labelLookup;
-	private $entityDeserializer;
+	private $itemDeserializer;
 
-	public function __construct( ItemStore $itemStore, ResourceLabelLookup $labelLookup, Deserializer $entityDeserializer ) {
+	public function __construct( ItemStore $itemStore, ResourceLabelLookup $labelLookup, Deserializer $itemDeserializer ) {
 		$this->itemStore = $itemStore;
 		$this->labelLookup = $labelLookup;
-		$this->entityDeserializer = $entityDeserializer;
+		$this->itemDeserializer = $itemDeserializer;
 	}
 
 	public function getItem( GetItemRequest $request ): SimpleItem {
 		$itemJson = $this->getItemJson( $request->getItemId() );
 
 		return $this->getSimpleItemFromItem(
-			$this->entityDeserializer->deserialize( $itemJson ),
+			$this->itemDeserializer->deserialize( $itemJson ),
 			$request->getLanguageCode()
 		);
 	}
