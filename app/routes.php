@@ -58,9 +58,9 @@ $app->get(
 		$listingRequest->setPerPage( (int)$request->get( 'per_page', 100 ) );
 		$listingRequest->setPage( (int)$request->get( 'page', 1 ) );
 
-		$items = $apiFactory->newListPropertiesUseCase()->listProperties( $listingRequest );
+		$properties = $apiFactory->newListPropertiesUseCase()->listProperties( $listingRequest );
 
-		return $app->json( $apiFactory->newPropertyListSerializer()->serialize( $items ) );
+		return $app->json( $apiFactory->newPropertyListSerializer()->serialize( $properties ) );
 	}
 );
 
@@ -89,8 +89,8 @@ $app->get(
 		$listingRequest = new GetPropertyRequest( $id );
 
 		try {
-			$item = $apiFactory->newGetPropertyUseCase()->getProperty( $listingRequest );
-			$json = $apiFactory->newSimplePropertySerializer()->serialize( $item );
+			$property = $apiFactory->newGetPropertyUseCase()->getProperty( $listingRequest );
+			$json = $apiFactory->newSimplePropertySerializer()->serialize( $property );
 			return $app->json( $json, 200 );
 		}
 		catch ( NoNullableReturnTypesException $ex ) {
