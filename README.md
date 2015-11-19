@@ -33,6 +33,16 @@ For a full CI run
 
 	composer ci
 
+## Internal structure
+
+* `web/`: web accessible code
+	* `index.php`: production entry point
+* `app/`: contains configuration and all framework dependent code
+	* `bootstrap.php`: framework application bootstrap (used by System tests)
+* `src/`: contains framework agnostic code
+	* `ApiFactory.php`: top level factory and service locator (used by Integration tests)
+	* `UseCases/`: one directory per use case
+
 ## Release notes
 
 ### Version 0.1 (dev)
