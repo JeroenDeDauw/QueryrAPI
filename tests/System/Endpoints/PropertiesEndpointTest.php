@@ -41,4 +41,25 @@ class PropertiesEndpointTest extends ApiTestCase {
 		$this->assertSuccessResponse( [], $client->getResponse() );
 	}
 
+	public function testGivenPageOffsetBeyondLastProperty_noNextLinkHeaderIsSet() {
+		$this->storeThreeProperties();
+		$client = $this->createClient();
+
+		$client->request( 'GET', '/properties?page=2' );
+
+		$this->assertFalse( $client->getResponse()->headers->has( 'Link' ) );
+	}
+
+	public function testWhenFurtherResults_nextLinkHeaderIsSet() {
+		$this->storeThreeProperties();
+		$client = $this->createClient();
+
+		$client->request( 'GET', '/properties?per_page=2' );
+
+		$this->assertSame(
+			'<http://localhost/properties?page=2&per_page=2>; rel="next"',
+			$client->getResponse()->headers->get( 'Link' )
+		);
+	}
+
 }

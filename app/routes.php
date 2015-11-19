@@ -16,7 +16,7 @@ use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * These varisbles need to be in scope when this file is included:
+ * These variables need to be in scope when this file is included:
  *
  * @var \Silex\Application $app
  * @var \Queryr\WebApi\ApiFactory $apiFactory
@@ -24,12 +24,10 @@ use Symfony\Component\HttpFoundation\Request;
 
 $app->get(
 	'/',
-	function() use ( $app, $apiFactory ) {
-		$urlBuilder = $apiFactory->getUrlBuilder();
-
+	function( Request $request ) use ( $app ) {
 		$api = [
-			'items_url' => $urlBuilder->getApiPath( 'items{/item_id}' ),
-			'properties_url' => $urlBuilder->getApiPath( 'properties{/property_id}' )
+			'items_url' => $request->getUriForPath( '/items{/item_id}' ),
+			'properties_url' => $request->getUriForPath( '/properties{/property_id}' )
 		];
 
 		return $app->json( $api );
@@ -60,7 +58,17 @@ $app->get(
 
 		$properties = $apiFactory->newListPropertiesUseCase()->listProperties( $listingRequest );
 
-		return $app->json( $apiFactory->newPropertyListSerializer()->serialize( $properties ) );
+		$response = $app->json( $apiFactory->newPropertyListSerializer()->serialize( $properties ) );
+
+		if ( $properties->getElements() !== [] ) {
+			$response->headers->set(
+				'Link',
+				'<' . $request->getUriForPath( '/properties' ) . '?page=' . ( $listingRequest->getPage() + 1 )
+				. '&per_page=' . $listingRequest->getPerPage() . '>; rel="next"'
+			);
+		}
+
+		return $response;
 	}
 );
 
