@@ -116,4 +116,57 @@ class ItemsEndpointTest extends ApiTestCase {
 		$this->assertSuccessResponse( [], $client->getResponse() );
 	}
 
+	public function testGivenPageOffsetBeyondLastItem_noNextLinkHeaderIsSet() {
+		$this->storeThreeItems();
+		$client = $this->createClient();
+
+		$client->request( 'GET', '/items?page=2' );
+
+		$this->assertLinkRelNotSet( $client, 'next' );
+	}
+
+	public function testGivenPageWithLessThanMaxItems_noNextLinkHeaderIsSet() {
+		$this->storeThreeItems();
+		$client = $this->createClient();
+
+		$client->request( 'GET', '/items?per_page=5' );
+
+		$this->assertLinkRelNotSet( $client, 'next' );
+	}
+
+	public function testWhenOnFirstPage_noFirstLinkHeaderIsSet() {
+		$this->storeThreeItems();
+		$client = $this->createClient();
+
+		$client->request( 'GET', '/items' );
+
+		$this->assertLinkRelNotSet( $client, 'first' );
+	}
+
+	public function testWhenFurtherResults_nextLinkHeaderIsSet() {
+		$this->storeThreeItems();
+		$client = $this->createClient();
+
+		$client->request( 'GET', '/items?per_page=2' );
+
+		$this->assertLinkRel(
+			$client,
+			'next',
+			'<http://localhost/items?page=2&per_page=2>; rel="next"'
+		);
+	}
+
+	public function testNotOnFirstPage_firstLinkHeaderIsSet() {
+		$this->storeThreeItems();
+		$client = $this->createClient();
+
+		$client->request( 'GET', '/items?page=42&per_page=23' );
+
+		$this->assertLinkRel(
+			$client,
+			'first',
+			'<http://localhost/items?page=1&per_page=23>; rel="first"'
+		);
+	}
+
 }

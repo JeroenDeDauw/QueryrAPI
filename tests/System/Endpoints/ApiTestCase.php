@@ -7,6 +7,7 @@ use Queryr\WebApi\Tests\TestEnvironment;
 use Silex\Application;
 use Silex\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Client;
 
 /**
  * @licence GNU GPL v2+
@@ -66,6 +67,29 @@ abstract class ApiTestCase extends WebTestCase {
 			json_encode( $expected, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES ),
 			$response->getContent()
 		);
+	}
+
+	protected function assertLinkRelNotSet( Client $client, string $linkRel ) {
+		$this->assertTrue( $client->getResponse()->isSuccessful(), 'request is successful' );
+
+		foreach ( (array)$client->getResponse()->headers->get( 'Link' ) as $linkValue ) {
+			$this->assertNotContains( 'rel="' . $linkRel . '"', $linkValue );
+		}
+
+		$this->assertTrue( true );
+	}
+
+	protected function assertLinkRel( Client $client, string $linkRel, string $expected ) {
+		$this->assertTrue( $client->getResponse()->isSuccessful(), 'request is successful' );
+
+		foreach ( (array)$client->getResponse()->headers->get( 'Link' ) as $linkValue ) {
+			if ( strpos( $linkValue, 'rel="' . $linkRel . '"' ) !== false ) {
+				$this->assertSame( $expected, $linkValue );
+				return;
+			}
+		}
+
+		$this->fail( 'No link with rel "' . $linkRel . '" found.' );
 	}
 
 }

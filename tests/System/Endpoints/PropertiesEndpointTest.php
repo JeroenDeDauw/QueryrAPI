@@ -2,7 +2,6 @@
 
 namespace Queryr\WebApi\Tests\System\Endpoints;
 
-use Symfony\Component\HttpKernel\Client;
 use Wikibase\DataFixtures\Properties\CountryProperty;
 use Wikibase\DataFixtures\Properties\InstanceOfProperty;
 use Wikibase\DataFixtures\Properties\PostalCodeProperty;
@@ -93,22 +92,6 @@ class PropertiesEndpointTest extends ApiTestCase {
 			'first',
 			'<http://localhost/properties?page=1&per_page=23>; rel="first"'
 		);
-	}
-
-	private function assertLinkRelNotSet( Client $client, string $linkRel ) {
-		foreach ( (array)$client->getResponse()->headers->get( 'Link' ) as $linkValue ) {
-			$this->assertNotContains( 'rel="' . $linkRel . '"', $linkValue );
-		}
-		$this->assertTrue( true );
-	}
-
-	private function assertLinkRel( Client $client, string $linkRel, string $expected ) {
-		foreach ( (array)$client->getResponse()->headers->get( 'Link' ) as $linkValue ) {
-			if ( strpos( $linkValue, 'rel="' . $linkRel . '"' ) !== false ) {
-				$this->assertSame( $expected, $linkValue );
-			}
-		}
-		$this->assertTrue( true );
 	}
 
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Queryr\WebApi\Endpoints;
 
+use Queryr\Resources\PropertyList;
 use Queryr\WebApi\LinkHeaderBuilder;
 use Queryr\WebApi\UseCases\ListProperties\PropertyListingRequest;
 use Silex\Application;
@@ -26,10 +27,22 @@ class GetPropertiesEndpoint {
 
 		$response = $this->app->json( $this->apiFactory->newPropertyListSerializer()->serialize( $properties ) );
 
+		$linkHeaderValues = $this->getLinkHeaderValues( $request, $listingRequest, $properties );
+
+		if ( $linkHeaderValues !== [] ) {
+			$response->headers->set( 'Link', $linkHeaderValues );
+		}
+
+		return $response;
+	}
+
+	private function getLinkHeaderValues( Request $request, PropertyListingRequest $listingRequest,
+			PropertyList $properties ): array {
+
 		$headerBuilder = new LinkHeaderBuilder();
 		$linkHeaderValues = [];
 
-		if ( $properties->getElements() == $listingRequest->getPerPage() ) {
+		if ( count( $properties->getElements() ) === $listingRequest->getPerPage() ) {
 			$linkHeaderValues[] = $headerBuilder->buildLinkHeader(
 				'next',
 				$request->getUriForPath( '/properties' ),
@@ -51,11 +64,7 @@ class GetPropertiesEndpoint {
 			);
 		}
 
-		if ( $linkHeaderValues !== [] ) {
-			$response->headers->set( 'Link', $linkHeaderValues );
-		}
-
-		return $response;
+		return $linkHeaderValues;
 	}
 
 }
