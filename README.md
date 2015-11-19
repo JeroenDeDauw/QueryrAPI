@@ -39,6 +39,7 @@ For a full CI run
 	* `index.php`: production entry point
 * `app/`: contains configuration and all framework dependent code
 	* `bootstrap.php`: framework application bootstrap (used by System tests)
+	* `routes.php`: defines the routes and their handlers
 * `src/`: contains framework agnostic code
 	* `ApiFactory.php`: top level factory and service locator (used by Integration tests)
 	* `UseCases/`: one directory per use case
