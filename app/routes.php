@@ -7,12 +7,11 @@
 
 declare(strict_types=1);
 
+use Queryr\WebApi\Endpoints\GetItemsEndpoint;
 use Queryr\WebApi\Endpoints\GetPropertiesEndpoint;
 use Queryr\WebApi\NoNullableReturnTypesException;
 use Queryr\WebApi\UseCases\GetItem\GetItemRequest;
 use Queryr\WebApi\UseCases\GetProperty\GetPropertyRequest;
-use Queryr\WebApi\UseCases\ListItems\ItemListingRequest;
-use Queryr\WebApi\UseCases\ListProperties\PropertyListingRequest;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -38,14 +37,7 @@ $app->get(
 $app->get(
 	'items',
 	function( Request $request ) use ( $app, $apiFactory ) {
-		$listingRequest = new ItemListingRequest();
-		// TODO: strict validation of arguments
-		$listingRequest->setPerPage( (int)$request->get( 'per_page', 100 ) );
-		$listingRequest->setPage( (int)$request->get( 'page', 1 ) );
-
-		$items = $apiFactory->newListItemsUseCase()->listItems( $listingRequest );
-
-		return $app->json( $apiFactory->newItemListSerializer()->serialize( $items ) );
+		return ( new GetItemsEndpoint( $app, $apiFactory ) )->getResult( $request );
 	}
 );
 
