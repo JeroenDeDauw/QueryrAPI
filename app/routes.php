@@ -7,6 +7,7 @@
 
 declare(strict_types=1);
 
+use Queryr\WebApi\Endpoints\GetPropertiesEndpoint;
 use Queryr\WebApi\NoNullableReturnTypesException;
 use Queryr\WebApi\UseCases\GetItem\GetItemRequest;
 use Queryr\WebApi\UseCases\GetProperty\GetPropertyRequest;
@@ -51,45 +52,7 @@ $app->get(
 $app->get(
 	'properties',
 	function( Request $request ) use ( $app, $apiFactory ) {
-		$listingRequest = new PropertyListingRequest();
-		// TODO: strict validation of arguments
-		$listingRequest->setPerPage( (int)$request->get( 'per_page', 100 ) );
-		$listingRequest->setPage( (int)$request->get( 'page', 1 ) );
-
-		$properties = $apiFactory->newListPropertiesUseCase()->listProperties( $listingRequest );
-
-		$response = $app->json( $apiFactory->newPropertyListSerializer()->serialize( $properties ) );
-
-		$headerBuilder = new \Queryr\WebApi\LinkHeaderBuilder();
-		$linkHeaderValues = [];
-
-		if ( $properties->getElements() == $listingRequest->getPerPage() ) {
-			$linkHeaderValues[] = $headerBuilder->buildLinkHeader(
-				'next',
-				$request->getUriForPath( '/properties' ),
-				[
-					'page' => $listingRequest->getPage() + 1,
-					'per_page' => $listingRequest->getPerPage()
-				]
-			);
-		}
-
-		if ( $listingRequest->getPage() !== 1 ) {
-			$linkHeaderValues[] = $headerBuilder->buildLinkHeader(
-				'first',
-				$request->getUriForPath( '/properties' ),
-				[
-					'page' => 1,
-					'per_page' => $listingRequest->getPerPage()
-				]
-			);
-		}
-
-		if ( $linkHeaderValues !== [] ) {
-			$response->headers->set( 'Link', $linkHeaderValues );
-		}
-
-		return $response;
+		return ( new GetPropertiesEndpoint( $app, $apiFactory ) )->getResult( $request );
 	}
 );
 

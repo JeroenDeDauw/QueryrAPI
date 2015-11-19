@@ -42,7 +42,8 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"Queryr\\WebApi\\": "src/"
+			"Queryr\\WebApi\\": "src/",
+			"Queryr\\WebApi\\Endpoints\\": "app/Endpoints/"
 		}
 	},
 	"autoload-dev": {
