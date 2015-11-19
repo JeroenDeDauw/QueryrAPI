@@ -60,20 +60,33 @@ $app->get(
 
 		$response = $app->json( $apiFactory->newPropertyListSerializer()->serialize( $properties ) );
 
-		if ( $properties->getElements() !== [] ) {
-			$headerBuilder = new \Queryr\WebApi\LinkHeaderBuilder();
+		$headerBuilder = new \Queryr\WebApi\LinkHeaderBuilder();
+		$linkHeaderValues = [];
 
-			$response->headers->set(
-				'Link',
-				$headerBuilder->buildLinkHeader(
-					'next',
-					$request->getUriForPath( '/properties' ),
-					[
-						'page' => $listingRequest->getPage() + 1,
-						'per_page' => $listingRequest->getPerPage()
-					]
-				)
+		if ( $properties->getElements() == $listingRequest->getPerPage() ) {
+			$linkHeaderValues[] = $headerBuilder->buildLinkHeader(
+				'next',
+				$request->getUriForPath( '/properties' ),
+				[
+					'page' => $listingRequest->getPage() + 1,
+					'per_page' => $listingRequest->getPerPage()
+				]
 			);
+		}
+
+		if ( $listingRequest->getPage() !== 1 ) {
+			$linkHeaderValues[] = $headerBuilder->buildLinkHeader(
+				'first',
+				$request->getUriForPath( '/properties' ),
+				[
+					'page' => 1,
+					'per_page' => $listingRequest->getPerPage()
+				]
+			);
+		}
+
+		if ( $linkHeaderValues !== [] ) {
+			$response->headers->set( 'Link', $linkHeaderValues );
 		}
 
 		return $response;

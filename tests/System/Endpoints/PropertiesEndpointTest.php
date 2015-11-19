@@ -2,6 +2,7 @@
 
 namespace Queryr\WebApi\Tests\System\Endpoints;
 
+use Symfony\Component\HttpKernel\Client;
 use Wikibase\DataFixtures\Properties\CountryProperty;
 use Wikibase\DataFixtures\Properties\InstanceOfProperty;
 use Wikibase\DataFixtures\Properties\PostalCodeProperty;
@@ -47,7 +48,25 @@ class PropertiesEndpointTest extends ApiTestCase {
 
 		$client->request( 'GET', '/properties?page=2' );
 
-		$this->assertFalse( $client->getResponse()->headers->has( 'Link' ) );
+		$this->assertLinkRelNotSet( $client, 'next' );
+	}
+
+	public function testGivenPageWithLessThanMaxProperties_noNextLinkHeaderIsSet() {
+		$this->storeThreeProperties();
+		$client = $this->createClient();
+
+		$client->request( 'GET', '/properties?per_page=5' );
+
+		$this->assertLinkRelNotSet( $client, 'next' );
+	}
+
+	public function testWhenOnFirstPage_noFirstLinkHeaderIsSet() {
+		$this->storeThreeProperties();
+		$client = $this->createClient();
+
+		$client->request( 'GET', '/properties' );
+
+		$this->assertLinkRelNotSet( $client, 'first' );
 	}
 
 	public function testWhenFurtherResults_nextLinkHeaderIsSet() {
@@ -56,10 +75,40 @@ class PropertiesEndpointTest extends ApiTestCase {
 
 		$client->request( 'GET', '/properties?per_page=2' );
 
-		$this->assertSame(
-			'<http://localhost/properties?page=2&per_page=2>; rel="next"',
-			$client->getResponse()->headers->get( 'Link' )
+		$this->assertLinkRel(
+			$client,
+			'next',
+			'<http://localhost/properties?page=2&per_page=2>; rel="next"'
 		);
+	}
+
+	public function testNotOnFirstPage_firstLinkHeaderIsSet() {
+		$this->storeThreeProperties();
+		$client = $this->createClient();
+
+		$client->request( 'GET', '/properties?page=42&per_page=23' );
+
+		$this->assertLinkRel(
+			$client,
+			'first',
+			'<http://localhost/properties?page=1&per_page=23>; rel="first"'
+		);
+	}
+
+	private function assertLinkRelNotSet( Client $client, string $linkRel ) {
+		foreach ( (array)$client->getResponse()->headers->get( 'Link' ) as $linkValue ) {
+			$this->assertNotContains( 'rel="' . $linkRel . '"', $linkValue );
+		}
+		$this->assertTrue( true );
+	}
+
+	private function assertLinkRel( Client $client, string $linkRel, string $expected ) {
+		foreach ( (array)$client->getResponse()->headers->get( 'Link' ) as $linkValue ) {
+			if ( strpos( $linkValue, 'rel="' . $linkRel . '"' ) !== false ) {
+				$this->assertSame( $expected, $linkValue );
+			}
+		}
+		$this->assertTrue( true );
 	}
 
 }
