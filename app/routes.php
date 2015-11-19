@@ -61,10 +61,18 @@ $app->get(
 		$response = $app->json( $apiFactory->newPropertyListSerializer()->serialize( $properties ) );
 
 		if ( $properties->getElements() !== [] ) {
+			$headerBuilder = new \Queryr\WebApi\LinkHeaderBuilder();
+
 			$response->headers->set(
 				'Link',
-				'<' . $request->getUriForPath( '/properties' ) . '?page=' . ( $listingRequest->getPage() + 1 )
-				. '&per_page=' . $listingRequest->getPerPage() . '>; rel="next"'
+				$headerBuilder->buildLinkHeader(
+					'next',
+					$request->getUriForPath( '/properties' ),
+					[
+						'page' => $listingRequest->getPage() + 1,
+						'per_page' => $listingRequest->getPerPage()
+					]
+				)
 			);
 		}
 
