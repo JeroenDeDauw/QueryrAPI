@@ -18,6 +18,8 @@ use Symfony\Component\HttpFoundation\Response;
 $app = new \Silex\Application();
 
 $app->after( function( Request $request, Response $response ) {
+	$response->headers->set( 'access-control-allow-origin', '*' );
+
 	if( $response instanceof JsonResponse ) {
 		$response->setEncodingOptions( JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES );
 	}
