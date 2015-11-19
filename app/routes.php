@@ -7,11 +7,10 @@
 
 declare(strict_types=1);
 
+use Queryr\WebApi\Endpoints\GetItemEndpoint;
 use Queryr\WebApi\Endpoints\GetItemsEndpoint;
 use Queryr\WebApi\Endpoints\GetPropertiesEndpoint;
-use Queryr\WebApi\NoNullableReturnTypesException;
-use Queryr\WebApi\UseCases\GetItem\GetItemRequest;
-use Queryr\WebApi\UseCases\GetProperty\GetPropertyRequest;
+use Queryr\WebApi\Endpoints\GetPropertyEndpoint;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -51,38 +50,14 @@ $app->get(
 $app->get(
 	'items/{id}',
 	function( Application $app, string $id ) use ( $apiFactory ) {
-		$listingRequest = new GetItemRequest( $id );
-
-		try {
-			$item = $apiFactory->newGetItemUseCase()->getItem( $listingRequest );
-			$json = $apiFactory->newSimpleItemSerializer()->serialize( $item );
-			return $app->json( $json, 200 );
-		}
-		catch ( NoNullableReturnTypesException $ex ) {
-			return $app->json( [
-				'message' => 'Not Found',
-				'code' => 404,
-			], 404 );
-		}
+		return ( new GetItemEndpoint( $app, $apiFactory ) )->getResult( $id );
 	}
 )->assert( 'id', '(Q|q)[1-9]\d*' );
 
 $app->get(
 	'properties/{id}',
 	function( Application $app, string $id ) use ( $apiFactory ) {
-		$listingRequest = new GetPropertyRequest( $id );
-
-		try {
-			$property = $apiFactory->newGetPropertyUseCase()->getProperty( $listingRequest );
-			$json = $apiFactory->newSimplePropertySerializer()->serialize( $property );
-			return $app->json( $json, 200 );
-		}
-		catch ( NoNullableReturnTypesException $ex ) {
-			return $app->json( [
-				'message' => 'Not Found',
-				'code' => 404,
-			], 404 );
-		}
+		return ( new GetPropertyEndpoint( $app, $apiFactory ) )->getResult( $id );
 	}
 )->assert( 'id', '(P|p)[1-9]\d*' );
 
