@@ -16,12 +16,12 @@ trait EndpointConstructor {
 	/**
 	 * @var Application
 	 */
-	protected $app;
+	private $app;
 
 	/**
 	 * @var ApiFactory
 	 */
-	protected $apiFactory;
+	private $apiFactory;
 
 	public function __construct( Application $app, ApiFactory $apiFactory ) {
 		$this->app = $app;
