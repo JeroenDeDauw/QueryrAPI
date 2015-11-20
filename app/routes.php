@@ -26,7 +26,8 @@ $app->get(
 	function( Request $request ) use ( $app ) {
 		$api = [
 			'items_url' => $request->getUriForPath( '/items{/item_id}' ),
-			'properties_url' => $request->getUriForPath( '/properties{/property_id}' )
+			'properties_url' => $request->getUriForPath( '/properties{/property_id}' ),
+			'item_types_url' => $request->getUriForPath( '/items/types' )
 		];
 
 		return $app->json( $api );
