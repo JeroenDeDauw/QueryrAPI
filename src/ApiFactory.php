@@ -114,7 +114,7 @@ class ApiFactory {
 		return $this->pimple['term_store_factory'];
 	}
 
-	private function getConnection(): Connection {
+	public function getConnection(): Connection {
 		return $this->pimple['dbal_connection'];
 	}
 
