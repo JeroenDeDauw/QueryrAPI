@@ -10,6 +10,9 @@
     composer install
     cp app/config/db-example.json app/config/db.json
 
+The database schema can be initialized via the install command of the [Replicator CLI tool]
+(https://github.com/JeroenDeDauw/Replicator).
+
 ## Running the API
 
 	cd web
