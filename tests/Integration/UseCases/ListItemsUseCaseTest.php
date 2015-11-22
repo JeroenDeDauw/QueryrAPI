@@ -3,8 +3,8 @@
 namespace Queryr\WebApi\Tests\Integration\UseCases;
 
 use Queryr\Resources\ItemList;
-use Queryr\WebApi\UseCases\ListItems\ItemListingRequest;
 use Queryr\WebApi\Tests\TestEnvironment;
+use Queryr\WebApi\UseCases\ListItems\ItemListingRequest;
 
 /**
  * @covers Queryr\WebApi\UseCases\ListItems\ListItemsUseCase
