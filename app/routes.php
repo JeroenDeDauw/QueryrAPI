@@ -28,9 +28,11 @@ $app->get(
 		$api = [
 			'items_url' => $request->getUriForPath( '/items{/item_id}' ),
 			'item_label_url' => $request->getUriForPath( '/items/{item_id}/label' ),
+			'item_aliases_url' => $request->getUriForPath( '/items/{item_id}/aliases' ),
 			'all_item_types_url' => $request->getUriForPath( '/items/types' ),
 			'properties_url' => $request->getUriForPath( '/properties{/property_id}' ),
 			'property_label_url' => $request->getUriForPath( '/properties{/property_id}/label' ),
+			'property_aliases_url' => $request->getUriForPath( '/properties{/property_id}/aliases' ),
 		];
 
 		return $app->json( $api );
@@ -67,6 +69,18 @@ $app->get(
 		}
 
 		return $app->json( $label );
+	}
+)->assert( 'id', '(Q|q)[1-9]\d*' );
+
+$app->get(
+	'items/{id}/aliases',
+	function( Application $app, string $id ) use ( $apiFactory ) {
+		$aliases = $apiFactory->getAliasesLookup()->getAliasesByIdAndLanguage(
+			new \Wikibase\DataModel\Entity\ItemId( $id ),
+			'en'
+		);
+
+		return $app->json( $aliases );
 	}
 )->assert( 'id', '(Q|q)[1-9]\d*' );
 
@@ -110,6 +124,16 @@ $app->get(
 	}
 )->assert( 'id', '(P|p)[1-9]\d*' );
 
+$app->get(
+	'properties/{id}/aliases',
+	function( Application $app, string $id ) use ( $apiFactory ) {
+		$aliases = $apiFactory->getAliasesLookup()->getAliasesByIdAndLanguage(
+			new \Wikibase\DataModel\Entity\PropertyId( $id ),
+			'en'
+		);
 
+		return $app->json( $aliases );
+	}
+)->assert( 'id', '(P|p)[1-9]\d*' );
 
 return $app;

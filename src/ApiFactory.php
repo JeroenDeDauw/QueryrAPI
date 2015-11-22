@@ -15,6 +15,7 @@ use Queryr\EntityStore\EntityStoreInstaller;
 use Queryr\EntityStore\ItemStore;
 use Queryr\EntityStore\PropertyStore;
 use Queryr\TermStore\LabelLookup;
+use Queryr\TermStore\TermStore;
 use Queryr\TermStore\TermStoreConfig;
 use Queryr\TermStore\TermStoreFactory;
 use Queryr\TermStore\TermStoreInstaller;
@@ -119,6 +120,10 @@ class ApiFactory {
 
 	public function getTermStoreWriter(): TermStoreWriter {
 		return $this->getTermStoreFactory()->newTermStoreWriter();
+	}
+
+	public function getAliasesLookup(): TermStore { // https://github.com/JeroenDeDauw/TermStore/issues/1
+		return $this->getTermStoreFactory()->newTermStore();
 	}
 
 	private function getEntityStoreConfig(): EntityStoreConfig {
