@@ -170,4 +170,26 @@ class ItemsEndpointTest extends ApiTestCase {
 		);
 	}
 
+	public function testNotOnFirstPage_previousLinkHeaderIsSet() {
+		$this->storeThreeItems();
+		$client = $this->createClient();
+
+		$client->request( 'GET', '/items?page=42&per_page=23' );
+
+		$this->assertLinkRel(
+			$client,
+			'previous',
+			'<http://localhost/items?page=41&per_page=23>; rel="previous"'
+		);
+	}
+
+	public function testOnFirstPage_previousLinkHeaderIsNotSet() {
+		$this->storeThreeItems();
+		$client = $this->createClient();
+
+		$client->request( 'GET', '/items?page=1&per_page=23' );
+
+		$this->assertLinkRelNotSet( $client, 'previous' );
+	}
+
 }

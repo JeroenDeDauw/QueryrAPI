@@ -50,6 +50,17 @@ class PaginationHeaderSetter {
 			);
 		}
 
+		if ( $paginationInfo->getPage() !== 1 ) {
+			$linkHeaderValues[] = $headerBuilder->buildLinkHeader(
+				'previous',
+				$url,
+				[
+					'page' => $paginationInfo->getPage() - 1,
+					'per_page' => $paginationInfo->getPerPage()
+				]
+			);
+		}
+
 		return $linkHeaderValues;
 	}
 

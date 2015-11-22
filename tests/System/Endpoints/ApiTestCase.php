@@ -72,7 +72,7 @@ abstract class ApiTestCase extends WebTestCase {
 	protected function assertLinkRelNotSet( Client $client, string $linkRel ) {
 		$this->assertTrue( $client->getResponse()->isSuccessful(), 'request is successful' );
 
-		foreach ( (array)$client->getResponse()->headers->get( 'Link' ) as $linkValue ) {
+		foreach ( $client->getResponse()->headers->get( 'Link', null, false ) as $linkValue ) {
 			$this->assertNotContains( 'rel="' . $linkRel . '"', $linkValue );
 		}
 
@@ -82,7 +82,7 @@ abstract class ApiTestCase extends WebTestCase {
 	protected function assertLinkRel( Client $client, string $linkRel, string $expected ) {
 		$this->assertTrue( $client->getResponse()->isSuccessful(), 'request is successful' );
 
-		foreach ( (array)$client->getResponse()->headers->get( 'Link' ) as $linkValue ) {
+		foreach ( $client->getResponse()->headers->get( 'Link', null, false ) as $linkValue ) {
 			if ( strpos( $linkValue, 'rel="' . $linkRel . '"' ) !== false ) {
 				$this->assertSame( $expected, $linkValue );
 				return;
