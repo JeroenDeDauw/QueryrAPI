@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Queryr\WebApi\Endpoints;
 
-use Queryr\WebApi\LinkHeaderBuilder;
+use Queryr\WebApi\PaginationHeaderSetter;
 use Queryr\WebApi\UseCases\ListItemTypes\ItemTypesListingRequest;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,11 +26,11 @@ class GetItemTypesEndpoint {
 
 		$response = $this->app->json( $this->getSerializedTypes( $itemTypes ) );
 
-		$linkHeaderValues = $this->getLinkHeaderValues( $request, $listingRequest, $itemTypes );
-
-		if ( $linkHeaderValues !== [] ) {
-			$response->headers->set( 'Link', $linkHeaderValues );
-		}
+		( new PaginationHeaderSetter( $response->headers ) )->setHeaders(
+			$request->getUriForPath( '/items/types' ),
+			$listingRequest,
+			count( $itemTypes )
+		);
 
 		return $response;
 	}
@@ -44,37 +44,6 @@ class GetItemTypesEndpoint {
 		}
 
 		return $serializedTypes;
-	}
-
-	private function getLinkHeaderValues( Request $request, ItemTypesListingRequest $listingRequest,
-			array $itemTypes ): array {
-
-		$headerBuilder = new LinkHeaderBuilder();
-		$linkHeaderValues = [];
-
-		if ( count( $itemTypes ) === $listingRequest->getPerPage() ) {
-			$linkHeaderValues[] = $headerBuilder->buildLinkHeader(
-				'next',
-				$request->getUriForPath( '/items/types' ),
-				[
-					'page' => $listingRequest->getPage() + 1,
-					'per_page' => $listingRequest->getPerPage()
-				]
-			);
-		}
-
-		if ( $listingRequest->getPage() !== 1 ) {
-			$linkHeaderValues[] = $headerBuilder->buildLinkHeader(
-				'first',
-				$request->getUriForPath( '/items/types' ),
-				[
-					'page' => 1,
-					'per_page' => $listingRequest->getPerPage()
-				]
-			);
-		}
-
-		return $linkHeaderValues;
 	}
 
 }

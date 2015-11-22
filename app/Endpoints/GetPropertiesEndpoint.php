@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Queryr\WebApi\Endpoints;
 
-use Queryr\Resources\PropertyList;
-use Queryr\WebApi\LinkHeaderBuilder;
 use Queryr\WebApi\PaginationHeaderSetter;
 use Queryr\WebApi\UseCases\ListProperties\PropertyListingRequest;
 use Silex\Application;
@@ -28,8 +26,7 @@ class GetPropertiesEndpoint {
 
 		$response = $this->app->json( $this->apiFactory->newPropertyListSerializer()->serialize( $properties ) );
 
-		$headerSetter = new PaginationHeaderSetter( $response->headers );
-		$headerSetter->setHeaders(
+		( new PaginationHeaderSetter( $response->headers ) )->setHeaders(
 			$request->getUriForPath( '/properties' ),
 			$listingRequest,
 			count( $properties->getElements() )
