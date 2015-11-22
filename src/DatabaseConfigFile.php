@@ -26,7 +26,7 @@ class DatabaseConfigFile {
 	public function read(): array {
 		$configJson = @file_get_contents( $this->configPath );
 
-		if ( $configJson === false ) {
+		if ( !is_string( $configJson ) ) {
 			throw new RuntimeException( 'Could not read the config file' );
 		}
 
