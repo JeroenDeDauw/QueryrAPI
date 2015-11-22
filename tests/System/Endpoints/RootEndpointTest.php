@@ -33,6 +33,7 @@ class RootEndpointTest extends ApiTestCase {
 		$this->assertArrayHasKey( 'properties_url', $json );
 		$this->assertArrayHasKey( 'all_item_types_url', $json );
 		$this->assertArrayHasKey( 'properties_url', $json );
+		$this->assertArrayHasKey( 'property_label_url', $json );
 	}
 
 }

@@ -30,6 +30,7 @@ $app->get(
 			'item_label_url' => $request->getUriForPath( '/items/{item_id}/label' ),
 			'all_item_types_url' => $request->getUriForPath( '/items/types' ),
 			'properties_url' => $request->getUriForPath( '/properties{/property_id}' ),
+			'property_label_url' => $request->getUriForPath( '/properties{/property_id}/label' ),
 		];
 
 		return $app->json( $api );
