@@ -15,8 +15,12 @@ The database schema can be initialized via the install command of the [Replicato
 
 ## Running the API
 
+For development
+
 	cd web
 	php -S localhost:8000
+
+For production, see the [Silex documentation on webserver configuration](http://silex.sensiolabs.org/doc/web_servers.html).
 
 ## API documentation
 
