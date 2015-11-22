@@ -43,6 +43,7 @@ For a full CI run
 * `src/`: contains framework agnostic code
 	* `ApiFactory.php`: top level factory and service locator (used by Integration tests)
 	* `UseCases/`: one directory per use case
+	* Dependencies on Symfony Components are explicitly defined in `composer.json`
 
 ## Release notes
 

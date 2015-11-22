@@ -6,6 +6,7 @@ namespace Queryr\WebApi\Endpoints;
 
 use Queryr\Resources\PropertyList;
 use Queryr\WebApi\LinkHeaderBuilder;
+use Queryr\WebApi\PaginationHeaderSetter;
 use Queryr\WebApi\UseCases\ListProperties\PropertyListingRequest;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,44 +28,14 @@ class GetPropertiesEndpoint {
 
 		$response = $this->app->json( $this->apiFactory->newPropertyListSerializer()->serialize( $properties ) );
 
-		$linkHeaderValues = $this->getLinkHeaderValues( $request, $listingRequest, $properties );
-
-		if ( $linkHeaderValues !== [] ) {
-			$response->headers->set( 'Link', $linkHeaderValues );
-		}
+		$headerSetter = new PaginationHeaderSetter( $response->headers );
+		$headerSetter->setHeaders(
+			$request->getUriForPath( '/properties' ),
+			$listingRequest,
+			count( $properties->getElements() )
+		);
 
 		return $response;
-	}
-
-	private function getLinkHeaderValues( Request $request, PropertyListingRequest $listingRequest,
-			PropertyList $properties ): array {
-
-		$headerBuilder = new LinkHeaderBuilder();
-		$linkHeaderValues = [];
-
-		if ( count( $properties->getElements() ) === $listingRequest->getPerPage() ) {
-			$linkHeaderValues[] = $headerBuilder->buildLinkHeader(
-				'next',
-				$request->getUriForPath( '/properties' ),
-				[
-					'page' => $listingRequest->getPage() + 1,
-					'per_page' => $listingRequest->getPerPage()
-				]
-			);
-		}
-
-		if ( $listingRequest->getPage() !== 1 ) {
-			$linkHeaderValues[] = $headerBuilder->buildLinkHeader(
-				'first',
-				$request->getUriForPath( '/properties' ),
-				[
-					'page' => 1,
-					'per_page' => $listingRequest->getPerPage()
-				]
-			);
-		}
-
-		return $linkHeaderValues;
 	}
 
 }
