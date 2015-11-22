@@ -3,9 +3,6 @@
 namespace Queryr\WebApi\Tests\System\Endpoints;
 
 use Wikibase\DataFixtures\Items\Berlin;
-use Wikibase\DataFixtures\Items\Germany;
-use Wikibase\DataFixtures\Properties\CountryProperty;
-use Wikibase\DataFixtures\Properties\PostalCodeProperty;
 
 /**
  * @licence GNU GPL v2+

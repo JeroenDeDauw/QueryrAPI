@@ -90,6 +90,25 @@ $app->get(
 	}
 )->assert( 'id', '(P|p)[1-9]\d*' );
 
+$app->get(
+	'properties/{id}/label',
+	function( Application $app, string $id ) use ( $apiFactory ) {
+		$label = $apiFactory->getLabelLookup()->getLabelByIdAndLanguage(
+			new \Wikibase\DataModel\Entity\PropertyId( $id ),
+			'en'
+		);
+
+		if ( $label === null ) {
+			return $this->app->json( [
+				'message' => 'Not Found',
+				'code' => 404,
+			], 404 );
+		}
+
+		return $app->json( $label );
+	}
+)->assert( 'id', '(P|p)[1-9]\d*' );
+
 
 
 return $app;
