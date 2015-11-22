@@ -15,6 +15,7 @@ $apiFactory = Queryr\WebApi\ApiFactory::newFromConfig();
  * @var \Silex\Application $app
  */
 $app = require __DIR__ . '/../app/bootstrap.php';
+$app['track_all_the_memory'] = $apiFactory;
 
 $app->register( new Silex\Provider\HttpFragmentServiceProvider() );
 $app->register( new Silex\Provider\ServiceControllerServiceProvider() );
