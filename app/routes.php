@@ -27,8 +27,9 @@ $app->get(
 	function( Request $request ) use ( $app ) {
 		$api = [
 			'items_url' => $request->getUriForPath( '/items{/item_id}' ),
+			'item_label_url' => $request->getUriForPath( '/items/{item_id}/label' ),
+			'all_item_types_url' => $request->getUriForPath( '/items/types' ),
 			'properties_url' => $request->getUriForPath( '/properties{/property_id}' ),
-			'item_types_url' => $request->getUriForPath( '/items/types' )
 		];
 
 		return $app->json( $api );
@@ -43,18 +44,44 @@ $app->get(
 );
 
 $app->get(
-	'properties',
-	function( Request $request ) use ( $app, $apiFactory ) {
-		return ( new GetPropertiesEndpoint( $app, $apiFactory ) )->getResult( $request );
-	}
-);
-
-$app->get(
 	'items/{id}',
 	function( Application $app, string $id ) use ( $apiFactory ) {
 		return ( new GetItemEndpoint( $app, $apiFactory ) )->getResult( $id );
 	}
 )->assert( 'id', '(Q|q)[1-9]\d*' );
+
+$app->get(
+	'items/{id}/label',
+	function( Application $app, string $id ) use ( $apiFactory ) {
+		$label = $apiFactory->getLabelLookup()->getLabelByIdAndLanguage(
+			new \Wikibase\DataModel\Entity\ItemId( $id ),
+			'en'
+		);
+
+		if ( $label === null ) {
+			return $this->app->json( [
+				'message' => 'Not Found',
+				'code' => 404,
+			], 404 );
+		}
+
+		return $app->json( $label );
+	}
+)->assert( 'id', '(Q|q)[1-9]\d*' );
+
+$app->get(
+	'items/types',
+	function( Request $request ) use ( $app, $apiFactory ) {
+		return ( new GetItemTypesEndpoint( $app, $apiFactory ) )->getResult( $request );
+	}
+);
+
+$app->get(
+	'properties',
+	function( Request $request ) use ( $app, $apiFactory ) {
+		return ( new GetPropertiesEndpoint( $app, $apiFactory ) )->getResult( $request );
+	}
+);
 
 $app->get(
 	'properties/{id}',
@@ -63,11 +90,6 @@ $app->get(
 	}
 )->assert( 'id', '(P|p)[1-9]\d*' );
 
-$app->get(
-		'items/types',
-		function( Request $request ) use ( $app, $apiFactory ) {
-			return ( new GetItemTypesEndpoint( $app, $apiFactory ) )->getResult( $request );
-		}
-);
+
 
 return $app;
