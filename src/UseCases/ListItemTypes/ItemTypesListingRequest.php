@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace Queryr\WebApi\UseCases\ListItemTypes;
 
+use Queryr\WebApi\PaginationInfo;
+
 /**
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ItemTypesListingRequest {
+class ItemTypesListingRequest implements PaginationInfo {
 
 	private $limit;
 	private $page;

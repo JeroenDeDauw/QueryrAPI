@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace Queryr\WebApi\UseCases\ListProperties;
 
+use Queryr\WebApi\PaginationInfo;
+
 /**
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class PropertyListingRequest {
+class PropertyListingRequest implements PaginationInfo {
 
 	private $limit;
 	private $page;
