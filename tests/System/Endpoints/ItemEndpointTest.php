@@ -10,6 +10,7 @@ use Wikibase\DataFixtures\Properties\PostalCodeProperty;
 /**
  * @covers Queryr\WebApi\UseCases\GetItem\GetItemUseCase
  * @covers Queryr\WebApi\UseCases\GetItem\GetItemRequest
+ * @covers Queryr\WebApi\Endpoints\GetItemEndpoint
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

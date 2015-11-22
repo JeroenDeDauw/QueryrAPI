@@ -9,6 +9,7 @@ use Wikibase\DataFixtures\Properties\PostalCodeProperty;
 /**
  * @covers Queryr\WebApi\UseCases\ListProperties\ListPropertiesUseCase
  * @covers Queryr\WebApi\UseCases\ListProperties\PropertyListingRequest
+ * @covers Queryr\WebApi\Endpoints\GetPropertiesEndpoint
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

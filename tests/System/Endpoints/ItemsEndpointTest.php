@@ -9,6 +9,7 @@ use Wikibase\DataFixtures\Items\Germany;
 /**
  * @covers Queryr\WebApi\UseCases\ListItems\ListItemsUseCase
  * @covers Queryr\WebApi\UseCases\ListItems\ItemListingRequest
+ * @covers Queryr\WebApi\Endpoints\GetItemsEndpoint
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

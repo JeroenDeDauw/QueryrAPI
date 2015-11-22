@@ -13,6 +13,7 @@ use Wikibase\DataFixtures\Properties\InstanceOfProperty;
 /**
  * @covers Queryr\WebApi\UseCases\ListItemTypes\ListItemTypesUseCase
  * @covers Queryr\WebApi\UseCases\ListItemTypes\ItemTypesListingRequest
+ * @covers Queryr\WebApi\Endpoints\GetItemTypesEndpoint
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

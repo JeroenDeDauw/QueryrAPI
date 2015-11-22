@@ -7,6 +7,7 @@ use Wikibase\DataFixtures\Properties\CountryProperty;
 /**
  * @covers Queryr\WebApi\UseCases\GetProperty\GetPropertyUseCase
  * @covers Queryr\WebApi\UseCases\GetProperty\GetPropertyRequest
+ * @covers Queryr\WebApi\Endpoints\GetPropertyEndpoint
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
