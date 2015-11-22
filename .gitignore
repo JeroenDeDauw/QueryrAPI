@@ -11,3 +11,4 @@ composer.lock
 vendor/
 
 app/config/
+app/cache/

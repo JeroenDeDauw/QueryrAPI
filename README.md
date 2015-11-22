@@ -33,6 +33,13 @@ For a full CI run
 
 	composer ci
 
+## Profiling
+
+When accessing the API via `web/index.dev.php`, profiling information will be generated and in
+`app/cache/profiler`. You can access the web UI via  `apiroot/_profiler/$hash`, where `$hash`
+is the profiler hash that you can find in the first column of `app/cache/profiler/index.csv`.
+Example URL: `http://localhost:8000/index.dev.php/_profiler/a36720`
+
 ## Internal structure
 
 * `web/`: web accessible code
