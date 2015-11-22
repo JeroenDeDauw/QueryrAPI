@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 use Queryr\WebApi\Endpoints\GetItemEndpoint;
 use Queryr\WebApi\Endpoints\GetItemsEndpoint;
+use Queryr\WebApi\Endpoints\GetItemTypesEndpoint;
 use Queryr\WebApi\Endpoints\GetPropertiesEndpoint;
 use Queryr\WebApi\Endpoints\GetPropertyEndpoint;
 use Silex\Application;
@@ -61,5 +62,12 @@ $app->get(
 		return ( new GetPropertyEndpoint( $app, $apiFactory ) )->getResult( $id );
 	}
 )->assert( 'id', '(P|p)[1-9]\d*' );
+
+$app->get(
+		'items/types',
+		function( Request $request ) use ( $app, $apiFactory ) {
+			return ( new GetItemTypesEndpoint( $app, $apiFactory ) )->getResult( $request );
+		}
+);
 
 return $app;

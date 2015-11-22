@@ -27,7 +27,7 @@
 		"queryr/term-store": "~1.0",
 		"queryr/serialization": "~1.0",
 
-		"jeroen/wikibase-data-fixtures": "~1.0"
+		"jeroen/wikibase-data-fixtures": "~1.1"
 	},
 	"require-dev": {
 		"ext-pdo_sqlite": "*",

@@ -22,6 +22,7 @@ use Queryr\TermStore\TermStoreWriter;
 use Queryr\WebApi\UseCases\GetItem\GetItemUseCase;
 use Queryr\WebApi\UseCases\GetProperty\GetPropertyUseCase;
 use Queryr\WebApi\UseCases\ListItems\ListItemsUseCase;
+use Queryr\WebApi\UseCases\ListItemTypes\ListItemTypesUseCase;
 use Queryr\WebApi\UseCases\ListProperties\ListPropertiesUseCase;
 use Serializers\Serializer;
 use Silex\Application;
@@ -161,6 +162,14 @@ class ApiFactory {
 		);
 	}
 
+	public function newListItemTypesUseCase(): ListItemTypesUseCase {
+		return new ListItemTypesUseCase(
+			$this->getItemStore(),
+			$this->getLabelLookup(),
+			$this->getUrlBuilder()
+		);
+	}
+
 	public function getPropertyStore(): PropertyStore {
 		return $this->pimple['property_store'];
 	}
@@ -221,6 +230,10 @@ class ApiFactory {
 
 	public function newSimplePropertySerializer(): Serializer {
 		return ( new QueryrSerializerFactory() )->newSimplePropertySerializer();
+	}
+
+	public function getItemTypeSerializer(): Serializer {
+		return ( new QueryrSerializerFactory() )->newItemTypeSerializer();
 	}
 
 }
