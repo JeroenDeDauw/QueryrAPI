@@ -29,11 +29,13 @@ $app->get(
 		$api = [
 			'items_url' => $request->getUriForPath( '/items{/item_id}' ),
 			'item_label_url' => $request->getUriForPath( '/items/{item_id}/label' ),
+			'item_description_url' => $request->getUriForPath( '/items/{item_id}/description' ),
 			'item_aliases_url' => $request->getUriForPath( '/items/{item_id}/aliases' ),
 			'item_data_url' => $request->getUriForPath( '/items/{item_id}/data' ),
 			'all_item_types_url' => $request->getUriForPath( '/items/types' ),
 			'properties_url' => $request->getUriForPath( '/properties{/property_id}' ),
 			'property_label_url' => $request->getUriForPath( '/properties{/property_id}/label' ),
+			'property_description_url' => $request->getUriForPath( '/properties{/property_id}/description' ),
 			'property_aliases_url' => $request->getUriForPath( '/properties{/property_id}/aliases' ),
 		];
 
@@ -74,6 +76,36 @@ $app->get(
 		}
 
 		return $app->json( $label );
+	}
+)->assert( 'id', $ITEM_ID_REGEX );
+
+$app->get(
+	'items/{id}/description',
+	function( Application $app, string $id ) use ( $apiFactory ) {
+		$itemRow = $apiFactory->getItemStore()->getItemRowByNumericItemId( (int)substr( $id, 1 ) );
+
+		if ( $itemRow === null ) {
+			return $this->app->json( [
+				'message' => 'Not Found',
+				'code' => 404,
+			], 404 );
+		}
+
+		/**
+		 * @var Wikibase\DataModel\Entity\Item $item
+		 */
+		$item = $apiFactory->getEntityDeserializer()->deserialize(
+			json_decode( $itemRow->getItemJson(), true )
+		);
+
+		if ( !$item->getFingerprint()->hasDescription( 'en' ) ) {
+			return $this->app->json( [
+				'message' => 'Not Found',
+				'code' => 404,
+			], 404 );
+		}
+
+		return $app->json( $item->getFingerprint()->getDescription( 'en' )->getText() );
 	}
 )->assert( 'id', $ITEM_ID_REGEX );
 
@@ -133,6 +165,36 @@ $app->get(
 		}
 
 		return $app->json( $label );
+	}
+)->assert( 'id', $PROPERTY_ID_REGEX );
+
+$app->get(
+	'properties/{id}/description',
+	function( Application $app, string $id ) use ( $apiFactory ) {
+		$propertyRow = $apiFactory->getPropertyStore()->getPropertyRowByNumericPropertyId( (int)substr( $id, 1 ) );
+
+		if ( $propertyRow === null ) {
+			return $this->app->json( [
+				'message' => 'Not Found',
+				'code' => 404,
+			], 404 );
+		}
+
+		/**
+		 * @var Wikibase\DataModel\Entity\Property $property
+		 */
+		$property = $apiFactory->getEntityDeserializer()->deserialize(
+			json_decode( $propertyRow->getPropertyJson(), true )
+		);
+
+		if ( !$property->getFingerprint()->hasDescription( 'en' ) ) {
+			return $this->app->json( [
+				'message' => 'Not Found',
+				'code' => 404,
+			], 404 );
+		}
+
+		return $app->json( $property->getFingerprint()->getDescription( 'en' )->getText() );
 	}
 )->assert( 'id', $PROPERTY_ID_REGEX );
 

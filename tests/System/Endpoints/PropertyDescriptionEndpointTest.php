@@ -9,12 +9,12 @@ use Wikibase\DataModel\Entity\PropertyId;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class PropertyLabelEndpointTest extends ApiTestCase {
+class PropertyDescriptionEndpointTest extends ApiTestCase {
 
 	public function testGivenNotKnownPropertyId_404isReturned() {
 		$client = $this->createClient();
 
-		$client->request( 'GET', '/properties/P900404/label' );
+		$client->request( 'GET', '/properties/P900404/description' );
 
 		$this->assert404( $client->getResponse() );
 	}
@@ -22,23 +22,23 @@ class PropertyLabelEndpointTest extends ApiTestCase {
 	public function testGivenNonPropertyId_404isReturned() {
 		$client = $this->createClient();
 
-		$client->request( 'GET', '/properties/YouMadBro/label' );
+		$client->request( 'GET', '/properties/YouMadBro/description' );
 
-		$this->assert404( $client->getResponse(), 'No route found for "GET /properties/YouMadBro/label"' );
+		$this->assert404( $client->getResponse(), 'No route found for "GET /properties/YouMadBro/description"' );
 	}
 
-	public function testGivenKnownPropertyId_propertyLabelIsReturned() {
+	public function testGivenKnownPropertyId_propertyDescriptionIsReturned() {
 		$property = new Property( new PropertyId( 'P1337' ), null, 'string' );
-		$property->getFingerprint()->setLabel( 'en', 'postal code' );
+		$property->getFingerprint()->setDescription( 'en', 'foo bar baz' );
 
 		$this->testEnvironment->insertProperty( $property );
 
 		$client = $this->createClient();
 
-		$client->request( 'GET', '/properties/P1337/label' );
+		$client->request( 'GET', '/properties/P1337/description' );
 
 		$this->assertSuccessResponse(
-			'postal code',
+			'foo bar baz',
 			$client->getResponse()
 		);
 	}
