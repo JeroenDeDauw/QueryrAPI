@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 use Queryr\WebApi\Endpoints\GetItemDataEndpoint;
 use Queryr\WebApi\Endpoints\GetItemEndpoint;
+use Queryr\WebApi\Endpoints\GetItemPropertyDataEndpoint;
 use Queryr\WebApi\Endpoints\GetItemsEndpoint;
 use Queryr\WebApi\Endpoints\GetItemTypesEndpoint;
 use Queryr\WebApi\Endpoints\GetPropertiesEndpoint;
@@ -31,7 +32,7 @@ $app->get(
 			'item_label_url' => $request->getUriForPath( '/items/{item_id}/label' ),
 			'item_description_url' => $request->getUriForPath( '/items/{item_id}/description' ),
 			'item_aliases_url' => $request->getUriForPath( '/items/{item_id}/aliases' ),
-			'item_data_url' => $request->getUriForPath( '/items/{item_id}/data' ),
+			'item_data_url' => $request->getUriForPath( '/items/{item_id}/data{/property_label}' ),
 			'all_item_types_url' => $request->getUriForPath( '/items/types' ),
 			'properties_url' => $request->getUriForPath( '/properties{/property_id}' ),
 			'property_label_url' => $request->getUriForPath( '/properties{/property_id}/label' ),
@@ -127,6 +128,13 @@ $app->get(
 		return ( new GetItemDataEndpoint( $app, $apiFactory ) )->getResult( $id );
 	}
 )->assert( 'id', $ITEM_ID_REGEX );
+
+$app->get(
+	'items/{item_id}/data/{property_label}',
+	function( Application $app, string $item_id, string $property_label ) use ( $apiFactory ) {
+		return ( new GetItemPropertyDataEndpoint( $app, $apiFactory ) )->getResult( $item_id, $property_label );
+	}
+)->assert( 'item_id', $ITEM_ID_REGEX );
 
 $app->get(
 	'items/types',
