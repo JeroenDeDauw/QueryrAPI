@@ -51,7 +51,7 @@ Example URL: `http://localhost:8000/index.dev.php/_profiler/a36720`
 
 * `web/`: web accessible code
 	* `index.php`: production entry point
-* `app/`: contains configuration and all framework dependent code
+* `app/`: contains configuration and all framework (Silex) dependent code
 	* `bootstrap.php`: framework application bootstrap (used by System tests)
 	* `routes.php`: defines the routes and their handlers
 * `src/`: contains framework agnostic code
