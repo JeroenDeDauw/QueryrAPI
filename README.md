@@ -1,5 +1,8 @@
 [![Build Status](https://travis-ci.org/JeroenDeDauw/QueryrAPI.svg)](https://travis-ci.org/JeroenDeDauw/QueryrAPI)
 
+QueryR API is an application that provides a REST webservice for accessing [Wikibase]
+(http://wikiba.se) data.
+
 ## System dependencies
 
 * PHP 7
