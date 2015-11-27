@@ -2,8 +2,8 @@
 
 namespace Tests\Queryr\Serialization;
 
-use Queryr\Resources\PropertyList;
-use Queryr\Resources\PropertyListElement;
+use Queryr\WebApi\UseCases\ListProperties\PropertyList;
+use Queryr\WebApi\UseCases\ListProperties\PropertyListElement;
 use Queryr\WebApi\Serializers\SerializerFactory;
 use Wikibase\DataModel\Entity\PropertyId;
 

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Queryr\WebApi\UseCases\ListItemTypes;
 
 use Queryr\EntityStore\ItemStore;
-use Queryr\Resources\ItemType;
+use Queryr\WebApi\UseCases\ListItemTypes\ItemType;
 use Queryr\TermStore\LabelLookup;
 use Queryr\WebApi\UrlBuilder;
 use Wikibase\DataModel\Entity\ItemId;

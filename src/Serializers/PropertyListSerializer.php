@@ -2,8 +2,8 @@
 
 namespace Queryr\WebApi\Serializers;
 
-use Queryr\Resources\PropertyList;
-use Queryr\Resources\PropertyListElement;
+use Queryr\WebApi\UseCases\ListProperties\PropertyList;
+use Queryr\WebApi\UseCases\ListProperties\PropertyListElement;
 use Serializers\Exceptions\UnsupportedObjectException;
 use Serializers\Serializer;
 

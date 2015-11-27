@@ -2,7 +2,7 @@
 
 namespace Tests\Queryr\Serialization;
 
-use Queryr\Resources\ItemType;
+use Queryr\WebApi\UseCases\ListItemTypes\ItemType;
 use Queryr\WebApi\Serializers\SerializerFactory;
 use Wikibase\DataModel\Entity\ItemId;
 

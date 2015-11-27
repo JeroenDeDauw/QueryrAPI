@@ -2,7 +2,7 @@
 
 namespace Queryr\WebApi\Serializers;
 
-use Queryr\Resources\ItemType;
+use Queryr\WebApi\UseCases\ListItemTypes\ItemType;
 use Serializers\Exceptions\UnsupportedObjectException;
 use Serializers\Serializer;
 

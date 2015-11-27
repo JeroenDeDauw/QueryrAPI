@@ -3,7 +3,7 @@
 namespace Tests\Queryr\Resources\Builders;
 
 use Queryr\Resources\Builders\SimplePropertyBuilder;
-use Queryr\Resources\SimpleProperty;
+use Queryr\WebApi\UseCases\GetProperty\SimpleProperty;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Term\Fingerprint;
 

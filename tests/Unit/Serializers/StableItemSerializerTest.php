@@ -4,20 +4,20 @@ namespace Tests\Queryr\Serialization;
 
 use DataValues\NumberValue;
 use DataValues\StringValue;
-use Queryr\Resources\SimpleItem;
-use Queryr\Resources\SimpleStatement;
+use Queryr\WebApi\UseCases\GetItem\SimpleItem;
+use Queryr\WebApi\ResponseModel\SimpleStatement;
 use Queryr\WebApi\Serializers\SerializerFactory;
 
 /**
- * @covers Queryr\WebApi\Serializers\SimpleItemSerializer
+ * @covers Queryr\WebApi\Serializers\StableItemSerializer
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class SimpleItemSerializerTest extends \PHPUnit_Framework_TestCase {
+class StableItemSerializerTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGivenNonItem_exceptionIsThrown() {
-		$serializer = ( new SerializerFactory() )->newSimpleItemSerializer();
+		$serializer = ( new SerializerFactory() )->newStableItemSerializer( [] );
 
 		$this->setExpectedException( 'Serializers\Exceptions\UnsupportedObjectException' );
 		$serializer->serialize( null );
@@ -38,21 +38,33 @@ class SimpleItemSerializerTest extends \PHPUnit_Framework_TestCase {
 
 		$item->statements = [
 			SimpleStatement::newInstance()
-				->withPropertyName( 'fluffiness' )
+				->withPropertyName( 'Population prop name' )
+				->withPropertyId( 'P23' )
 				->withType( 'number' )
 				->withValues( [ new NumberValue( 9001 ) ] ),
 
 			SimpleStatement::newInstance()
-				->withPropertyName( 'awesome' )
+				->withPropertyName( 'foo bar baz' )
+				->withPropertyId( 'P42' )
 				->withType( 'string' )
 				->withValues( [ new StringValue( 'Jeroen' ), new StringValue( 'Abraham' ) ] ),
+
+			SimpleStatement::newInstance()
+				->withPropertyName( 'Property that is no in the map' )
+				->withPropertyId( 'P1337' )
+				->withType( 'number' )
+				->withValues( [ new NumberValue( 1337 ) ] ),
 		];
 
 		return $item;
 	}
 
-	public function testSerializationWithValueForOneProperty() {
-		$serializer = ( new SerializerFactory() )->newSimpleItemSerializer();
+	public function testSerialization() {
+		$serializer = ( new SerializerFactory() )->newStableItemSerializer( [
+			'P42' => 'Certified by',
+			'P23' => 'Population',
+		] );
+
 		$serialized = $serializer->serialize( $this->newSimpleItem() );
 
 		$expected = [
@@ -67,11 +79,11 @@ class SimpleItemSerializerTest extends \PHPUnit_Framework_TestCase {
 			'aliases' => [ 'cats' ],
 
 			'data' => [
-				'fluffiness' => [
+				'Population' => [
 					'value' => 9001,
 					'type' => 'number'
 				],
-				'awesome' => [
+				'Certified by' => [
 					'value' => 'Jeroen',
 					'values' => [ 'Jeroen', 'Abraham' ],
 					'type' => 'string'

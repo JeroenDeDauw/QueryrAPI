@@ -2,8 +2,8 @@
 
 namespace Tests\Queryr\Serialization;
 
-use Queryr\Resources\ItemList;
-use Queryr\Resources\ItemListElement;
+use Queryr\WebApi\UseCases\ListItems\ItemList;
+use Queryr\WebApi\UseCases\ListItems\ItemListElement;
 use Queryr\WebApi\Serializers\SerializerFactory;
 use Wikibase\DataModel\Entity\ItemId;
 

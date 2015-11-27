@@ -2,7 +2,7 @@
 
 namespace Queryr\WebApi\Tests\Integration\UseCases;
 
-use Queryr\Resources\ItemList;
+use Queryr\WebApi\UseCases\ListItems\ItemList;
 use Queryr\WebApi\Tests\TestEnvironment;
 use Queryr\WebApi\UseCases\ListItems\ItemListingRequest;
 

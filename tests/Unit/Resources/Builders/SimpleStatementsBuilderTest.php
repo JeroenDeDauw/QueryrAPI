@@ -4,7 +4,7 @@ namespace Tests\Queryr\Resources\Builders;
 
 use DataValues\StringValue;
 use Queryr\Resources\Builders\SimpleStatementsBuilder;
-use Queryr\Resources\SimpleStatement;
+use Queryr\WebApi\ResponseModel\SimpleStatement;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;

@@ -2,7 +2,7 @@
 
 namespace Queryr\Resources\Builders;
 
-use Queryr\Resources\SimpleProperty;
+use Queryr\WebApi\UseCases\GetProperty\SimpleProperty;
 use Wikibase\DataModel\Entity\Property;
 
 /**

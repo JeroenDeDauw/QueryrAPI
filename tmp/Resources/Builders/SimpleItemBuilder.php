@@ -2,7 +2,7 @@
 
 namespace Queryr\Resources\Builders;
 
-use Queryr\Resources\SimpleItem;
+use Queryr\WebApi\UseCases\GetItem\SimpleItem;
 use Wikibase\DataModel\Entity\Item;
 
 /**

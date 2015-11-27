@@ -1,6 +1,6 @@
 <?php
 
-namespace Queryr\Resources;
+namespace Queryr\WebApi\UseCases\ListItemTypes;
 
 use RuntimeException;
 use Wikibase\DataModel\Entity\ItemId;

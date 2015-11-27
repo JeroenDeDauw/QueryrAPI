@@ -4,7 +4,7 @@ namespace Queryr\Resources\Builders;
 
 use DataValues\DataValue;
 use DataValues\StringValue;
-use Queryr\Resources\SimpleStatement;
+use Queryr\WebApi\ResponseModel\SimpleStatement;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\PropertyId;

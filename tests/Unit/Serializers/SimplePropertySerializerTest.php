@@ -2,7 +2,7 @@
 
 namespace Tests\Queryr\Serialization;
 
-use Queryr\Resources\SimpleProperty;
+use Queryr\WebApi\UseCases\GetProperty\SimpleProperty;
 use Queryr\WebApi\Serializers\SerializerFactory;
 
 /**

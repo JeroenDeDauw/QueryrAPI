@@ -8,7 +8,7 @@ use Deserializers\Deserializer;
 use Queryr\EntityStore\ItemStore;
 use Queryr\Resources\Builders\BuilderFactory;
 use Queryr\Resources\Builders\ResourceLabelLookup;
-use Queryr\Resources\SimpleItem;
+use Queryr\WebApi\UseCases\GetItem\SimpleItem;
 use Queryr\WebApi\NoNullableReturnTypesException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;

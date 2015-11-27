@@ -1,6 +1,8 @@
 <?php
 
-namespace Queryr\Resources;
+namespace Queryr\WebApi\UseCases\ListItems;
+
+use Queryr\WebApi\UseCases\ListItems\ItemListElement;
 
 /**
  * @licence GNU GPL v2+

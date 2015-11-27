@@ -1,14 +1,14 @@
 <?php
 
-namespace Tests\Queryr\Resources\Builders;
+namespace Queryr\WebApi\Tests\Unit\UseCases\ListProperties;
 
-use Queryr\Resources\PropertyList;
-use Queryr\Resources\PropertyListElement;
+use Queryr\WebApi\UseCases\ListProperties\PropertyList;
+use Queryr\WebApi\UseCases\ListProperties\PropertyListElement;
 use Wikibase\DataModel\Entity\PropertyId;
 
 /**
- * @covers Queryr\Resources\PropertyList
- * @covers Queryr\Resources\PropertyListElement
+ * @covers Queryr\WebApi\UseCases\ListProperties\PropertyList
+ * @covers Queryr\WebApi\UseCases\ListProperties\PropertyListElement
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -33,8 +33,6 @@ class PropertyListTest extends \PHPUnit_Framework_TestCase {
 
 		$list = new PropertyList( $items );
 		$this->assertSame( $items, $list->getElements() );
-
-
 	}
 
 	public function testElement() {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Queryr\Resources;
+namespace Queryr\WebApi\UseCases\GetProperty;
 
 /**
  * @licence GNU GPL v2+

@@ -1,6 +1,6 @@
 <?php
 
-namespace Queryr\Resources;
+namespace Queryr\WebApi\UseCases\ListProperties;
 
 use Wikibase\DataModel\Entity\PropertyId;
 

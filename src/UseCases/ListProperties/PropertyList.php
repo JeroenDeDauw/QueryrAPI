@@ -1,6 +1,8 @@
 <?php
 
-namespace Queryr\Resources;
+namespace Queryr\WebApi\UseCases\ListProperties;
+
+use Queryr\WebApi\UseCases\ListProperties\PropertyListElement;
 
 /**
  * @licence GNU GPL v2+

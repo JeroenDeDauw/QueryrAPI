@@ -1,6 +1,6 @@
 <?php
 
-namespace Queryr\Resources;
+namespace Queryr\WebApi\UseCases\ListItems;
 
 use InvalidArgumentException;
 use RuntimeException;

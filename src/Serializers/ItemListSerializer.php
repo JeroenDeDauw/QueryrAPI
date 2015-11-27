@@ -2,8 +2,8 @@
 
 namespace Queryr\WebApi\Serializers;
 
-use Queryr\Resources\ItemList;
-use Queryr\Resources\ItemListElement;
+use Queryr\WebApi\UseCases\ListItems\ItemList;
+use Queryr\WebApi\UseCases\ListItems\ItemListElement;
 use Serializers\Exceptions\UnsupportedObjectException;
 use Serializers\Serializer;
 

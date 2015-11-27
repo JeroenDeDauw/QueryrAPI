@@ -1,14 +1,14 @@
 <?php
 
-namespace Tests\Queryr\Resources\Builders;
+namespace Queryr\WebApi\Tests\Unit\UseCases\ListItems;
 
-use Queryr\Resources\ItemList;
-use Queryr\Resources\ItemListElement;
+use Queryr\WebApi\UseCases\ListItems\ItemList;
+use Queryr\WebApi\UseCases\ListItems\ItemListElement;
 use Wikibase\DataModel\Entity\ItemId;
 
 /**
- * @covers Queryr\Resources\ItemList
- * @covers Queryr\Resources\ItemListElement
+ * @covers Queryr\WebApi\UseCases\ListItems\ItemList
+ * @covers Queryr\WebApi\UseCases\ListItems\ItemListElement
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

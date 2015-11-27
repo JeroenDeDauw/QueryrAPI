@@ -2,8 +2,8 @@
 
 namespace Queryr\WebApi\Serializers;
 
-use Queryr\Resources\SimpleItem;
-use Queryr\Resources\SimpleProperty;
+use Queryr\WebApi\UseCases\GetItem\SimpleItem;
+use Queryr\WebApi\UseCases\GetProperty\SimpleProperty;
 use Serializers\Exceptions\UnsupportedObjectException;
 use Serializers\Serializer;
 

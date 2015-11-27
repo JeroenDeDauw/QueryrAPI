@@ -1,6 +1,8 @@
 <?php
 
-namespace Queryr\Resources;
+namespace Queryr\WebApi\UseCases\GetItem;
+
+use Queryr\WebApi\ResponseModel\SimpleStatement;
 
 /**
  * @licence GNU GPL v2+

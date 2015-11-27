@@ -2,7 +2,7 @@
 
 namespace Queryr\WebApi\Serializers;
 
-use Queryr\Resources\SimpleStatement;
+use Queryr\WebApi\ResponseModel\SimpleStatement;
 use Serializers\Exceptions\UnsupportedObjectException;
 use Serializers\Serializer;
 
