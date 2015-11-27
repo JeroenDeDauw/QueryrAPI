@@ -1,6 +1,6 @@
 <?php
 
-namespace Queryr\Serialization;
+namespace Queryr\WebApi\Serializers;
 
 use Queryr\Resources\SimpleItem;
 use Serializers\Exceptions\UnsupportedObjectException;
@@ -11,9 +11,7 @@ use Serializers\Serializer;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class StableItemSerializer implements Serializer {
-
-	private $propertyMap;
+class SimpleItemSerializer implements Serializer {
 
 	/**
 	 * @var Serializer
@@ -30,13 +28,7 @@ class StableItemSerializer implements Serializer {
 	 */
 	private $item;
 
-	/**
-	 * @param Serializer $foundationalSerializer
-	 * @param Serializer $statementSerializer
-	 * @param string[] $propertyMap Maps property id (string) to stable property name
-	 */
-	public function __construct( Serializer $foundationalSerializer, Serializer $statementSerializer, array $propertyMap ) {
-		$this->propertyMap = $propertyMap;
+	public function __construct( Serializer $foundationalSerializer, Serializer $statementSerializer ) {
 		$this->foundationalSerializer = $foundationalSerializer;
 		$this->statementSerializer = $statementSerializer;
 	}
@@ -63,11 +55,7 @@ class StableItemSerializer implements Serializer {
 		$data = [];
 
 		foreach ( $this->item->statements as $simpleStatement ) {
-			$propertyId = $simpleStatement->propertyId->getSerialization();
-
-			if ( array_key_exists( $propertyId, $this->propertyMap ) ) {
-				$data[$this->propertyMap[$propertyId]] = $this->statementSerializer->serialize( $simpleStatement );
-			}
+			$data[$simpleStatement->propertyName] = $this->statementSerializer->serialize( $simpleStatement );
 		}
 
 		return $data;

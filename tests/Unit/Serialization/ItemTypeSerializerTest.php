@@ -3,11 +3,11 @@
 namespace Tests\Queryr\Serialization;
 
 use Queryr\Resources\ItemType;
-use Queryr\Serialization\SerializerFactory;
+use Queryr\WebApi\Serializers\SerializerFactory;
 use Wikibase\DataModel\Entity\ItemId;
 
 /**
- * @covers Queryr\Serialization\ItemTypeSerializer
+ * @covers Queryr\WebApi\Serializers\ItemTypeSerializer
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

@@ -4,11 +4,11 @@ namespace Tests\Queryr\Serialization;
 
 use Queryr\Resources\PropertyList;
 use Queryr\Resources\PropertyListElement;
-use Queryr\Serialization\SerializerFactory;
+use Queryr\WebApi\Serializers\SerializerFactory;
 use Wikibase\DataModel\Entity\PropertyId;
 
 /**
- * @covers Queryr\Serialization\PropertyListSerializer
+ * @covers Queryr\WebApi\Serializers\PropertyListSerializer
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

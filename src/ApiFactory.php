@@ -14,7 +14,7 @@ use Queryr\EntityStore\EntityStoreFactory;
 use Queryr\EntityStore\EntityStoreInstaller;
 use Queryr\EntityStore\ItemStore;
 use Queryr\EntityStore\PropertyStore;
-use Queryr\Serialization\SerializerFactory as QueryrSerializerFactory;
+use Queryr\WebApi\Serializers\SerializerFactory as QueryrSerializerFactory;
 use Queryr\TermStore\LabelLookup;
 use Queryr\TermStore\TermStore;
 use Queryr\TermStore\TermStoreConfig;

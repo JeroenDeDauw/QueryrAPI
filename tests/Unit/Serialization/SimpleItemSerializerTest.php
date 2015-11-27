@@ -6,10 +6,10 @@ use DataValues\NumberValue;
 use DataValues\StringValue;
 use Queryr\Resources\SimpleItem;
 use Queryr\Resources\SimpleStatement;
-use Queryr\Serialization\SerializerFactory;
+use Queryr\WebApi\Serializers\SerializerFactory;
 
 /**
- * @covers Queryr\Serialization\SimpleItemSerializer
+ * @covers Queryr\WebApi\Serializers\SimpleItemSerializer
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

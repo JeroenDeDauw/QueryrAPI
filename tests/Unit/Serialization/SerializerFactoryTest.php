@@ -2,10 +2,10 @@
 
 namespace Tests\Queryr\Serialization;
 
-use Queryr\Serialization\SerializerFactory;
+use Queryr\WebApi\Serializers\SerializerFactory;
 
 /**
- * @covers Queryr\Serialization\SerializerFactory
+ * @covers Queryr\WebApi\Serializers\SerializerFactory
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

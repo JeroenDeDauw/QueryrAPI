@@ -1,7 +1,15 @@
 <?php
 
-namespace Queryr\Serialization;
+namespace Queryr\WebApi\Serializers;
 
+use Queryr\WebApi\Serializers\ItemListSerializer;
+use Queryr\WebApi\Serializers\ItemTypeSerializer;
+use Queryr\WebApi\Serializers\PropertyListSerializer;
+use Queryr\WebApi\Serializers\SimpleFoundationSerializer;
+use Queryr\WebApi\Serializers\SimpleItemSerializer;
+use Queryr\WebApi\Serializers\SimplePropertySerializer;
+use Queryr\WebApi\Serializers\SimpleStatementSerializer;
+use Queryr\WebApi\Serializers\StableItemSerializer;
 use Serializers\Serializer;
 
 /**

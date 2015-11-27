@@ -4,11 +4,11 @@ namespace Tests\Queryr\Serialization;
 
 use Queryr\Resources\ItemList;
 use Queryr\Resources\ItemListElement;
-use Queryr\Serialization\SerializerFactory;
+use Queryr\WebApi\Serializers\SerializerFactory;
 use Wikibase\DataModel\Entity\ItemId;
 
 /**
- * @covers Queryr\Serialization\ItemListSerializer
+ * @covers Queryr\WebApi\Serializers\ItemListSerializer
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

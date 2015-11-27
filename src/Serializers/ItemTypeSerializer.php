@@ -1,6 +1,6 @@
 <?php
 
-namespace Queryr\Serialization;
+namespace Queryr\WebApi\Serializers;
 
 use Queryr\Resources\ItemType;
 use Serializers\Exceptions\UnsupportedObjectException;

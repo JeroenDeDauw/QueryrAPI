@@ -1,6 +1,6 @@
 <?php
 
-namespace Queryr\Serialization;
+namespace Queryr\WebApi\Serializers;
 
 use Queryr\Resources\SimpleProperty;
 use Serializers\Exceptions\UnsupportedObjectException;

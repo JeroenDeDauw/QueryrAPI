@@ -3,10 +3,10 @@
 namespace Tests\Queryr\Serialization;
 
 use Queryr\Resources\SimpleProperty;
-use Queryr\Serialization\SerializerFactory;
+use Queryr\WebApi\Serializers\SerializerFactory;
 
 /**
- * @covers Queryr\Serialization\SimplePropertySerializer
+ * @covers Queryr\WebApi\Serializers\SimplePropertySerializer
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
