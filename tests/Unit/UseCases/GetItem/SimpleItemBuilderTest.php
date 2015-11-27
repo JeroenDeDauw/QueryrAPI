@@ -1,10 +1,10 @@
 <?php
 
-namespace Tests\Queryr\Resources\Builders;
+namespace Queryr\WebApi\Tests\Unit\UseCases\GetItem;
 
 use DataValues\StringValue;
-use Queryr\Resources\Builders\SimpleItemBuilder;
-use Queryr\Resources\Builders\SimpleStatementsBuilder;
+use Queryr\WebApi\UseCases\GetItem\SimpleItemBuilder;
+use Queryr\WebApi\ResponseModel\SimpleStatementsBuilder;
 use Queryr\WebApi\UseCases\GetItem\SimpleItem;
 use Queryr\WebApi\ResponseModel\SimpleStatement;
 use Wikibase\DataModel\Entity\Item;
@@ -16,7 +16,7 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Term\Fingerprint;
 
 /**
- * @covers Queryr\Resources\Builders\SimpleItemBuilder
+ * @covers Queryr\WebApi\UseCases\GetItem\SimpleItemBuilder
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -92,7 +92,7 @@ class SimpleItemBuilderTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function buildNewSimpleItemForLanguage( $languageCode ) {
-		$labelLookup = $this->getMock( 'Queryr\Resources\Builders\ResourceLabelLookup' );
+		$labelLookup = $this->getMock( 'Queryr\TermStore\LabelLookup' );
 
 		$labelLookup->expects( $this->any() )
 			->method( 'getLabelByIdAndLanguage' )

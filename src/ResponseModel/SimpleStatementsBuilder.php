@@ -1,10 +1,10 @@
 <?php
 
-namespace Queryr\Resources\Builders;
+namespace Queryr\WebApi\ResponseModel;
 
 use DataValues\DataValue;
 use DataValues\StringValue;
-use Queryr\WebApi\ResponseModel\SimpleStatement;
+use Queryr\TermStore\LabelLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -21,7 +21,7 @@ class SimpleStatementsBuilder {
 	private $languageCode;
 	private $labelLookup;
 
-	public function __construct( $languageCode, ResourceLabelLookup $labelLookup ) {
+	public function __construct( $languageCode, LabelLookup $labelLookup ) {
 		$this->languageCode = $languageCode;
 		$this->labelLookup = $labelLookup;
 	}

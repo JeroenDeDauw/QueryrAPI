@@ -6,7 +6,7 @@ namespace Queryr\WebApi\UseCases\GetProperty;
 
 use Deserializers\Deserializer;
 use Queryr\EntityStore\PropertyStore;
-use Queryr\Resources\Builders\SimplePropertyBuilder;
+use Queryr\WebApi\UseCases\GetProperty\SimplePropertyBuilder;
 use Queryr\WebApi\UseCases\GetProperty\SimpleProperty;
 use Queryr\WebApi\NoNullableReturnTypesException;
 use Wikibase\DataModel\Entity\PropertyId;

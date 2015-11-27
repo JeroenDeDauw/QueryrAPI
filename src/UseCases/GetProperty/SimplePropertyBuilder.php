@@ -1,8 +1,7 @@
 <?php
 
-namespace Queryr\Resources\Builders;
+namespace Queryr\WebApi\UseCases\GetProperty;
 
-use Queryr\WebApi\UseCases\GetProperty\SimpleProperty;
 use Wikibase\DataModel\Entity\Property;
 
 /**

@@ -1,9 +1,9 @@
 <?php
 
-namespace Tests\Queryr\Resources\Builders;
+namespace Queryr\WebApi\Tests\Unit\ResponseModel;
 
 use DataValues\StringValue;
-use Queryr\Resources\Builders\SimpleStatementsBuilder;
+use Queryr\WebApi\ResponseModel\SimpleStatementsBuilder;
 use Queryr\WebApi\ResponseModel\SimpleStatement;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
@@ -13,7 +13,7 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 
 /**
- * @covers Queryr\Resources\Builders\SimpleStatementsBuilder
+ * @covers Queryr\WebApi\ResponseModel\SimpleStatementsBuilder
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -34,7 +34,7 @@ class SimpleStatementsBuilderTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function assertBuildsFrom( array $statements, array $expected ) {
-		$labelLookup = $this->getMock( 'Queryr\Resources\Builders\ResourceLabelLookup' );
+		$labelLookup = $this->getMock( 'Queryr\TermStore\LabelLookup' );
 
 		$labelLookup->expects( $this->any() )
 			->method( 'getLabelByIdAndLanguage' )
@@ -60,7 +60,7 @@ class SimpleStatementsBuilderTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testLabelLookupFallsBackToId() {
-		$labelLookup = $this->getMock( 'Queryr\Resources\Builders\ResourceLabelLookup' );
+		$labelLookup = $this->getMock( 'Queryr\TermStore\LabelLookup' );
 
 		$labelLookup->expects( $this->any() )
 			->method( 'getLabelByIdAndLanguage' )

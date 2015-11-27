@@ -1,8 +1,8 @@
 <?php
 
-namespace Queryr\Resources\Builders;
+namespace Queryr\WebApi\UseCases\GetItem;
 
-use Queryr\WebApi\UseCases\GetItem\SimpleItem;
+use Queryr\WebApi\ResponseModel\SimpleStatementsBuilder;
 use Wikibase\DataModel\Entity\Item;
 
 /**

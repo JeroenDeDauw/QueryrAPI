@@ -1,14 +1,14 @@
 <?php
 
-namespace Tests\Queryr\Resources\Builders;
+namespace Queryr\WebApi\Tests\Unit\UseCases\GetProperty;
 
-use Queryr\Resources\Builders\SimplePropertyBuilder;
+use Queryr\WebApi\UseCases\GetProperty\SimplePropertyBuilder;
 use Queryr\WebApi\UseCases\GetProperty\SimpleProperty;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Term\Fingerprint;
 
 /**
- * @covers Queryr\Resources\Builders\SimplePropertyBuilder
+ * @covers Queryr\WebApi\UseCases\GetProperty\SimplePropertyBuilder
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -58,7 +58,7 @@ class SimplePropertyBuilderTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function buildNewSimplePropertyForLanguage( $languageCode ) {
-		$labelLookup = $this->getMock( 'Queryr\Resources\Builders\ResourceLabelLookup' );
+		$labelLookup = $this->getMock( 'Queryr\TermStore\LabelLookup' );
 
 		$labelLookup->expects( $this->any() )
 			->method( 'getLabelByIdAndLanguage' )

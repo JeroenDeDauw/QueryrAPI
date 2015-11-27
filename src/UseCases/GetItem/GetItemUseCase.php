@@ -6,9 +6,9 @@ namespace Queryr\WebApi\UseCases\GetItem;
 
 use Deserializers\Deserializer;
 use Queryr\EntityStore\ItemStore;
-use Queryr\Resources\Builders\BuilderFactory;
-use Queryr\Resources\Builders\ResourceLabelLookup;
-use Queryr\WebApi\UseCases\GetItem\SimpleItem;
+use Queryr\WebApi\UseCases\GetItem\SimpleItemBuilder;
+use Queryr\WebApi\ResponseModel\SimpleStatementsBuilder;
+use Queryr\TermStore\LabelLookup;
 use Queryr\WebApi\NoNullableReturnTypesException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -23,7 +23,7 @@ class GetItemUseCase {
 	private $labelLookup;
 	private $itemDeserializer;
 
-	public function __construct( ItemStore $itemStore, ResourceLabelLookup $labelLookup, Deserializer $itemDeserializer ) {
+	public function __construct( ItemStore $itemStore, LabelLookup $labelLookup, Deserializer $itemDeserializer ) {
 		$this->itemStore = $itemStore;
 		$this->labelLookup = $labelLookup;
 		$this->itemDeserializer = $itemDeserializer;
@@ -52,12 +52,19 @@ class GetItemUseCase {
 	}
 
 	private function getSimpleItemFromItem( Item $item, string $languageCode ): SimpleItem {
-		$simpleItemBuilder = ( new BuilderFactory() )->newSimpleItemBuilder(
+		$simpleItemBuilder = $this->newSimpleItemBuilder(
 			$languageCode,
 			$this->labelLookup
 		);
 
 		return $simpleItemBuilder->buildFromItem( $item );
+	}
+
+	private function newSimpleItemBuilder( $languageCode, LabelLookup $labelLookup ) {
+		return new SimpleItemBuilder(
+			$languageCode,
+			new SimpleStatementsBuilder( $languageCode, $labelLookup )
+		);
 	}
 
 }

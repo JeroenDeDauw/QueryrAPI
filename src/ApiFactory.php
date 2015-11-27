@@ -155,7 +155,7 @@ class ApiFactory {
 	public function newGetItemUseCase(): GetItemUseCase {
 		return new GetItemUseCase(
 			$this->getItemStore(),
-			new SimpleItemLabelLookup( $this->getLabelLookup() ),
+			$this->getLabelLookup(),
 			$this->getEntityDeserializer()
 		);
 	}
