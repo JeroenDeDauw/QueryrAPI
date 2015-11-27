@@ -26,7 +26,6 @@
 
 		"queryr/entity-store": "~1.0",
 		"queryr/term-store": "~1.0",
-		"queryr/serialization": "~1.0",
 
 		"jeroen/wikibase-data-fixtures": "~1.1",
 
@@ -49,7 +48,8 @@
 	"autoload": {
 		"psr-4": {
 			"Queryr\\WebApi\\": "src/",
-			"Queryr\\WebApi\\Endpoints\\": "app/Endpoints/"
+			"Queryr\\WebApi\\Endpoints\\": "app/Endpoints/",
+			"Queryr\\": "tmp/"
 		}
 	},
 	"autoload-dev": {
