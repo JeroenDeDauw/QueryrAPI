@@ -218,4 +218,11 @@ $app->get(
 	}
 )->assert( 'id', $PROPERTY_ID_REGEX );
 
+$app->get(
+	'swagger.json',
+	function() {
+		return file_get_contents( __DIR__ . '/swagger.json' );
+	}
+);
+
 return $app;
