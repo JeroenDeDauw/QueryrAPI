@@ -46,9 +46,7 @@ For a full CI run
 ## Profiling
 
 When accessing the API via `web/index.dev.php`, profiling information will be generated and in
-`app/cache/profiler`. You can access the web UI via  `apiroot/_profiler/$hash`, where `$hash`
-is the profiler hash that you can find in the first column of `app/cache/profiler/index.csv`.
-Example URL: `http://localhost:8000/index.dev.php/_profiler/a36720`
+`app/cache/profiler`. You can access the profiler UI via `index.dev.php/_profiler`.
 
 ## Internal structure
 
@@ -57,13 +55,8 @@ Example URL: `http://localhost:8000/index.dev.php/_profiler/a36720`
 * `app/`: contains configuration and all framework (Silex) dependent code
 	* `bootstrap.php`: framework application bootstrap (used by System tests)
 	* `routes.php`: defines the routes and their handlers
+	* `Endpoints/`: some of the route handlers have a dedicated file here to not clutter `routes.php`
 * `src/`: contains framework agnostic code
 	* `ApiFactory.php`: top level factory and service locator (used by Integration tests)
 	* `UseCases/`: one directory per use case
 	* Dependencies on Symfony Components are explicitly defined in `composer.json`
-
-## Release notes
-
-### Version 0.1 (dev)
-
-*
