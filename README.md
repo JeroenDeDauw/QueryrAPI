@@ -60,3 +60,9 @@ When accessing the API via `web/index.dev.php`, profiling information will be ge
 	* `ApiFactory.php`: top level factory and service locator (used by Integration tests)
 	* `UseCases/`: one directory per use case
 	* Dependencies on Symfony Components are explicitly defined in `composer.json`
+* `tests/`: tests mirror the directory and namespace structure of the production code
+	* `Unit/`: small isolated tests
+	* `Integration/`: tests combining several units
+	* `System/`: edge-to-edge tests
+	* `TestEnvironment.php`: encapsulates application setup for integration and system tests
+	* `Fixtures/`: test stubs and spies
