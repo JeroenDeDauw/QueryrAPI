@@ -9,6 +9,9 @@
     "schemes": [
         "http"
     ],
+    "produces": [
+        "application/json"
+    ],
     "parameters": {
         "per_page": {
             "name": "per_page",
