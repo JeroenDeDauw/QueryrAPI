@@ -220,8 +220,18 @@ $app->get(
 
 $app->get(
 	'swagger.json',
-	function() {
-		return file_get_contents( __DIR__ . '/swagger.json' );
+	function( Request $request ) {
+		return str_replace(
+			[
+				'you_should_probably_replace_this_by_the_actual_host',
+				'you_should_probably_replace_this_by_the_actual_basePath',
+			],
+			[
+				$request->getHost(),
+				$request->getBasePath()
+			],
+			file_get_contents( __DIR__ . '/swagger.json' )
+		);
 	}
 );
 
