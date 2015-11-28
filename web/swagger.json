@@ -1,0 +1,389 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "0.0.1",
+        "title": "QueryR API"
+    },
+    "host": "queryr.wmflabs.org",
+    "basePath": "/api",
+    "schemes": [
+        "http"
+    ],
+    "parameters": {
+        "per_page": {
+            "name": "per_page",
+            "in": "query",
+            "description": "Maximum number of records to return",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 1000,
+            "default": 100
+        },
+        "page": {
+            "name": "page",
+            "in": "query",
+            "description": "Pagination parameter",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 100,
+            "default": 1
+        },
+        "path_item_id": {
+            "in": "path",
+            "name": "item_id",
+            "description": "ID of the item. Example: Q64",
+            "required": true,
+            "type": "string"
+        },
+        "path_property_id": {
+            "in": "path",
+            "name": "property_id",
+            "description": "ID of the property. Example: P31",
+            "required": true,
+            "type": "string"
+        }
+    },
+    "paths": {
+        "/": {
+            "get": {
+                "tags": [ "root" ],
+                "description": "Returns a hash with urls of noteworthy endpoints.",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/items": {
+            "get": {
+                "tags": [ "items" ],
+                "description": "Lists item summaries. Each summary holds a link to the full item.",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/per_page"
+                    },
+                    {
+                        "$ref": "#/parameters/page"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/items/{item_id}": {
+            "get": {
+                "tags": [ "items" ],
+                "description": "Returns a single item.",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/path_item_id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "Item not found"
+                    }
+                }
+            }
+        },
+        "/items/{item_id}/label": {
+            "get": {
+                "tags": [ "items" ],
+                "description": "Returns the label in the request language of a single item.",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/path_item_id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "Label not found"
+                    }
+                }
+            }
+        },
+        "/items/{item_id}/description": {
+            "get": {
+                "tags": [ "items" ],
+                "description": "Returns the description in the request language of a single item.",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/path_item_id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "Description not found"
+                    }
+                }
+            }
+        },
+        "/items/{item_id}/aliases": {
+            "get": {
+                "tags": [ "items" ],
+                "description": "Returns the aliases in the request language of a single item.",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/path_item_id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "Aliases not found"
+                    }
+                }
+            }
+        },
+        "/items/{item_id}/data": {
+            "get": {
+                "tags": [ "items" ],
+                "description": "Returns the data of a single item.",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/path_item_id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "Item not found"
+                    }
+                }
+            }
+        },
+        "/items/{item_id}/data/{property_label}": {
+            "get": {
+                "tags": [ "items" ],
+                "description": "Returns the data of a single items property.",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/path_item_id"
+                    },
+                    {
+                        "in": "path",
+                        "name": "property_label",
+                        "description": "Property label",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "Item not found"
+                    }
+                }
+            }
+        },
+        "/items/types": {
+            "get": {
+                "tags": [ "items" ],
+                "description": "Lists the types of items in the system. These are items used as value of the \"instance of\" property",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/per_page"
+                    },
+                    {
+                        "$ref": "#/parameters/page"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/properties": {
+            "get": {
+                "tags": [ "properties" ],
+                "description": "Lists property summaries. Each summary holds a link to the full property.",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/per_page"
+                    },
+                    {
+                        "$ref": "#/parameters/page"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/properties/{property_id}": {
+            "get": {
+                "tags": [ "properties" ],
+                "description": "Returns a single property.",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/path_property_id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "Item not found"
+                    }
+                }
+            }
+        },
+        "/properties/{property_id}/label": {
+            "get": {
+                "tags": [ "properties" ],
+                "description": "Returns the label in the request language of a single property.",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/path_property_id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "Label not found"
+                    }
+                }
+            }
+        },
+        "/properties/{property_id}/description": {
+            "get": {
+                "tags": [ "properties" ],
+                "description": "Returns the description in the request language of a single property.",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/path_property_id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "Description not found"
+                    }
+                }
+            }
+        },
+        "/properties/{property_id}/aliases": {
+            "get": {
+                "tags": [ "properties" ],
+                "description": "Returns the aliases in the request language of a single property.",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/path_property_id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "Aliases not found"
+                    }
+                }
+            }
+        }
+    }
+}
