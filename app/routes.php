@@ -225,7 +225,7 @@ $swaggerRoute = function( Request $request ) {
 			'you_should_probably_replace_this_by_the_actual_basePath',
 		],
 		[
-			$request->getHost(),
+			$request->getHttpHost(),
 			$request->getBasePath()
 		],
 		file_get_contents( __DIR__ . '/swagger.json' )
