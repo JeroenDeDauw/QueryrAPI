@@ -175,8 +175,12 @@
                     }
                 ],
                 "responses": {
-                    "1337": {
-                        "description": "OK"
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string",
+                            "example": "Berlin"
+                        }
                     },
                     "400": {
                         "description": "Invalid ID supplied"
@@ -201,7 +205,11 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "OK",
+                        "schema": {
+                            "type": "string",
+                            "example": "capital city and state of Germany"
+                        }
                     },
                     "400": {
                         "description": "Invalid ID supplied"
@@ -394,7 +402,11 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "OK",
+                        "schema": {
+                            "type": "string",
+                            "example": "postal code"
+                        }
                     },
                     "400": {
                         "description": "Invalid ID supplied"
@@ -419,7 +431,11 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "OK",
+                        "schema": {
+                            "type": "string",
+                            "example": "identifier assigned by postal authorities for the subject area"
+                        }
                     },
                     "400": {
                         "description": "Invalid ID supplied"
@@ -451,9 +467,9 @@
                                 "type": "string"
                             },
                             "example": [
-                                "instance of",
-                                "is a",
-                                "rdf:type"
+                                "post code",
+                                "zip code",
+                                "postcode"
                             ]
                         }
                     },
