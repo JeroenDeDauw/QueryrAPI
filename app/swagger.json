@@ -74,6 +74,24 @@
                     "type": "string"
                 }
             }
+        },
+        "property_list_element": {
+            "type": "object",
+            "required": [ "id", "type", "url", "wikidata_url" ],
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "wikidata_url": {
+                    "type": "string"
+                }
+            }
         }
     },
     "paths": {
@@ -315,7 +333,13 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/property_list_element"
+                            }
+                        }
                     }
                 }
             }
