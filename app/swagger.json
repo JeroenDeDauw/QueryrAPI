@@ -56,22 +56,28 @@
             "required": [ "id", "updated_at", "url", "wikidata_url" ],
             "properties": {
                 "id": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "Q60"
                 },
                 "label": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "New York City"
                 },
                 "updated_at": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "2015-11-24T23:19:46Z"
                 },
                 "url": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "http://queryr.wmflabs.org/items/Q60"
                 },
                 "wikidata_url": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "https://www.wikidata.org/entity/Q60"
                 },
                 "wikipedia_url": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "https://www.wikidata.org/wiki/Special:GoToLinkedPage/enwiki/Q60"
                 }
             }
         },
@@ -80,16 +86,20 @@
             "required": [ "id", "type", "url", "wikidata_url" ],
             "properties": {
                 "id": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "P281"
                 },
                 "type": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "string"
                 },
                 "url": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "http://queryr.wmflabs.org/properties/P281"
                 },
                 "wikidata_url": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "https://www.wikidata.org/entity/P281"
                 }
             }
         }
