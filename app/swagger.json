@@ -50,6 +50,32 @@
             "type": "string"
         }
     },
+    "definitions": {
+        "item_list_element": {
+            "type": "object",
+            "required": [ "id", "updated_at", "url", "wikidata_url" ],
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "label": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "wikidata_url": {
+                    "type": "string"
+                },
+                "wikipedia_url": {
+                    "type": "string"
+                }
+            }
+        }
+    },
     "paths": {
         "/": {
             "get": {
@@ -82,7 +108,13 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/item_list_element"
+                            }
+                        }
                     }
                 }
             }
