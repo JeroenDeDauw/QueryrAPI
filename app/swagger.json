@@ -175,7 +175,7 @@
                     }
                 ],
                 "responses": {
-                    "200": {
+                    "1337": {
                         "description": "OK"
                     },
                     "400": {
@@ -226,7 +226,18 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            },
+                            "example": [
+                                "NYC",
+                                "New York",
+                                "The Big Apple"
+                            ]
+                        }
                     },
                     "400": {
                         "description": "Invalid ID supplied"
@@ -433,7 +444,18 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            },
+                            "example": [
+                                "instance of",
+                                "is a",
+                                "rdf:type"
+                            ]
+                        }
                     },
                     "400": {
                         "description": "Invalid ID supplied"
