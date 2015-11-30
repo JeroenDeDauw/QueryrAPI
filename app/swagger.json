@@ -140,7 +140,7 @@
                 "values": {
                     "type": "array",
                     "items": {
-                        "type": "mixed"
+                        "type": "object"
                     },
                     "minItems": 2,
                     "example": [
