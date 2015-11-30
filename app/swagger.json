@@ -124,6 +124,38 @@
                     "example": "https://www.wikidata.org/entity/Q146"
                 }
             }
+        },
+        "simple_statement": {
+            "type": "object",
+            "required": [ "value", "type" ],
+            "properties": {
+                "value": {
+                    "type": "mixed",
+                    "example": "Los Angeles"
+                },
+                "type": {
+                    "type": "string",
+                    "example": "string"
+                },
+                "values": {
+                    "type": "array",
+                    "items": {
+                        "type": "mixed"
+                    },
+                    "minItems": 2,
+                    "example": [
+                        "Los Angeles",
+                        "Madrid",
+                        "Istanbul"
+                    ]
+                }
+            }
+        },
+        "simple_statement_map": {
+            "type": "object",
+            "additionalProperties": {
+                "$ref": "#/definitions/simple_statement"
+            }
         }
     },
     "paths": {
@@ -183,7 +215,41 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "required": [ "id", "data" ],
+                            "properties": {
+                                "id": {
+                                    "title": "item_identifiers",
+                                    "type": "object",
+                                    "required": [ "wikidata" ],
+                                    "properties": {
+                                        "wikidata": {
+                                            "type": "string"
+                                        },
+                                        "en_wikipedia": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "label": {
+                                    "type": "string"
+                                },
+                                "description": {
+                                    "type": "string"
+                                },
+                                "aliases": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/simple_statement_map"
+                                }
+                            }
+                        }
                     },
                     "400": {
                         "description": "Invalid ID supplied"
@@ -302,7 +368,10 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/simple_statement_map"
+                        }
                     },
                     "400": {
                         "description": "Invalid ID supplied"
@@ -334,7 +403,10 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/simple_statement"
+                        }
                     },
                     "400": {
                         "description": "Invalid ID supplied"
@@ -415,7 +487,38 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "required": [ "id", "type" ],
+                            "properties": {
+                                "id": {
+                                    "title": "property_identifiers",
+                                    "type": "object",
+                                    "required": [ "wikidata" ],
+                                    "properties": {
+                                        "wikidata": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "label": {
+                                    "type": "string"
+                                },
+                                "description": {
+                                    "type": "string"
+                                },
+                                "aliases": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": {
+                                    "type": "string"
+                                }
+                            }
+                        }
                     },
                     "400": {
                         "description": "Invalid ID supplied"
