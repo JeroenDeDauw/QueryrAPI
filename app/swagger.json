@@ -142,7 +142,6 @@
                     "items": {
                         "type": "mixed"
                     },
-                    "minItems": 2,
                     "example": [
                         "Los Angeles",
                         "Madrid",
