@@ -102,6 +102,28 @@
                     "example": "https://www.wikidata.org/entity/P281"
                 }
             }
+        },
+        "item_type_list_element": {
+            "type": "object",
+            "required": [ "label", "id", "url", "wikidata_url" ],
+            "properties": {
+                "label": {
+                    "type": "string",
+                    "example": "cat"
+                },
+                "id": {
+                    "type": "string",
+                    "example": "Q146"
+                },
+                "url": {
+                    "type": "string",
+                    "example": "http://queryr.wmflabs.org/items/Q146"
+                },
+                "wikidata_url": {
+                    "type": "string",
+                    "example": "https://www.wikidata.org/entity/Q146"
+                }
+            }
         }
     },
     "paths": {
@@ -340,7 +362,13 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/item_type_list_element"
+                            }
+                        }
                     }
                 }
             }
