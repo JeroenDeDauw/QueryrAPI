@@ -130,6 +130,7 @@
             "required": [ "value", "type" ],
             "properties": {
                 "value": {
+                    "type": "object",
                     "example": "Los Angeles"
                 },
                 "type": {
