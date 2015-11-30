@@ -130,7 +130,6 @@
             "required": [ "value", "type" ],
             "properties": {
                 "value": {
-                    "type": "mixed",
                     "example": "Los Angeles"
                 },
                 "type": {
@@ -142,6 +141,7 @@
                     "items": {
                         "type": "mixed"
                     },
+                    "minItems": 2,
                     "example": [
                         "Los Angeles",
                         "Madrid",
