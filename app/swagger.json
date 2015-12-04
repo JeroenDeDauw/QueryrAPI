@@ -397,7 +397,7 @@
                 }
             }
         },
-        "/items/{item_id}/data/{property_label}": {
+        "/items/{item_id}/data/{property_id}": {
             "get": {
                 "tags": [ "items" ],
                 "description": "Returns the data of a single items property.",
@@ -409,11 +409,7 @@
                         "$ref": "#/parameters/path_item_id"
                     },
                     {
-                        "in": "path",
-                        "name": "property_label",
-                        "description": "Property label",
-                        "required": true,
-                        "type": "string"
+                        "$ref": "#/parameters/path_property_id"
                     }
                 ],
                 "responses": {

@@ -76,7 +76,7 @@ class SimpleEntitySerializer implements Serializer {
 		$data = [];
 
 		foreach ( $this->entity->statements as $simpleStatement ) {
-			$data[$simpleStatement->propertyName] = $this->statementSerializer->serialize( $simpleStatement );
+			$data[$simpleStatement->propertyId->getSerialization()] = $this->statementSerializer->serialize( $simpleStatement );
 		}
 
 		return $data;

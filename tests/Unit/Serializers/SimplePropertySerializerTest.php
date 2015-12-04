@@ -7,6 +7,7 @@ use DataValues\StringValue;
 use Queryr\WebApi\ResponseModel\SimpleStatement;
 use Queryr\WebApi\UseCases\GetProperty\SimpleProperty;
 use Queryr\WebApi\Serializers\SerializerFactory;
+use Wikibase\DataModel\Entity\PropertyId;
 
 /**
  * @covers Queryr\WebApi\Serializers\SimplePropertySerializer
@@ -36,11 +37,13 @@ class SimplePropertySerializerTest extends \PHPUnit_Framework_TestCase {
 
 		$property->statements = [
 			SimpleStatement::newInstance()
+				->withPropertyId( new PropertyId( 'P1' ) )
 				->withPropertyName( 'fluffiness' )
 				->withType( 'number' )
 				->withValues( [ new NumberValue( 9001 ) ] ),
 
 			SimpleStatement::newInstance()
+				->withPropertyId( new PropertyId( 'P2' ) )
 				->withPropertyName( 'awesome' )
 				->withType( 'string' )
 				->withValues( [ new StringValue( 'Jeroen' ), new StringValue( 'Abraham' ) ] ),
@@ -80,11 +83,11 @@ class SimplePropertySerializerTest extends \PHPUnit_Framework_TestCase {
 
 			'data_url' => 'http://data',
 			'data' => [
-				'fluffiness' => [
+				'P1' => [
 					'value' => 9001,
 					'type' => 'number'
 				],
-				'awesome' => [
+				'P2' => [
 					'value' => 'Jeroen',
 					'values' => [ 'Jeroen', 'Abraham' ],
 					'type' => 'string'

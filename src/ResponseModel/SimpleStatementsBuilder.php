@@ -35,11 +35,11 @@ class SimpleStatementsBuilder {
 		$simpleStatements = [];
 
 		foreach ( $statements->getPropertyIds() as $propertyId ) {
-			$simpleStatement = new SimpleStatement();
-
 			$statementValues = $this->getStatementValuesWithPropertyId( $statements, $propertyId );
 
 			if ( !empty( $statementValues ) ) {
+				$simpleStatement = new SimpleStatement();
+
 				$simpleStatement->values = $statementValues;
 				$simpleStatement->valueType = $statementValues[0]->getType();
 				$simpleStatement->propertyName = $this->getEntityName( $propertyId );

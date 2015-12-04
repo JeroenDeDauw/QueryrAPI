@@ -18,7 +18,7 @@ class ItemPropertyDataEndpointTest extends ApiTestCase {
 	public function testGivenNotKnownItemId_404isReturned() {
 		$client = $this->createClient();
 
-		$client->request( 'GET', '/items/Q900404/data/instance of' );
+		$client->request( 'GET', '/items/Q900404/data/P31' );
 
 		$this->assert404( $client->getResponse() );
 	}
@@ -26,9 +26,9 @@ class ItemPropertyDataEndpointTest extends ApiTestCase {
 	public function testGivenNonItemId_404isReturned() {
 		$client = $this->createClient();
 
-		$client->request( 'GET', '/items/YouMadBro/data/instance of' );
+		$client->request( 'GET', '/items/YouMadBro/data/P31' );
 
-		$this->assert404( $client->getResponse(), 'No route found for "GET /items/YouMadBro/data/instance of"' );
+		$this->assert404( $client->getResponse(), 'No route found for "GET /items/YouMadBro/data/P31"' );
 	}
 
 	public function testGivenKnownItemId_itemPropertyDataIsReturned() {
@@ -39,7 +39,7 @@ class ItemPropertyDataEndpointTest extends ApiTestCase {
 
 		$client = $this->createClient();
 
-		$client->request( 'GET', '/items/Q2013/data/instance of' );
+		$client->request( 'GET', '/items/Q2013/data/P31' );
 
 		$this->assertSuccessResponse(
 			(object)[

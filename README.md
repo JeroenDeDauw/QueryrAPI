@@ -77,13 +77,14 @@ When accessing the API via `web/index.dev.php`, profiling information will be ge
     * `aliases_url`
     * `wikidata_url`
 	* `wikipedia_html_url`
-
 * Added top level elements to GET `/properties/$id` default response format:
     * `label_url`
     * `description_url`
     * `aliases_url`
     * `wikidata_url`
 	* `data`
+* The `data` top level element in the item response format now indexes by property id rather than property label
+* Changed GET `/items/$id/data/$property_label` to `/items/$id/data/$property_id`
 
 ### Version 0.1 (2015-11-30)
 

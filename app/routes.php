@@ -130,9 +130,9 @@ $app->get(
 )->assert( 'id', $ITEM_ID_REGEX );
 
 $app->get(
-	'items/{item_id}/data/{property_label}',
-	function( Application $app, string $item_id, string $property_label ) use ( $apiFactory ) {
-		return ( new GetItemPropertyDataEndpoint( $app, $apiFactory ) )->getResult( $item_id, $property_label );
+	'items/{item_id}/data/{property_id}',
+	function( Application $app, string $item_id, string $property_id ) use ( $apiFactory ) {
+		return ( new GetItemPropertyDataEndpoint( $app, $apiFactory ) )->getResult( $item_id, $property_id );
 	}
 )->assert( 'item_id', $ITEM_ID_REGEX );
 

@@ -101,7 +101,7 @@ class ItemEndpointTest extends ApiTestCase {
 				'wikidata_url' => 'https://www.wikidata.org/entity/Q64',
 				'data_url' => 'http://test.url/items/Q64/data',
 				'data' => (object)[
-					'country' => (object)[ // denormalized
+					'P17' => (object)[
 						'value' => 'Germany', // denormalized
 						'type' => 'string'
 					],
@@ -109,7 +109,7 @@ class ItemEndpointTest extends ApiTestCase {
 						'value' => 'Q515',
 						'type' => 'string'
 					],
-					'postal code' => (object)[ // denormalized
+					'P281' => (object)[
 						'value' => '10115–14199',
 						'type' => 'string'
 					]

@@ -52,8 +52,8 @@ class SimpleStatement {
 		return $this;
 	}
 
-	public function withPropertyId( $propertyId ) {
-		$this->propertyId = is_string( $propertyId ) ? new PropertyId( $propertyId ) : $propertyId;
+	public function withPropertyId( PropertyId $propertyId ) {
+		$this->propertyId = $propertyId;
 		return $this;
 	}
 
