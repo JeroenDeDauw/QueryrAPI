@@ -7,6 +7,7 @@ use DataValues\StringValue;
 use Queryr\WebApi\ResponseModel\SimpleStatement;
 use Queryr\WebApi\UseCases\GetProperty\SimpleProperty;
 use Queryr\WebApi\Serializers\SerializerFactory;
+use Serializers\Exceptions\UnsupportedObjectException;
 use Wikibase\DataModel\Entity\PropertyId;
 
 /**
@@ -20,7 +21,7 @@ class SimplePropertySerializerTest extends \PHPUnit_Framework_TestCase {
 	public function testGivenNonItem_exceptionIsThrown() {
 		$serializer = ( new SerializerFactory() )->newSimplePropertySerializer();
 
-		$this->setExpectedException( 'Serializers\Exceptions\UnsupportedObjectException' );
+		$this->setExpectedException( UnsupportedObjectException::class );
 		$serializer->serialize( null );
 	}
 

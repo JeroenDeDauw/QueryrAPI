@@ -3,6 +3,7 @@
 namespace Queryr\WebApi\Tests\Unit\UseCases\GetItem;
 
 use DataValues\StringValue;
+use Queryr\TermStore\LabelLookup;
 use Queryr\WebApi\UrlBuilder;
 use Queryr\WebApi\UseCases\GetItem\SimpleItemBuilder;
 use Queryr\WebApi\ResponseModel\SimpleStatementsBuilder;
@@ -100,7 +101,7 @@ class SimpleItemBuilderTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function buildNewSimpleItemForLanguage( $languageCode ) {
-		$labelLookup = $this->getMock( 'Queryr\TermStore\LabelLookup' );
+		$labelLookup = $this->getMock( LabelLookup::class );
 
 		$labelLookup->expects( $this->any() )
 			->method( 'getLabelByIdAndLanguage' )

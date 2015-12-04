@@ -8,6 +8,7 @@ use Queryr\WebApi\Tests\TestEnvironment;
 use Queryr\WebApi\UseCases\GetItem\SimpleItem;
 use Queryr\WebApi\ResponseModel\SimpleStatement;
 use Queryr\WebApi\Serializers\SerializerFactory;
+use Serializers\Exceptions\UnsupportedObjectException;
 use Wikibase\DataModel\Entity\PropertyId;
 
 /**
@@ -22,7 +23,7 @@ class SimpleItemSerializerTest extends \PHPUnit_Framework_TestCase {
 
 		$serializer = TestEnvironment::newUninstalledInstance()->getFactory()->newSimpleItemSerializer();
 
-		$this->setExpectedException( 'Serializers\Exceptions\UnsupportedObjectException' );
+		$this->setExpectedException( UnsupportedObjectException::class );
 		$serializer->serialize( null );
 	}
 

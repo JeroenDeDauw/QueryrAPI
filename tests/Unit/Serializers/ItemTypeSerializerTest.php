@@ -4,6 +4,7 @@ namespace Tests\Queryr\Serialization;
 
 use Queryr\WebApi\UseCases\ListItemTypes\ItemType;
 use Queryr\WebApi\Serializers\SerializerFactory;
+use Serializers\Exceptions\UnsupportedObjectException;
 use Wikibase\DataModel\Entity\ItemId;
 
 /**
@@ -17,7 +18,7 @@ class ItemTypeSerializerTest extends \PHPUnit_Framework_TestCase {
 	public function testGivenNonItemType_exceptionIsThrown() {
 		$serializer = ( new SerializerFactory() )->newItemTypeSerializer();
 
-		$this->setExpectedException( 'Serializers\Exceptions\UnsupportedObjectException' );
+		$this->setExpectedException( UnsupportedObjectException::class );
 		$serializer->serialize( null );
 	}
 

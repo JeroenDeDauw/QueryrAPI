@@ -2,6 +2,7 @@
 
 namespace Queryr\WebApi\Tests\Unit\UseCases\GetProperty;
 
+use Queryr\TermStore\LabelLookup;
 use Queryr\WebApi\ResponseModel\SimpleStatementsBuilder;
 use Queryr\WebApi\UrlBuilder;
 use Queryr\WebApi\UseCases\GetProperty\SimplePropertyBuilder;
@@ -66,7 +67,7 @@ class SimplePropertyBuilderTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function buildNewSimplePropertyForLanguage( $languageCode ) {
-		$labelLookup = $this->getMock( 'Queryr\TermStore\LabelLookup' );
+		$labelLookup = $this->getMock( LabelLookup::class );
 
 		$labelLookup->expects( $this->any() )
 			->method( 'getLabelByIdAndLanguage' )
