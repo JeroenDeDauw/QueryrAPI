@@ -246,6 +246,21 @@
                                         "type": "string"
                                     }
                                 },
+                                "label_url": {
+                                    "type": "string"
+                                },
+                                "description_url": {
+                                    "type": "string"
+                                },
+                                "aliases_url": {
+                                    "type": "string"
+                                },
+                                "wikidata_url": {
+                                    "type": "string"
+                                },
+                                "wikipedia_html_url": {
+                                    "type": "string"
+                                },
                                 "data": {
                                     "$ref": "#/definitions/simple_statement_map"
                                 }
@@ -503,6 +518,9 @@
                                         }
                                     }
                                 },
+                                "type": {
+                                    "type": "string"
+                                },
                                 "label": {
                                     "type": "string"
                                 },
@@ -515,8 +533,20 @@
                                         "type": "string"
                                     }
                                 },
-                                "type": {
+                                "label_url": {
                                     "type": "string"
+                                },
+                                "description_url": {
+                                    "type": "string"
+                                },
+                                "aliases_url": {
+                                    "type": "string"
+                                },
+                                "wikidata_url": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/simple_statement_map"
                                 }
                             }
                         }
