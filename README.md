@@ -71,14 +71,14 @@ When accessing the API via `web/index.dev.php`, profiling information will be ge
 
 ### Version 0.2 (dev)
 
-* Added top level elements to GET `/items/$id`:
+* Added top level elements to GET `/items/$id` default response format:
     * `label_url`
     * `description_url`
     * `aliases_url`
     * `wikidata_url`
 	* `wikipedia_html_url`
 
-* Added top level elements to GET `/properties/$id`:
+* Added top level elements to GET `/properties/$id` default response format:
     * `label_url`
     * `description_url`
     * `aliases_url`
