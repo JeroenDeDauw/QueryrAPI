@@ -219,7 +219,7 @@
                         "description": "OK",
                         "schema": {
                             "type": "object",
-                            "required": [ "id", "data" ],
+                            "required": [ "id", "data", "label_url", "description_url", "aliases_url", "wikidata_url" ],
                             "properties": {
                                 "id": {
                                     "title": "item_identifiers",
@@ -506,7 +506,7 @@
                         "description": "OK",
                         "schema": {
                             "type": "object",
-                            "required": [ "id", "type" ],
+                            "required": [ "id", "type", "label_url", "description_url", "aliases_url", "wikidata_url", "data" ],
                             "properties": {
                                 "id": {
                                     "title": "property_identifiers",
