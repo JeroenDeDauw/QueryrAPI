@@ -2,6 +2,9 @@
 
 namespace Tests\Queryr\Serialization;
 
+use DataValues\NumberValue;
+use DataValues\StringValue;
+use Queryr\WebApi\ResponseModel\SimpleStatement;
 use Queryr\WebApi\UseCases\GetProperty\SimpleProperty;
 use Queryr\WebApi\Serializers\SerializerFactory;
 
@@ -31,12 +34,31 @@ class SimplePropertySerializerTest extends \PHPUnit_Framework_TestCase {
 		$property->description = 'lots of kittens';
 		$property->aliases = [ 'cats' ];
 
+		$property->statements = [
+			SimpleStatement::newInstance()
+				->withPropertyName( 'fluffiness' )
+				->withType( 'number' )
+				->withValues( [ new NumberValue( 9001 ) ] ),
+
+			SimpleStatement::newInstance()
+				->withPropertyName( 'awesome' )
+				->withType( 'string' )
+				->withValues( [ new StringValue( 'Jeroen' ), new StringValue( 'Abraham' ) ] ),
+		];
+
 		$property->type = 'awesome';
+
+		$property->labelUrl = 'http://labels';
+		$property->descriptionUrl = 'http://description';
+		$property->aliasesUrl = 'http://aliases';
+		$property->dataUrl = 'http://data';
+		$property->wikidataUrl = 'http://wikidata';
+		$property->wikipediaHtmlUrl = 'http://wikipedia';
 
 		return $property;
 	}
 
-	public function testSerializationWithValueForOneProperty() {
+	public function testSerializationWithValueForTwoProperties() {
 		$serializer = ( new SerializerFactory() )->newSimplePropertySerializer();
 		$serialized = $serializer->serialize( $this->newSimpleProperty() );
 
@@ -50,6 +72,24 @@ class SimplePropertySerializerTest extends \PHPUnit_Framework_TestCase {
 			'aliases' => [ 'cats' ],
 
 			'type' => 'awesome',
+
+			'label_url' => 'http://labels',
+			'description_url' => 'http://description',
+			'aliases_url' => 'http://aliases',
+			'wikidata_url' => 'http://wikidata',
+
+			'data_url' => 'http://data',
+			'data' => [
+				'fluffiness' => [
+					'value' => 9001,
+					'type' => 'number'
+				],
+				'awesome' => [
+					'value' => 'Jeroen',
+					'values' => [ 'Jeroen', 'Abraham' ],
+					'type' => 'string'
+				],
+			]
 		];
 
 		$this->assertEquals( $expected, $serialized );

@@ -156,14 +156,17 @@ class ApiFactory {
 		return new GetItemUseCase(
 			$this->getItemStore(),
 			$this->getLabelLookup(),
-			$this->getEntityDeserializer()
+			$this->getEntityDeserializer(),
+			$this->getUrlBuilder()
 		);
 	}
 
 	public function newGetPropertyUseCase(): GetPropertyUseCase {
 		return new GetPropertyUseCase(
 			$this->getPropertyStore(),
-			$this->getEntityDeserializer()
+			$this->getLabelLookup(),
+			$this->getEntityDeserializer(),
+			$this->getUrlBuilder()
 		);
 	}
 

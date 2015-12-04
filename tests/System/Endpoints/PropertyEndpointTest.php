@@ -31,12 +31,19 @@ class PropertyEndpointTest extends ApiTestCase {
 
 		$this->assertSuccessResponse(
 			(object)[
+				'type' => 'wikibase-item',
+
 				'id' => (object)[
 					'wikidata' => 'P17'
 				],
 				'label' => 'country',
 				'description' => 'sovereign state of this item',
-				'type' => 'wikibase-item'
+				'label_url' => 'http://test.url/properties/P17/label',
+				'description_url' => 'http://test.url/properties/P17/description',
+				'aliases_url' => 'http://test.url/properties/P17/aliases',
+				'wikidata_url' => 'https://www.wikidata.org/entity/P17',
+				'data_url' => 'http://test.url/properties/P17/data',
+				'data' => [],
 			],
 			$client->getResponse()
 		);

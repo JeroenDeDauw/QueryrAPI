@@ -37,12 +37,12 @@ class SimpleStatement {
 		return new self();
 	}
 
-	public function withPropertyName( $propertyName ) {
+	public function withPropertyName( string $propertyName ) {
 		$this->propertyName = $propertyName;
 		return $this;
 	}
 
-	public function withType( $type ) {
+	public function withType( string $type ) {
 		$this->valueType = $type;
 		return $this;
 	}

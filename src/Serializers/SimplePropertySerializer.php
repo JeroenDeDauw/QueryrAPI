@@ -16,15 +16,15 @@ class SimplePropertySerializer implements Serializer {
 	/**
 	 * @var Serializer
 	 */
-	private $foundationalSerializer;
+	private $entitySerializer;
 
 	/**
 	 * @var SimpleProperty
 	 */
 	private $property;
 
-	public function __construct( Serializer $foundationalSerializer ) {
-		$this->foundationalSerializer = $foundationalSerializer;
+	public function __construct( Serializer $simpleEntitySerializer ) {
+		$this->entitySerializer = $simpleEntitySerializer;
 	}
 
 	public function serialize( $object ) {
@@ -37,12 +37,11 @@ class SimplePropertySerializer implements Serializer {
 		return $this->serializeProperty();
 	}
 
-	private function serializeProperty() {
-		$serialization = $this->foundationalSerializer->serialize( $this->property );
-
-		$serialization['type'] = $this->property->type;
-
-		return $serialization;
+	private function serializeProperty(): array {
+		return array_merge(
+			[ 'type' => $this->property->type ],
+			$this->entitySerializer->serialize( $this->property )
+		);
 	}
 
 }

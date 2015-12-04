@@ -6,8 +6,9 @@ namespace Queryr\WebApi\UseCases\GetProperty;
 
 use Deserializers\Deserializer;
 use Queryr\EntityStore\PropertyStore;
-use Queryr\WebApi\UseCases\GetProperty\SimplePropertyBuilder;
-use Queryr\WebApi\UseCases\GetProperty\SimpleProperty;
+use Queryr\TermStore\LabelLookup;
+use Queryr\WebApi\ResponseModel\SimpleStatementsBuilder;
+use Queryr\WebApi\UrlBuilder;
 use Queryr\WebApi\NoNullableReturnTypesException;
 use Wikibase\DataModel\Entity\PropertyId;
 
@@ -19,15 +20,23 @@ class GetPropertyUseCase {
 
 	private $propertyStore;
 	private $propertyDeserializer;
+	private $urlBuilder;
+	private $labelLookup;
 
-	public function __construct( PropertyStore $propertyStore, Deserializer $propertyDeserializer ) {
+	public function __construct( PropertyStore $propertyStore, LabelLookup $labelLookup,
+			Deserializer $propertyDeserializer, UrlBuilder $urlBuilder ) {
+
 		$this->propertyStore = $propertyStore;
+		$this->labelLookup = $labelLookup;
 		$this->propertyDeserializer = $propertyDeserializer;
+		$this->urlBuilder = $urlBuilder;
 	}
 
 	public function getProperty( GetPropertyRequest $request ): SimpleProperty {
 		$propertyJson = $this->getPropertyJson( $request->getPropertyId() );
-		$simplePropertyBuilder = new SimplePropertyBuilder( $request->getLanguageCode() );
+
+		$simplePropertyBuilder = $this->newSimplePropertyBuilder( $request->getLanguageCode() );
+
 		return $simplePropertyBuilder->buildFromProperty( $this->propertyDeserializer->deserialize( $propertyJson ) );
 	}
 
@@ -42,6 +51,14 @@ class GetPropertyUseCase {
 		}
 
 		return json_decode( $propertyRow->getPropertyJson(), true );
+	}
+
+	private function newSimplePropertyBuilder( $languageCode ) {
+		return new SimplePropertyBuilder(
+			$languageCode,
+			new SimpleStatementsBuilder( $languageCode, $this->labelLookup ),
+			$this->urlBuilder
+		);
 	}
 
 }

@@ -48,10 +48,17 @@ class SimpleItemSerializerTest extends \PHPUnit_Framework_TestCase {
 				->withValues( [ new StringValue( 'Jeroen' ), new StringValue( 'Abraham' ) ] ),
 		];
 
+		$item->labelUrl = 'http://labels';
+		$item->descriptionUrl = 'http://description';
+		$item->aliasesUrl = 'http://aliases';
+		$item->dataUrl = 'http://data';
+		$item->wikidataUrl = 'http://wikidata';
+		$item->wikipediaHtmlUrl = 'http://wikipedia';
+
 		return $item;
 	}
 
-	public function testSerializationWithValueForOneProperty() {
+	public function testSerializationWithValueForTwoProperties() {
 		$serializer = ( new SerializerFactory() )->newSimpleItemSerializer();
 		$serialized = $serializer->serialize( $this->newSimpleItem() );
 
@@ -66,6 +73,12 @@ class SimpleItemSerializerTest extends \PHPUnit_Framework_TestCase {
 			'description' => 'lots of kittens',
 			'aliases' => [ 'cats' ],
 
+			'label_url' => 'http://labels',
+			'description_url' => 'http://description',
+			'aliases_url' => 'http://aliases',
+			'wikidata_url' => 'http://wikidata',
+
+			'data_url' => 'http://data',
 			'data' => [
 				'fluffiness' => [
 					'value' => 9001,

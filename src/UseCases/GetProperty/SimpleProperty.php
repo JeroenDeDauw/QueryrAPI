@@ -2,31 +2,14 @@
 
 namespace Queryr\WebApi\UseCases\GetProperty;
 
+use Queryr\WebApi\ResponseModel\SimpleEntityTrait;
+
 /**
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class SimpleProperty {
-
-	/**
-	 * @var string[]
-	 */
-	public $ids = [];
-
-	/**
-	 * @var string
-	 */
-	public $label = '';
-
-	/**
-	 * @var string
-	 */
-	public $description = '';
-
-	/**
-	 * @var string[]
-	 */
-	public $aliases = [];
+	use SimpleEntityTrait;
 
 	/**
 	 * @var string

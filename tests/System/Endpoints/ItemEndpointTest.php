@@ -40,6 +40,11 @@ class ItemEndpointTest extends ApiTestCase {
 				],
 				'label' => 'Berlin',
 				'description' => 'capital city and state of Germany',
+				'label_url' => 'http://test.url/items/Q64/label',
+				'description_url' => 'http://test.url/items/Q64/description',
+				'aliases_url' => 'http://test.url/items/Q64/aliases',
+				'wikidata_url' => 'https://www.wikidata.org/entity/Q64',
+				'data_url' => 'http://test.url/items/Q64/data',
 				'data' => (object)[
 					'P17' => (object)[
 						'value' => 'Q183',
@@ -89,6 +94,11 @@ class ItemEndpointTest extends ApiTestCase {
 				],
 				'label' => 'Berlin',
 				'description' => 'capital city and state of Germany',
+				'label_url' => 'http://test.url/items/Q64/label',
+				'description_url' => 'http://test.url/items/Q64/description',
+				'aliases_url' => 'http://test.url/items/Q64/aliases',
+				'wikidata_url' => 'https://www.wikidata.org/entity/Q64',
+				'data_url' => 'http://test.url/items/Q64/data',
 				'data' => (object)[
 					'country' => (object)[ // denormalized
 						'value' => 'Germany', // denormalized

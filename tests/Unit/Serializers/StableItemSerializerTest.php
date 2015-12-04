@@ -16,6 +16,10 @@ use Queryr\WebApi\Serializers\SerializerFactory;
  */
 class StableItemSerializerTest extends \PHPUnit_Framework_TestCase {
 
+	public function setUp() {
+		$this->markTestSkipped( 'Not currently using StableItemSerializer' );
+	}
+
 	public function testGivenNonItem_exceptionIsThrown() {
 		$serializer = ( new SerializerFactory() )->newStableItemSerializer( [] );
 

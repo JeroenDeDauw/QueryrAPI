@@ -2,6 +2,8 @@
 
 namespace Queryr\WebApi\Tests\Unit\UseCases\GetProperty;
 
+use Queryr\WebApi\ResponseModel\SimpleStatementsBuilder;
+use Queryr\WebApi\UrlBuilder;
 use Queryr\WebApi\UseCases\GetProperty\SimplePropertyBuilder;
 use Queryr\WebApi\UseCases\GetProperty\SimpleProperty;
 use Wikibase\DataModel\Entity\Property;
@@ -54,6 +56,12 @@ class SimplePropertyBuilderTest extends \PHPUnit_Framework_TestCase {
 
 		$expected->type = 'kittens';
 
+		$expected->labelUrl = 'http://test/properties/P1337/label';
+		$expected->descriptionUrl = 'http://test/properties/P1337/description';
+		$expected->aliasesUrl = 'http://test/properties/P1337/aliases';
+		$expected->dataUrl = 'http://test/properties/P1337/data';
+		$expected->wikidataUrl = 'https://www.wikidata.org/entity/P1337';
+
 		$this->assertEquals( $expected, $simpleProperty );
 	}
 
@@ -64,7 +72,11 @@ class SimplePropertyBuilderTest extends \PHPUnit_Framework_TestCase {
 			->method( 'getLabelByIdAndLanguage' )
 			->will( $this->returnValue( 'awesome label' ) );
 
-		$propertyBuilder = new SimplePropertyBuilder( $languageCode );
+		$propertyBuilder = new SimplePropertyBuilder(
+			$languageCode,
+			new SimpleStatementsBuilder( $languageCode, $labelLookup ),
+			new UrlBuilder( 'http://test' )
+		);
 
 		return $propertyBuilder->buildFromProperty( $this->newProperty() );
 	}
@@ -82,6 +94,12 @@ class SimplePropertyBuilderTest extends \PHPUnit_Framework_TestCase {
 
 		$expected->type = 'kittens';
 
+		$expected->labelUrl = 'http://test/properties/P1337/label';
+		$expected->descriptionUrl = 'http://test/properties/P1337/description';
+		$expected->aliasesUrl = 'http://test/properties/P1337/aliases';
+		$expected->dataUrl = 'http://test/properties/P1337/data';
+		$expected->wikidataUrl = 'https://www.wikidata.org/entity/P1337';
+
 		$this->assertEquals( $expected, $simpleProperty );
 	}
 
@@ -96,6 +114,12 @@ class SimplePropertyBuilderTest extends \PHPUnit_Framework_TestCase {
 		$expected->label = 'baz';
 
 		$expected->type = 'kittens';
+
+		$expected->labelUrl = 'http://test/properties/P1337/label';
+		$expected->descriptionUrl = 'http://test/properties/P1337/description';
+		$expected->aliasesUrl = 'http://test/properties/P1337/aliases';
+		$expected->dataUrl = 'http://test/properties/P1337/data';
+		$expected->wikidataUrl = 'https://www.wikidata.org/entity/P1337';
 
 		$this->assertEquals( $expected, $simpleProperty );
 	}

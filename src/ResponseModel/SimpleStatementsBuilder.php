@@ -21,7 +21,7 @@ class SimpleStatementsBuilder {
 	private $languageCode;
 	private $labelLookup;
 
-	public function __construct( $languageCode, LabelLookup $labelLookup ) {
+	public function __construct( string $languageCode, LabelLookup $labelLookup ) {
 		$this->languageCode = $languageCode;
 		$this->labelLookup = $labelLookup;
 	}
@@ -31,7 +31,7 @@ class SimpleStatementsBuilder {
 	 *
 	 * @return array
 	 */
-	public function buildFromStatements( StatementList $statements ) {
+	public function buildFromStatements( StatementList $statements ): array {
 		$simpleStatements = [];
 
 		foreach ( $statements->getPropertyIds() as $propertyId ) {
@@ -52,7 +52,7 @@ class SimpleStatementsBuilder {
 		return $simpleStatements;
 	}
 
-	private function getEntityName( EntityId $id ) {
+	private function getEntityName( EntityId $id ): string {
 		$label = $this->labelLookup->getLabelByIdAndLanguage( $id, $this->languageCode );
 
 		return $label === null ? $id->getSerialization() : $label;

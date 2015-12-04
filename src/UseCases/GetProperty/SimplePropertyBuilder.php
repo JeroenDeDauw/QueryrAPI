@@ -2,6 +2,8 @@
 
 namespace Queryr\WebApi\UseCases\GetProperty;
 
+use Queryr\WebApi\ResponseModel\SimpleStatementsBuilder;
+use Queryr\WebApi\UrlBuilder;
 use Wikibase\DataModel\Entity\Property;
 
 /**
@@ -13,6 +15,8 @@ class SimplePropertyBuilder {
 	const MAIN_LANGUAGE = 'en';
 
 	private $languageCode;
+	private $statementsBuilder;
+	private $urlBuilder;
 
 	/**
 	 * @var Property
@@ -24,8 +28,10 @@ class SimplePropertyBuilder {
 	 */
 	private $simpleProperty;
 
-	public function __construct( $languageCode ) {
+	public function __construct( string $languageCode, SimpleStatementsBuilder $statementsBuilder, UrlBuilder $urlBuilder ) {
 		$this->languageCode = $languageCode;
+		$this->statementsBuilder = $statementsBuilder;
+		$this->urlBuilder = $urlBuilder;
 	}
 
 	public function buildFromProperty( Property $property ) {
@@ -38,6 +44,8 @@ class SimplePropertyBuilder {
 		$this->addDescription();
 		$this->addAliases();
 
+		$this->addHyperlinks();
+
 		$this->addType();
 
 		return $this->simpleProperty;
@@ -48,21 +56,34 @@ class SimplePropertyBuilder {
 	}
 
 	private function addLabel() {
-		if ( $this->property->getFingerprint()->getLabels()->hasTermForLanguage( $this->languageCode ) ) {
+		if ( $this->property->getFingerprint()->hasLabel( $this->languageCode ) ) {
 			$this->simpleProperty->label = $this->property->getFingerprint()->getLabel( $this->languageCode )->getText();
 		}
 	}
 
 	private function addDescription() {
-		if ( $this->property->getFingerprint()->getDescriptions()->hasTermForLanguage( $this->languageCode ) ) {
+		if ( $this->property->getFingerprint()->hasDescription( $this->languageCode ) ) {
 			$this->simpleProperty->description = $this->property->getFingerprint()->getDescription( $this->languageCode )->getText();
 		}
 	}
 
 	private function addAliases() {
-		if ( $this->property->getFingerprint()->getAliasGroups()->hasGroupForLanguage( $this->languageCode ) ) {
+		if ( $this->property->getFingerprint()->hasAliasGroup( $this->languageCode ) ) {
 			$this->simpleProperty->aliases = $this->property->getFingerprint()->getAliasGroup( $this->languageCode )->getAliases();
 		}
+	}
+
+	private function addHyperlinks() {
+		$builder = $this->urlBuilder;
+		$id = $this->property->getId();
+
+		$this->simpleProperty->labelUrl = $builder->getApiPropertyLabelUrl( $id );
+		$this->simpleProperty->descriptionUrl = $builder->getApiPropertyDescriptionUrl( $id );
+		$this->simpleProperty->aliasesUrl = $builder->getApiPropertyAliasesUrl( $id );
+
+		$this->simpleProperty->wikidataUrl = $builder->getWdEntityUrl( $id );
+
+		$this->simpleProperty->dataUrl = $builder->getApiPropertyDataUrl( $id );
 	}
 
 	private function addType() {

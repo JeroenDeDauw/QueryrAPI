@@ -3,6 +3,7 @@
 namespace Queryr\WebApi\Tests\Unit\UseCases\GetItem;
 
 use DataValues\StringValue;
+use Queryr\WebApi\UrlBuilder;
 use Queryr\WebApi\UseCases\GetItem\SimpleItemBuilder;
 use Queryr\WebApi\ResponseModel\SimpleStatementsBuilder;
 use Queryr\WebApi\UseCases\GetItem\SimpleItem;
@@ -88,6 +89,13 @@ class SimpleItemBuilderTest extends \PHPUnit_Framework_TestCase {
 
 		$expected->statements = [ $this->getSimpleStatement() ];
 
+		$expected->labelUrl = 'http://test/items/Q1337/label';
+		$expected->descriptionUrl = 'http://test/items/Q1337/description';
+		$expected->aliasesUrl = 'http://test/items/Q1337/aliases';
+		$expected->dataUrl = 'http://test/items/Q1337/data';
+		$expected->wikidataUrl = 'https://www.wikidata.org/entity/Q1337';
+		$expected->wikipediaHtmlUrl = 'https://www.wikidata.org/wiki/Special:GoToLinkedPage/enwiki/Q1337';
+
 		$this->assertEquals( $expected, $simpleItem );
 	}
 
@@ -98,8 +106,11 @@ class SimpleItemBuilderTest extends \PHPUnit_Framework_TestCase {
 			->method( 'getLabelByIdAndLanguage' )
 			->will( $this->returnValue( 'awesome label' ) );
 
-		$statementsBuilder = new SimpleStatementsBuilder( $languageCode, $labelLookup );
-		$itemBuilder = new SimpleItemBuilder( $languageCode, $statementsBuilder );
+		$itemBuilder = new SimpleItemBuilder(
+			$languageCode,
+			new SimpleStatementsBuilder( $languageCode, $labelLookup ),
+			new UrlBuilder( 'http://test' )
+		);
 
 		return $itemBuilder->buildFromItem( $this->newItem() );
 	}
@@ -126,6 +137,13 @@ class SimpleItemBuilderTest extends \PHPUnit_Framework_TestCase {
 
 		$expected->statements = [ $this->getSimpleStatement() ];
 
+		$expected->labelUrl = 'http://test/items/Q1337/label';
+		$expected->descriptionUrl = 'http://test/items/Q1337/description';
+		$expected->aliasesUrl = 'http://test/items/Q1337/aliases';
+		$expected->dataUrl = 'http://test/items/Q1337/data';
+		$expected->wikidataUrl = 'https://www.wikidata.org/entity/Q1337';
+		$expected->wikipediaHtmlUrl = 'https://www.wikidata.org/wiki/Special:GoToLinkedPage/enwiki/Q1337';
+
 		$this->assertEquals( $expected, $simpleItem );
 	}
 
@@ -141,6 +159,13 @@ class SimpleItemBuilderTest extends \PHPUnit_Framework_TestCase {
 		$expected->label = 'baz';
 
 		$expected->statements = [ $this->getSimpleStatement() ];
+
+		$expected->labelUrl = 'http://test/items/Q1337/label';
+		$expected->descriptionUrl = 'http://test/items/Q1337/description';
+		$expected->aliasesUrl = 'http://test/items/Q1337/aliases';
+		$expected->dataUrl = 'http://test/items/Q1337/data';
+		$expected->wikidataUrl = 'https://www.wikidata.org/entity/Q1337';
+		$expected->wikipediaHtmlUrl = 'https://www.wikidata.org/wiki/Special:GoToLinkedPage/enwiki/Q1337';
 
 		$this->assertEquals( $expected, $simpleItem );
 	}
