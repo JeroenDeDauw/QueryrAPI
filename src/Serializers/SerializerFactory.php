@@ -14,16 +14,6 @@ class SerializerFactory {
 	/**
 	 * @return Serializer
 	 */
-	public function newSimpleItemSerializer() {
-		return new SimpleItemSerializer(
-			new SimpleEntitySerializer( new SimpleStatementSerializer() )
-
-		);
-	}
-
-	/**
-	 * @return Serializer
-	 */
 	public function newSimplePropertySerializer() {
 		return new SimplePropertySerializer(
 			new SimpleEntitySerializer( new SimpleStatementSerializer() )

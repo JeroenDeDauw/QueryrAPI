@@ -66,3 +66,19 @@ When accessing the API via `web/index.dev.php`, profiling information will be ge
 	* `System/`: edge-to-edge tests
 	* `TestEnvironment.php`: encapsulates application setup for integration and system tests
 	* `Fixtures/`: test stubs and spies
+
+## Release notes
+
+### Version 0.2 (dev)
+
+* Added top level elements to GET `/items/$id` and GET `/properties/$id`:
+    * `label_url`
+    * `description_url`
+    * `aliases_url`
+    * `wikidata_url`
+
+* Added top level elements to GET `/items/$id`: `wikipedia_html_url`
+
+### Version 0.1 (2015-11-30)
+
+* Initial release

@@ -21,6 +21,9 @@ use Queryr\TermStore\TermStoreConfig;
 use Queryr\TermStore\TermStoreFactory;
 use Queryr\TermStore\TermStoreInstaller;
 use Queryr\TermStore\TermStoreWriter;
+use Queryr\WebApi\Serializers\SimpleEntitySerializer;
+use Queryr\WebApi\Serializers\SimpleItemSerializer;
+use Queryr\WebApi\Serializers\SimpleStatementSerializer;
 use Queryr\WebApi\UseCases\GetItem\GetItemUseCase;
 use Queryr\WebApi\UseCases\GetProperty\GetPropertyUseCase;
 use Queryr\WebApi\UseCases\ListItems\ListItemsUseCase;
@@ -233,7 +236,10 @@ class ApiFactory {
 	}
 
 	public function newSimpleItemSerializer(): Serializer {
-		return ( new QueryrSerializerFactory() )->newSimpleItemSerializer();
+		return new SimpleItemSerializer(
+			new SimpleEntitySerializer( new SimpleStatementSerializer() ),
+			$this->getUrlBuilder()
+		);
 	}
 
 	public function newSimplePropertySerializer(): Serializer {

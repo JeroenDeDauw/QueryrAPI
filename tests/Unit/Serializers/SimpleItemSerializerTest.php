@@ -4,6 +4,7 @@ namespace Tests\Queryr\Serialization;
 
 use DataValues\NumberValue;
 use DataValues\StringValue;
+use Queryr\WebApi\Tests\TestEnvironment;
 use Queryr\WebApi\UseCases\GetItem\SimpleItem;
 use Queryr\WebApi\ResponseModel\SimpleStatement;
 use Queryr\WebApi\Serializers\SerializerFactory;
@@ -17,7 +18,8 @@ use Queryr\WebApi\Serializers\SerializerFactory;
 class SimpleItemSerializerTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGivenNonItem_exceptionIsThrown() {
-		$serializer = ( new SerializerFactory() )->newSimpleItemSerializer();
+
+		$serializer = TestEnvironment::newUninstalledInstance()->getFactory()->newSimpleItemSerializer();
 
 		$this->setExpectedException( 'Serializers\Exceptions\UnsupportedObjectException' );
 		$serializer->serialize( null );
@@ -59,7 +61,7 @@ class SimpleItemSerializerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testSerializationWithValueForTwoProperties() {
-		$serializer = ( new SerializerFactory() )->newSimpleItemSerializer();
+		$serializer = TestEnvironment::newInstance()->getFactory()->newSimpleItemSerializer();
 		$serialized = $serializer->serialize( $this->newSimpleItem() );
 
 		$expected = [
@@ -89,7 +91,8 @@ class SimpleItemSerializerTest extends \PHPUnit_Framework_TestCase {
 					'values' => [ 'Jeroen', 'Abraham' ],
 					'type' => 'string'
 				],
-			]
+			],
+			'wikipedia_html_url' => 'http://wikipedia'
 		];
 
 		$this->assertEquals( $expected, $serialized );

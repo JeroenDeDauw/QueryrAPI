@@ -58,7 +58,8 @@ class ItemEndpointTest extends ApiTestCase {
 						'value' => '10115–14199',
 						'type' => 'string'
 					]
-				]
+				],
+				'wikipedia_html_url' => 'https://www.wikidata.org/wiki/Special:GoToLinkedPage/enwiki/Q64'
 			],
 			$client->getResponse()
 		);
@@ -112,7 +113,8 @@ class ItemEndpointTest extends ApiTestCase {
 						'value' => '10115–14199',
 						'type' => 'string'
 					]
-				]
+				],
+				'wikipedia_html_url' => 'https://www.wikidata.org/wiki/Special:GoToLinkedPage/enwiki/Q64'
 			],
 			$client->getResponse()
 		);

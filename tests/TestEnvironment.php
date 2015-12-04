@@ -18,6 +18,15 @@ use Wikibase\DataModel\Entity\Property;
 class TestEnvironment {
 
 	public static function newInstance() {
+		$instance = new self();
+
+		$instance->factory->newEntityStoreInstaller()->install();
+		$instance->factory->newTermStoreInstaller()->install();
+
+		return $instance;
+	}
+
+	public static function newUninstalledInstance() {
 		return new self();
 	}
 
@@ -31,9 +40,6 @@ class TestEnvironment {
 			'driver' => 'pdo_sqlite',
 			'memory' => true,
 		] );
-
-		$this->factory->newEntityStoreInstaller()->install();
-		$this->factory->newTermStoreInstaller()->install();
 	}
 
 	public function getFactory(): ApiFactory {
