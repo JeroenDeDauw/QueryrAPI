@@ -28,11 +28,4 @@ class SerializerFactoryTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	public function testGetStableItemSerializer() {
-		$this->assertInstanceOf(
-			'Serializers\Serializer',
-			$this->factory->newStableItemSerializer( [] )
-		);
-	}
-
 }

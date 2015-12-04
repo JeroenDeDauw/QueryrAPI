@@ -2,14 +2,6 @@
 
 namespace Queryr\WebApi\Serializers;
 
-use Queryr\WebApi\Serializers\ItemListSerializer;
-use Queryr\WebApi\Serializers\ItemTypeSerializer;
-use Queryr\WebApi\Serializers\PropertyListSerializer;
-use Queryr\WebApi\Serializers\SimpleEntitySerializer;
-use Queryr\WebApi\Serializers\SimpleItemSerializer;
-use Queryr\WebApi\Serializers\SimplePropertySerializer;
-use Queryr\WebApi\Serializers\SimpleStatementSerializer;
-use Queryr\WebApi\Serializers\StableItemSerializer;
 use Serializers\Serializer;
 
 /**
@@ -35,18 +27,6 @@ class SerializerFactory {
 	public function newSimplePropertySerializer() {
 		return new SimplePropertySerializer(
 			new SimpleEntitySerializer( new SimpleStatementSerializer() )
-		);
-	}
-
-	/**
-	 * @param string[] $propertyMap Maps property id (string) to stable property name
-	 * @return Serializer
-	 */
-	public function newStableItemSerializer( array $propertyMap ) {
-		return new StableItemSerializer(
-			new SimpleEntitySerializer( new SimpleStatementSerializer() ),
-			new SimpleStatementSerializer(),
-			$propertyMap
 		);
 	}
 
