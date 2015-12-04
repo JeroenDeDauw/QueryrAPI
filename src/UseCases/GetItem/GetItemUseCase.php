@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Queryr\WebApi\UseCases\GetItem;
 
 use Deserializers\Deserializer;
+use OhMyPhp\NoNullableReturnTypesException;
 use Queryr\EntityStore\ItemStore;
 use Queryr\WebApi\UrlBuilder;
 use Queryr\WebApi\ResponseModel\SimpleStatementsBuilder;
 use Queryr\TermStore\LabelLookup;
-use Queryr\WebApi\NoNullableReturnTypesException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 

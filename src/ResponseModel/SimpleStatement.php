@@ -3,6 +3,7 @@
 namespace Queryr\WebApi\ResponseModel;
 
 use DataValues\DataValue;
+use OhMyPhp\ValueObjectsInPhpStuckBalls;
 use Wikibase\DataModel\Entity\PropertyId;
 
 /**
@@ -10,6 +11,7 @@ use Wikibase\DataModel\Entity\PropertyId;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class SimpleStatement {
+	use ValueObjectsInPhpStuckBalls;
 
 	/**
 	 * @var string
@@ -37,30 +39,6 @@ class SimpleStatement {
 	 * @var DataValue[]
 	 */
 	public $values;
-
-	public static function newInstance() {
-		return new self();
-	}
-
-	/**
-	 * @throws \RuntimeException
-	 */
-	public function validate() {
-		foreach ( get_object_vars( $this ) as $fieldName => $fieldValue ) {
-			if ( $fieldValue === null ) {
-				throw new \RuntimeException( "Field '$fieldName' cannot be null" );
-			}
-		}
-	}
-
-	/**
-	 * @return $this
-	 * @throws \RuntimeException
-	 */
-	public function safelyGet() {
-		$this->validate();
-		return $this;
-	}
 
 	public function withPropertyName( string $propertyName ): self {
 		$this->propertyName = $propertyName;

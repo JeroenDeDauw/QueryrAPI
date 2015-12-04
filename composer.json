@@ -28,7 +28,7 @@
 		"queryr/entity-store": "~1.0",
 		"queryr/term-store": "~1.0",
 
-		"jeroen/wikibase-data-fixtures": "~1.1"
+		"jeroen/oh-my-php": "~0.1"
 	},
 	"require-dev": {
 		"ext-pdo_sqlite": "*",
@@ -42,13 +42,14 @@
 		"symfony/browser-kit": "~2.7",
 
 		"silex/web-profiler": "~1.0",
-		"sorien/silex-dbal-profiler": "~1.1"
+		"sorien/silex-dbal-profiler": "~1.1",
+
+		"jeroen/wikibase-data-fixtures": "~1.1"
 	},
 	"autoload": {
 		"psr-4": {
 			"Queryr\\WebApi\\": "src/",
-			"Queryr\\WebApi\\Endpoints\\": "app/Endpoints/",
-			"Queryr\\": "tmp/"
+			"Queryr\\WebApi\\Endpoints\\": "app/Endpoints/"
 		}
 	},
 	"autoload-dev": {

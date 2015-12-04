@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Queryr\WebApi\UseCases\GetProperty;
 
 use Deserializers\Deserializer;
+use OhMyPhp\NoNullableReturnTypesException;
 use Queryr\EntityStore\PropertyStore;
 use Queryr\TermStore\LabelLookup;
 use Queryr\WebApi\ResponseModel\SimpleStatementsBuilder;
 use Queryr\WebApi\UrlBuilder;
-use Queryr\WebApi\NoNullableReturnTypesException;
 use Wikibase\DataModel\Entity\PropertyId;
 
 /**

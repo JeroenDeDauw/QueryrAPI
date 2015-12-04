@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Queryr\WebApi\Endpoints;
 
-use Queryr\WebApi\NoNullableReturnTypesException;
+use OhMyPhp\NoNullableReturnTypesException;
 use Queryr\WebApi\UseCases\GetItem\GetItemRequest;
 use Silex\Application;
 
