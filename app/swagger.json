@@ -2,8 +2,7 @@
     "swagger": "2.0",
     "info": {
         "version": "0.0.1",
-        "title": "QueryR API",
-        "description": "This API aims to provide simple and easy access to Wikipedia and Wikidata data."
+        "title": "QueryR API"
     },
     "host": "you_should_probably_replace_this_by_the_actual_host",
     "basePath": "you_should_probably_replace_this_by_the_actual_basePath",
