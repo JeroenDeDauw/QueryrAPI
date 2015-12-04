@@ -57,7 +57,7 @@ class SimpleStatement {
 	 * @return $this
 	 * @throws \RuntimeException
 	 */
-	public function get() {
+	public function safelyGet() {
 		$this->validate();
 		return $this;
 	}

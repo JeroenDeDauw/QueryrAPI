@@ -17,7 +17,7 @@ class SimpleStatementTest extends \PHPUnit_Framework_TestCase {
 		$ss = new SimpleStatement();
 
 		$this->setExpectedException( \RuntimeException::class );
-		$ss->get()->propertyId;
+		$ss->safelyGet()->propertyId;
 	}
 
 	public function testSafeAccessWhenOnlyUrlAndIdSetCausesException() {
@@ -26,7 +26,7 @@ class SimpleStatementTest extends \PHPUnit_Framework_TestCase {
 			->withPropertyName( 'kittens' );
 
 		$this->setExpectedException( \RuntimeException::class );
-		$ss->get()->propertyUrl;
+		$ss->safelyGet()->propertyUrl;
 	}
 
 	public function testSafeAccessWhenAllSetDoesNotCauseException() {
@@ -37,7 +37,7 @@ class SimpleStatementTest extends \PHPUnit_Framework_TestCase {
 			->withType( 'string' )
 			->withValues( [ 'foo' ] );
 
-		$this->assertSame( 'kittens', $ss->get()->propertyName );
+		$this->assertSame( 'kittens', $ss->safelyGet()->propertyName );
 	}
 
 }
