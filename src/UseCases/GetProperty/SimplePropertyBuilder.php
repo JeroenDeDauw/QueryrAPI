@@ -39,6 +39,7 @@ class SimplePropertyBuilder {
 		$this->simpleProperty = new SimpleProperty();
 
 		$this->addIdLinks();
+		$this->addType();
 
 		$this->addLabel();
 		$this->addDescription();
@@ -46,7 +47,7 @@ class SimplePropertyBuilder {
 
 		$this->addHyperlinks();
 
-		$this->addType();
+		$this->addStatements();
 
 		return $this->simpleProperty;
 	}
@@ -88,6 +89,10 @@ class SimplePropertyBuilder {
 
 	private function addType() {
 		$this->simpleProperty->type = $this->property->getDataTypeId();
+	}
+
+	private function addStatements() {
+		$this->simpleProperty->statements = $this->statementsBuilder->buildFromStatements( $this->property->getStatements() );
 	}
 
 }

@@ -71,13 +71,19 @@ When accessing the API via `web/index.dev.php`, profiling information will be ge
 
 ### Version 0.2 (dev)
 
-* Added top level elements to GET `/items/$id` and GET `/properties/$id`:
+* Added top level elements to GET `/items/$id`:
     * `label_url`
     * `description_url`
     * `aliases_url`
     * `wikidata_url`
+	* `wikipedia_html_url`
 
-* Added top level elements to GET `/items/$id`: `wikipedia_html_url`
+* Added top level elements to GET `/properties/$id`:
+    * `label_url`
+    * `description_url`
+    * `aliases_url`
+    * `wikidata_url`
+	* `data`
 
 ### Version 0.1 (2015-11-30)
 
