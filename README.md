@@ -85,6 +85,7 @@ When accessing the API via `web/index.dev.php`, profiling information will be ge
 	* `data` (required map)
 * The `data` top level element in the item response format now indexes by property id rather than property label
 * Added `property` (required map) to statement serialization
+* Values of type `wikibase-entityid` now get turned into a map with `label`, `id` and `url` rather than into a string
 * Changed GET `/items/$id/data/$property_label` to `/items/$id/data/$property_id`
 
 ### Version 0.1 (2015-11-30)
