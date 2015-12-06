@@ -3,6 +3,7 @@
 namespace Queryr\WebApi\Serializers;
 
 use Queryr\WebApi\ResponseModel\SimpleStatement;
+use Serializers\Exceptions\SerializationException;
 use Serializers\Exceptions\UnsupportedObjectException;
 use Serializers\Serializer;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -19,7 +20,12 @@ class SimpleStatementSerializer implements Serializer {
 			throw new UnsupportedObjectException( $simpleStatement, 'Can only serialize instances of SimpleStatement' );
 		}
 
-		// TODO: verify $simpleStatement
+		try {
+			$simpleStatement->validate();
+		}
+		catch ( \RuntimeException $ex ) {
+			throw new SerializationException( 'Cannot serialize an incomplete SimpleStatement', $ex );
+		}
 
 		$propertyValue = [
 			'property' => $this->getPropertySerialization( $simpleStatement ),
