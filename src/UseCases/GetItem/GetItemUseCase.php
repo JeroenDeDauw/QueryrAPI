@@ -62,7 +62,7 @@ class GetItemUseCase {
 	private function newSimpleItemBuilder( $languageCode ) {
 		return new SimpleItemBuilder(
 			$languageCode,
-			new SimpleStatementsBuilder( $languageCode, $this->labelLookup ),
+			new SimpleStatementsBuilder( $languageCode, $this->labelLookup, $this->urlBuilder ),
 			$this->urlBuilder
 		);
 	}

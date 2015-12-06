@@ -5,6 +5,7 @@ namespace Queryr\WebApi\ResponseModel;
 use DataValues\DataValue;
 use DataValues\StringValue;
 use Queryr\TermStore\LabelLookup;
+use Queryr\WebApi\UrlBuilder;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -20,10 +21,12 @@ class SimpleStatementsBuilder {
 
 	private $languageCode;
 	private $labelLookup;
+	private $urlBuilder;
 
-	public function __construct( string $languageCode, LabelLookup $labelLookup ) {
+	public function __construct( string $languageCode, LabelLookup $labelLookup, UrlBuilder $urlBuilder ) {
 		$this->languageCode = $languageCode;
 		$this->labelLookup = $labelLookup;
+		$this->urlBuilder = $urlBuilder;
 	}
 
 	/**
@@ -44,6 +47,7 @@ class SimpleStatementsBuilder {
 				$simpleStatement->valueType = $statementValues[0]->getType();
 				$simpleStatement->propertyName = $this->getEntityName( $propertyId );
 				$simpleStatement->propertyId = $propertyId;
+				$simpleStatement->propertyUrl = $this->urlBuilder->getApiPropertyUrl( $propertyId );
 
 				$simpleStatements[] = $simpleStatement;
 			}

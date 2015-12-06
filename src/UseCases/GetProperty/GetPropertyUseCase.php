@@ -56,7 +56,7 @@ class GetPropertyUseCase {
 	private function newSimplePropertyBuilder( $languageCode ) {
 		return new SimplePropertyBuilder(
 			$languageCode,
-			new SimpleStatementsBuilder( $languageCode, $this->labelLookup ),
+			new SimpleStatementsBuilder( $languageCode, $this->labelLookup, $this->urlBuilder ),
 			$this->urlBuilder
 		);
 	}

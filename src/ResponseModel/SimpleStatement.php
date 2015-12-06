@@ -13,6 +13,10 @@ use Wikibase\DataModel\Entity\PropertyId;
 class SimpleStatement {
 	use ValueObjectsInPhpStuckBalls;
 
+	public static function newInstance() {
+		return new self();
+	}
+
 	/**
 	 * @var string
 	 */

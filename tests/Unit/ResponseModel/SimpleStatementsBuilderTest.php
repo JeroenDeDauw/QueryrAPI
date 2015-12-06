@@ -6,6 +6,7 @@ use DataValues\StringValue;
 use Queryr\TermStore\LabelLookup;
 use Queryr\WebApi\ResponseModel\SimpleStatementsBuilder;
 use Queryr\WebApi\ResponseModel\SimpleStatement;
+use Queryr\WebApi\UrlBuilder;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -28,6 +29,7 @@ class SimpleStatementsBuilderTest extends \PHPUnit_Framework_TestCase {
 		$expected = SimpleStatement::newInstance()
 			->withPropertyName( 'awesome label' )
 			->withPropertyId( new PropertyId( 'P42' ) )
+			->withPropertyUrl( 'http://test/properties/P42' )
 			->withType( 'string' )
 			->withValues( [ new StringValue( 'kittens' ) ] );
 
@@ -41,7 +43,7 @@ class SimpleStatementsBuilderTest extends \PHPUnit_Framework_TestCase {
 			->method( 'getLabelByIdAndLanguage' )
 			->will( $this->returnValue( 'awesome label' ) );
 
-		$builder = new SimpleStatementsBuilder( 'en', $labelLookup );
+		$builder = new SimpleStatementsBuilder( 'en', $labelLookup, new UrlBuilder( 'http://test' ) );
 		$simpleStatements = $builder->buildFromStatements( new StatementList( $statements ) );
 
 		$this->assertEquals( $expected, $simpleStatements );
@@ -54,6 +56,7 @@ class SimpleStatementsBuilderTest extends \PHPUnit_Framework_TestCase {
 		$expected = SimpleStatement::newInstance()
 			->withPropertyName( 'awesome label' )
 			->withPropertyId( new PropertyId( 'P42' ) )
+			->withPropertyUrl( 'http://test/properties/P42' )
 			->withType( 'string' )
 			->withValues( [ new StringValue( 'awesome label' ) ] );
 
@@ -70,12 +73,13 @@ class SimpleStatementsBuilderTest extends \PHPUnit_Framework_TestCase {
 		$statement = new Statement( new PropertyValueSnak( 42, new EntityIdValue( new ItemId( 'Q1337' ) ) ) );
 		$statement->setGuid( 'first guid' );
 
-		$builder = new SimpleStatementsBuilder( 'en', $labelLookup );
+		$builder = new SimpleStatementsBuilder( 'en', $labelLookup, new UrlBuilder( 'http://test' ) );
 		$simpleStatements = $builder->buildFromStatements( new StatementList( [ $statement ] ) );
 
 		$expected = SimpleStatement::newInstance()
 			->withPropertyName( 'P42' )
 			->withPropertyId( new PropertyId( 'P42' ) )
+			->withPropertyUrl( 'http://test/properties/P42' )
 			->withType( 'string' )
 			->withValues( [ new StringValue( 'Q1337' ) ] );
 

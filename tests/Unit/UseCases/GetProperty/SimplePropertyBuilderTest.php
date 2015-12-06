@@ -73,10 +73,12 @@ class SimplePropertyBuilderTest extends \PHPUnit_Framework_TestCase {
 			->method( 'getLabelByIdAndLanguage' )
 			->will( $this->returnValue( 'awesome label' ) );
 
+		$urlBuilder = new UrlBuilder( 'http://test' );
+
 		$propertyBuilder = new SimplePropertyBuilder(
 			$languageCode,
-			new SimpleStatementsBuilder( $languageCode, $labelLookup ),
-			new UrlBuilder( 'http://test' )
+			new SimpleStatementsBuilder( $languageCode, $labelLookup, $urlBuilder ),
+				$urlBuilder
 		);
 
 		return $propertyBuilder->buildFromProperty( $this->newProperty() );

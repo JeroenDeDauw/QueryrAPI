@@ -43,12 +43,14 @@ class SimpleItemSerializerTest extends \PHPUnit_Framework_TestCase {
 		$item->statements = [
 			SimpleStatement::newInstance()
 				->withPropertyId( new PropertyId( 'P1' ) )
+				->withPropertyUrl( 'http://property/1' )
 				->withPropertyName( 'fluffiness' )
 				->withType( 'number' )
 				->withValues( [ new NumberValue( 9001 ) ] ),
 
 			SimpleStatement::newInstance()
 				->withPropertyId( new PropertyId( 'P2' ) )
+				->withPropertyUrl( 'http://property/2' )
 				->withPropertyName( 'awesome' )
 				->withType( 'string' )
 				->withValues( [ new StringValue( 'Jeroen' ), new StringValue( 'Abraham' ) ] ),

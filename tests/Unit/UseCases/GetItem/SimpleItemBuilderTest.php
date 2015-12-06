@@ -107,10 +107,12 @@ class SimpleItemBuilderTest extends \PHPUnit_Framework_TestCase {
 			->method( 'getLabelByIdAndLanguage' )
 			->will( $this->returnValue( 'awesome label' ) );
 
+		$urlBuilder = new UrlBuilder( 'http://test' );
+
 		$itemBuilder = new SimpleItemBuilder(
 			$languageCode,
-			new SimpleStatementsBuilder( $languageCode, $labelLookup ),
-			new UrlBuilder( 'http://test' )
+			new SimpleStatementsBuilder( $languageCode, $labelLookup, $urlBuilder ),
+			$urlBuilder
 		);
 
 		return $itemBuilder->buildFromItem( $this->newItem() );
@@ -120,6 +122,7 @@ class SimpleItemBuilderTest extends \PHPUnit_Framework_TestCase {
 		return SimpleStatement::newInstance()
 			->withPropertyName( 'awesome label' )
 			->withPropertyId( new PropertyId( 'P42' ) )
+			->withPropertyUrl( 'http://test/properties/P42' )
 			->withType( 'string' )
 			->withValues( [ new StringValue( 'kittens' ) ] );
 	}
