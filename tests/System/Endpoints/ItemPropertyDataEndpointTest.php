@@ -48,12 +48,28 @@ class ItemPropertyDataEndpointTest extends ApiTestCase {
 					'id' => 'P31',
 					'url' => 'http://test.url/properties/P31',
 				],
-				'value' => 'Wikimedia project',
-				'type' => 'string',
+				'value' => (object)[
+					'label' => 'Wikimedia project',
+					'id' => 'Q14827288',
+					'url' => 'http://test.url/items/Q14827288',
+				],
+				'type' => 'queryr-entity-identity',
 				'values' => [
-					'Wikimedia project',
-					'Q593744',
-					'online database',
+					(object)[
+						'label' => 'Wikimedia project',
+						'id' => 'Q14827288',
+						'url' => 'http://test.url/items/Q14827288',
+					],
+					(object)[
+						'label' => 'Q593744',
+						'id' => 'Q593744',
+						'url' => 'http://test.url/items/Q593744',
+					],
+					(object)[
+						'label' => 'online database',
+						'id' => 'Q7094076',
+						'url' => 'http://test.url/items/Q7094076',
+					],
 				],
 			],
 			$client->getResponse()

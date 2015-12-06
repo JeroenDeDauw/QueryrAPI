@@ -52,8 +52,12 @@ class ItemEndpointTest extends ApiTestCase {
 							'id' => 'P17',
 							'url' => 'http://test.url/properties/P17',
 						],
-						'value' => 'Q183',
-						'type' => 'string'
+						'value' => (object)[
+							'label' => 'Q183',
+							'id' => 'Q183',
+							'url' => 'http://test.url/items/Q183',
+						],
+						'type' => 'queryr-entity-identity'
 					],
 					'P31' => (object)[
 						'property' => (object)[
@@ -61,8 +65,12 @@ class ItemEndpointTest extends ApiTestCase {
 							'id' => 'P31',
 							'url' => 'http://test.url/properties/P31',
 						],
-						'value' => 'Q515',
-						'type' => 'string'
+						'value' => (object)[
+							'label' => 'Q515',
+							'id' => 'Q515',
+							'url' => 'http://test.url/items/Q515',
+						],
+						'type' => 'queryr-entity-identity'
 					],
 					'P281' => (object)[
 						'property' => (object)[
@@ -122,8 +130,12 @@ class ItemEndpointTest extends ApiTestCase {
 							'id' => 'P17',
 							'url' => 'http://test.url/properties/P17',
 						],
-						'value' => 'Germany', // denormalized
-						'type' => 'string'
+						'value' => (object)[
+							'label' => 'Germany', // denormalized
+							'id' => 'Q183',
+							'url' => 'http://test.url/items/Q183',
+						],
+						'type' => 'queryr-entity-identity'
 					],
 					'P31' => (object)[
 						'property' => (object)[
@@ -131,8 +143,12 @@ class ItemEndpointTest extends ApiTestCase {
 							'id' => 'P31',
 							'url' => 'http://test.url/properties/P31',
 						],
-						'value' => 'Q515',
-						'type' => 'string'
+						'value' => (object)[
+							'label' => 'Q515',
+							'id' => 'Q515',
+							'url' => 'http://test.url/items/Q515',
+						],
+						'type' => 'queryr-entity-identity'
 					],
 					'P281' => (object)[
 						'property' => (object)[

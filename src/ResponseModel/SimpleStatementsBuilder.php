@@ -5,6 +5,7 @@ namespace Queryr\WebApi\ResponseModel;
 use DataValues\DataValue;
 use DataValues\StringValue;
 use Queryr\TermStore\LabelLookup;
+use Queryr\WebApi\ResponseModel\DataValues\EntityIdentityValue;
 use Queryr\WebApi\UrlBuilder;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
@@ -85,7 +86,11 @@ class SimpleStatementsBuilder {
 		$value = $snak->getDataValue();
 
 		if ( $value instanceof EntityIdValue ) {
-			return new StringValue( $this->getEntityName( $value->getEntityId() ) );
+			return new EntityIdentityValue(
+				$value->getEntityId(),
+				$this->getEntityName( $value->getEntityId() ),
+				$this->urlBuilder->getApiEntityUrl( $value->getEntityId() )
+			);
 		}
 
 		return $value;

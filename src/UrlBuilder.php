@@ -80,4 +80,16 @@ class UrlBuilder {
 		return $this->getApiPropertyUrl( $id ) . '/data';
 	}
 
+	public function getApiEntityUrl( EntityId $id ): string {
+		if ( $id instanceof ItemId ) {
+			return $this->getApiItemUrl( $id );
+		}
+
+		if ( $id instanceof PropertyId ) {
+			return $this->getApiPropertyUrl( $id );
+		}
+
+		throw new \RuntimeException( 'Unsupported EntityId type' );
+	}
+
 }

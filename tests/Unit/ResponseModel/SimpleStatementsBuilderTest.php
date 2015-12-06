@@ -4,6 +4,7 @@ namespace Queryr\WebApi\Tests\Unit\ResponseModel;
 
 use DataValues\StringValue;
 use Queryr\TermStore\LabelLookup;
+use Queryr\WebApi\ResponseModel\DataValues\EntityIdentityValue;
 use Queryr\WebApi\ResponseModel\SimpleStatementsBuilder;
 use Queryr\WebApi\ResponseModel\SimpleStatement;
 use Queryr\WebApi\UrlBuilder;
@@ -57,8 +58,14 @@ class SimpleStatementsBuilderTest extends \PHPUnit_Framework_TestCase {
 			->withPropertyName( 'awesome label' )
 			->withPropertyId( new PropertyId( 'P42' ) )
 			->withPropertyUrl( 'http://test/properties/P42' )
-			->withType( 'string' )
-			->withValues( [ new StringValue( 'awesome label' ) ] );
+			->withType( 'queryr-entity-identity' )
+			->withValues( [
+				new EntityIdentityValue(
+					new ItemId( 'Q1337' ),
+					'awesome label',
+					'http://test/items/Q1337'
+				)
+			] );
 
 		$this->assertBuildsFrom( [ $statement ], [ $expected ] );
 	}
@@ -80,8 +87,14 @@ class SimpleStatementsBuilderTest extends \PHPUnit_Framework_TestCase {
 			->withPropertyName( 'P42' )
 			->withPropertyId( new PropertyId( 'P42' ) )
 			->withPropertyUrl( 'http://test/properties/P42' )
-			->withType( 'string' )
-			->withValues( [ new StringValue( 'Q1337' ) ] );
+			->withType( 'queryr-entity-identity' )
+			->withValues( [
+				new EntityIdentityValue(
+					new ItemId( 'Q1337' ),
+					'Q1337',
+					'http://test/items/Q1337'
+				)
+			] );
 
 		$this->assertEquals( [ $expected ], $simpleStatements );
 	}
