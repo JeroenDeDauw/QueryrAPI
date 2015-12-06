@@ -78,14 +78,14 @@ class SimpleStatementsBuilder {
 			$snak = $statement->getMainSnak();
 
 			if ( $snak instanceof PropertyValueSnak ) {
-				$statementValues[] = $this->handle( $snak );
+				$statementValues[] = $this->getSnakValue( $snak );
 			}
 		}
 
 		return $statementValues;
 	}
 
-	private function handle( PropertyValueSnak $snak ) {
+	private function getSnakValue( PropertyValueSnak $snak ): DataValue {
 		$value = $snak->getDataValue();
 
 		if ( $value instanceof EntityIdValue ) {
