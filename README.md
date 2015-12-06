@@ -72,17 +72,18 @@ When accessing the API via `web/index.dev.php`, profiling information will be ge
 ### Version 0.2 (dev)
 
 * Added top level elements to GET `/items/$id` default response format:
-    * `label_url`
-    * `description_url`
-    * `aliases_url`
-    * `wikidata_url`
-	* `wikipedia_html_url`
+    * `label_url` (required string)
+    * `description_url` (required string)
+    * `aliases_url` (required string)
+    * `wikidata_url` (required string)
+	* `wikipedia_html_url` (optional string)
 * Added top level elements to GET `/properties/$id` default response format:
-    * `label_url`
-    * `description_url`
-    * `aliases_url`
-    * `wikidata_url`
-	* `data`
+    * `label_url` (required string)
+    * `description_url` (required string)
+    * `aliases_url` (required string)
+    * `wikidata_url` (required string)
+	* `data` (required map)
+* Added `property` (required map) to statement serialization
 * The `data` top level element in the item response format now indexes by property id rather than property label
 * Changed GET `/items/$id/data/$property_label` to `/items/$id/data/$property_id`
 
