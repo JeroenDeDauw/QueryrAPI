@@ -87,10 +87,20 @@ class SimplePropertySerializerTest extends \PHPUnit_Framework_TestCase {
 			'data_url' => 'http://data',
 			'data' => [
 				'P1' => [
+					'property' => [
+						'label' => 'fluffiness',
+						'id' => 'P1',
+						'url' => 'http://property/1',
+					],
 					'value' => 9001,
 					'type' => 'number'
 				],
 				'P2' => [
+					'property' => [
+						'label' => 'awesome',
+						'id' => 'P2',
+						'url' => 'http://property/2',
+					],
 					'value' => 'Jeroen',
 					'values' => [ 'Jeroen', 'Abraham' ],
 					'type' => 'string'

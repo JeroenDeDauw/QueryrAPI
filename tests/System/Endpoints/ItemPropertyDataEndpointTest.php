@@ -43,6 +43,11 @@ class ItemPropertyDataEndpointTest extends ApiTestCase {
 
 		$this->assertSuccessResponse(
 			(object)[
+				'property' => (object)[
+					'label' => 'instance of',
+					'id' => 'P31',
+					'url' => 'http://test.url/properties/P31',
+				],
 				'value' => 'Wikimedia project',
 				'type' => 'string',
 				'values' => [

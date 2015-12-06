@@ -28,18 +28,7 @@ class PropertyEndpointTest extends ApiTestCase {
 	}
 
 	public function testGivenKnownPropertyId_propertyIsReturned() {
-		$fingerprint = new Fingerprint();
-		$fingerprint->setLabel( 'en', 'country' );
-		$fingerprint->setLabel( 'nl', 'land' );
-		$fingerprint->setDescription( 'en', 'sovereign state of this item' );
-
-		$countryProperty = new Property( new PropertyId( 'P17' ), $fingerprint, 'wikibase-item' );
-
-		$countryProperty->getStatements()->addNewStatement(
-			new PropertyValueSnak( 42, new StringValue( 'foobar' ) )
-		);
-
-		$this->testEnvironment->insertProperty( $countryProperty );
+		$this->testEnvironment->insertProperty( $this->newCountryProperty() );
 
 		$client = $this->createClient();
 
@@ -61,6 +50,11 @@ class PropertyEndpointTest extends ApiTestCase {
 				'data_url' => 'http://test.url/properties/P17/data',
 				'data' => [
 					'P42' => [
+						'property' => (object)[
+							'label' => 'P42',
+							'id' => 'P42',
+							'url' => 'http://test.url/properties/P42',
+						],
 						'value' => 'foobar',
 						'type' => 'string'
 					]
@@ -68,6 +62,21 @@ class PropertyEndpointTest extends ApiTestCase {
 			],
 			$client->getResponse()
 		);
+	}
+
+	private function newCountryProperty() {
+		$fingerprint = new Fingerprint();
+		$fingerprint->setLabel( 'en', 'country' );
+		$fingerprint->setLabel( 'nl', 'land' );
+		$fingerprint->setDescription( 'en', 'sovereign state of this item' );
+
+		$countryProperty = new Property( new PropertyId( 'P17' ), $fingerprint, 'wikibase-item' );
+
+		$countryProperty->getStatements()->addNewStatement(
+			new PropertyValueSnak( 42, new StringValue( 'foobar' ) )
+		);
+
+		return $countryProperty;
 	}
 
 	public function testGivenLowercasePropertyId_propertyIsReturned() {
