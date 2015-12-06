@@ -69,7 +69,7 @@ When accessing the API via `web/index.dev.php`, profiling information will be ge
 
 ## Release notes
 
-### Version 0.2 (dev)
+### Version 0.2 (2015-12-06)
 
 * Added top level elements to GET `/items/$id` default response format:
     * `label_url` (required string)
