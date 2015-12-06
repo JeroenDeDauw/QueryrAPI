@@ -5,7 +5,7 @@ QueryR API is an application that provides a REST webservice for accessing [Wiki
 
 ## System dependencies
 
-* PHP 7
+* PHP >= 7
 * php5-sqlite (only needed for running the tests)
 
 ## Installation
@@ -83,8 +83,8 @@ When accessing the API via `web/index.dev.php`, profiling information will be ge
     * `aliases_url` (required string)
     * `wikidata_url` (required string)
 	* `data` (required map)
-* Added `property` (required map) to statement serialization
 * The `data` top level element in the item response format now indexes by property id rather than property label
+* Added `property` (required map) to statement serialization
 * Changed GET `/items/$id/data/$property_label` to `/items/$id/data/$property_id`
 
 ### Version 0.1 (2015-11-30)

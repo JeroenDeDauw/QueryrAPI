@@ -38,7 +38,9 @@ class SimpleStatementsBuilder {
 		$simpleStatements = [];
 
 		foreach ( $statements->getPropertyIds() as $propertyId ) {
-			$statementValues = $this->getStatementValuesWithPropertyId( $statements, $propertyId );
+			$statementValues = $this->getStatementMainValues(
+				$statements->getByPropertyId( $propertyId )->getBestStatements()
+			);
 
 			if ( !empty( $statementValues ) ) {
 				$simpleStatement = new SimpleStatement();
@@ -64,19 +66,13 @@ class SimpleStatementsBuilder {
 
 	/**
 	 * @param StatementList $statements
-	 * @param PropertyId $propertyId
 	 *
 	 * @return DataValue[]
 	 */
-	private function getStatementValuesWithPropertyId( StatementList $statements, PropertyId $propertyId ) {
+	private function getStatementMainValues( StatementList $statements ) {
 		$statementValues = [];
 
-		/**
-		 * @var Statement $statement
-		 */
-		foreach ( $statements->getByPropertyId( $propertyId )->getBestStatements() as $statement ) {
-			$snak = $statement->getMainSnak();
-
+		foreach ( $statements->getMainSnaks() as $snak ) {
 			if ( $snak instanceof PropertyValueSnak ) {
 				$statementValues[] = $this->getSnakValue( $snak );
 			}
