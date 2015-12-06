@@ -127,8 +127,24 @@
         },
         "simple_statement": {
             "type": "object",
-            "required": [ "value", "type" ],
+            "required": [ "property", "value", "type" ],
             "properties": {
+                "property": {
+                    "title": "property_identity",
+                    "type": "object",
+                    "required": [ "label", "id", "url" ],
+                    "properties": {
+                        "label": {
+                            "type": "string"
+                        },
+                        "id": {
+                            "type": "string"
+                        },
+                        "url": {
+                            "type": "string"
+                        }
+                    }
+                },
                 "value": {
                     "type": "object",
                     "example": "Los Angeles"
