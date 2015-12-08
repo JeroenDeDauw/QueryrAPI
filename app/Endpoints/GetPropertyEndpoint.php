@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Queryr\WebApi\Endpoints;
 
 use OhMyPhp\NoNullableReturnTypesException;
+use Queryr\WebApi\ResponseModel\SimpleStatement;
 use Queryr\WebApi\UseCases\GetProperty\GetPropertyRequest;
 use Silex\Application;
 
@@ -20,6 +21,11 @@ class GetPropertyEndpoint {
 
 		try {
 			$property = $this->apiFactory->newGetPropertyUseCase()->getProperty( $listingRequest );
+
+			usort( $property->statements, function( SimpleStatement $s0, SimpleStatement $s1 ) {
+				return $s0->propertyId->getNumericId() <=> $s1->propertyId->getNumericId();
+			} );
+
 			$json = $this->apiFactory->newSimplePropertySerializer()->serialize( $property );
 			return $this->app->json( $json, 200 );
 		}

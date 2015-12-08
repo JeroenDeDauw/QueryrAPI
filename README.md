@@ -69,6 +69,10 @@ When accessing the API via `web/index.dev.php`, profiling information will be ge
 
 ## Release notes
 
+### Version 0.3 (dev)
+
+* Elements in the data section of the item and property GET response are now ordered by property id
+
 ### Version 0.2 (2015-12-06)
 
 * Added top level elements to GET `/items/$id` default response format:

@@ -2,10 +2,15 @@
 
 namespace Queryr\WebApi\Tests\System\Endpoints;
 
+use DataValues\StringValue;
 use Wikibase\DataFixtures\Items\Berlin;
 use Wikibase\DataFixtures\Items\Germany;
 use Wikibase\DataFixtures\Properties\CountryProperty;
 use Wikibase\DataFixtures\Properties\PostalCodeProperty;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
 
 /**
  * @covers Queryr\WebApi\UseCases\GetItem\GetItemUseCase
@@ -172,6 +177,36 @@ class ItemEndpointTest extends ApiTestCase {
 		$client->request( 'GET', '/items/YouMadBro' );
 
 		$this->assert404( $client->getResponse(), 'No route found for "GET /items/YouMadBro"' );
+	}
+
+	/**
+	 * @depends testGivenKnownItemId_itemIsReturned
+	 */
+	public function testDataIsOrderedByStatementId() {
+		$item = new Item( new ItemId( 'Q1' ) );
+
+		$item->getStatements()->addNewStatement(
+			new PropertyValueSnak( new PropertyId( 'P1337' ), new StringValue( 'kittens' ) )
+		);
+
+		$item->getStatements()->addNewStatement(
+			new PropertyValueSnak( new PropertyId( 'P23' ), new StringValue( 'cats' ) )
+		);
+
+		$item->getStatements()->addNewStatement(
+			new PropertyValueSnak( new PropertyId( 'P42' ), new StringValue( 'bunnies' ) )
+		);
+
+		$this->testEnvironment->insertItem( $item );
+
+		$client = $this->createClient();
+
+		$client->request( 'GET', '/items/Q1' );
+
+		$this->assertSame(
+			[ 'P23', 'P42', 'P1337' ],
+			array_keys( json_decode( $client->getResponse()->getContent(), true )['data'] )
+		);
 	}
 
 }
