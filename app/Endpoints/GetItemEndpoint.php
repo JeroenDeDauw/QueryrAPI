@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Queryr\WebApi\Endpoints;
 
 use OhMyPhp\NoNullableReturnTypesException;
-use Queryr\WebApi\ResponseModel\SimpleStatement;
 use Queryr\WebApi\UseCases\GetItem\GetItemRequest;
 use Silex\Application;
 
@@ -21,11 +20,6 @@ class GetItemEndpoint {
 
 		try {
 			$item = $this->apiFactory->newGetItemUseCase()->getItem( $listingRequest );
-
-			usort( $item->statements, function( SimpleStatement $s0, SimpleStatement $s1 ) {
-				return $s0->propertyId->getNumericId() <=> $s1->propertyId->getNumericId();
-			} );
-
 			$json = $this->apiFactory->newSimpleItemSerializer()->serialize( $item );
 			return $this->app->json( $json, 200 );
 		}

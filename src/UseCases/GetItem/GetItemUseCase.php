@@ -7,9 +7,10 @@ namespace Queryr\WebApi\UseCases\GetItem;
 use Deserializers\Deserializer;
 use OhMyPhp\NoNullableReturnTypesException;
 use Queryr\EntityStore\ItemStore;
-use Queryr\WebApi\UrlBuilder;
-use Queryr\WebApi\ResponseModel\SimpleStatementsBuilder;
 use Queryr\TermStore\LabelLookup;
+use Queryr\WebApi\ResponseModel\SimpleStatement;
+use Queryr\WebApi\ResponseModel\SimpleStatementsBuilder;
+use Queryr\WebApi\UrlBuilder;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 
@@ -36,10 +37,16 @@ class GetItemUseCase {
 	public function getItem( GetItemRequest $request ): SimpleItem {
 		$itemJson = $this->getItemJson( $request->getItemId() );
 
-		return $this->getSimpleItemFromItem(
+		$item = $this->getSimpleItemFromItem(
 			$this->itemDeserializer->deserialize( $itemJson ),
 			$request->getLanguageCode()
 		);
+
+		usort( $item->statements, function( SimpleStatement $s0, SimpleStatement $s1 ) {
+			return $s0->propertyId->getNumericId() <=> $s1->propertyId->getNumericId();
+		} );
+
+		return $item;
 	}
 
 	private function getItemJson( string $id ): array {

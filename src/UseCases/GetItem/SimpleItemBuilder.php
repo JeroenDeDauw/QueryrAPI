@@ -5,7 +5,6 @@ namespace Queryr\WebApi\UseCases\GetItem;
 use Queryr\WebApi\ResponseModel\SimpleStatementsBuilder;
 use Queryr\WebApi\UrlBuilder;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\ItemId;
 
 /**
  * @licence GNU GPL v2+

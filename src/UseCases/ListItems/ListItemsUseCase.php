@@ -6,8 +6,6 @@ namespace Queryr\WebApi\UseCases\ListItems;
 
 use Queryr\EntityStore\Data\ItemInfo;
 use Queryr\EntityStore\ItemStore;
-use Queryr\WebApi\UseCases\ListItems\ItemList;
-use Queryr\WebApi\UseCases\ListItems\ItemListElement;
 use Queryr\WebApi\UrlBuilder;
 use Wikibase\DataModel\Entity\ItemId;
 

@@ -6,8 +6,6 @@ namespace Queryr\WebApi\UseCases\ListProperties;
 
 use Queryr\EntityStore\Data\PropertyInfo;
 use Queryr\EntityStore\PropertyStore;
-use Queryr\WebApi\UseCases\ListProperties\PropertyList;
-use Queryr\WebApi\UseCases\ListProperties\PropertyListElement;
 use Queryr\WebApi\UrlBuilder;
 use Wikibase\DataModel\Entity\PropertyId;
 

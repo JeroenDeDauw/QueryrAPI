@@ -8,6 +8,7 @@ use Deserializers\Deserializer;
 use OhMyPhp\NoNullableReturnTypesException;
 use Queryr\EntityStore\PropertyStore;
 use Queryr\TermStore\LabelLookup;
+use Queryr\WebApi\ResponseModel\SimpleStatement;
 use Queryr\WebApi\ResponseModel\SimpleStatementsBuilder;
 use Queryr\WebApi\UrlBuilder;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -37,7 +38,13 @@ class GetPropertyUseCase {
 
 		$simplePropertyBuilder = $this->newSimplePropertyBuilder( $request->getLanguageCode() );
 
-		return $simplePropertyBuilder->buildFromProperty( $this->propertyDeserializer->deserialize( $propertyJson ) );
+		$property = $simplePropertyBuilder->buildFromProperty( $this->propertyDeserializer->deserialize( $propertyJson ) );
+
+		usort( $property->statements, function( SimpleStatement $s0, SimpleStatement $s1 ) {
+			return $s0->propertyId->getNumericId() <=> $s1->propertyId->getNumericId();
+		} );
+
+		return $property;
 	}
 
 	private function getPropertyJson( string $id ): array {
