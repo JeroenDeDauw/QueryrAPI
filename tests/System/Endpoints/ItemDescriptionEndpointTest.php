@@ -18,12 +18,12 @@ class ItemDescriptionEndpointTest extends ApiTestCase {
 		$this->assert404( $client->getResponse() );
 	}
 
-	public function testGivenNonItemId_404isReturned() {
+	public function testGivenNonItemId_400isReturned() {
 		$client = $this->createClient();
 
 		$client->request( 'GET', '/items/YouMadBro/description' );
 
-		$this->assert404( $client->getResponse(), 'No route found for "GET /items/YouMadBro/description"' );
+		$this->assert400( $client->getResponse(), 'Invalid id' );
 	}
 
 	public function testGivenKnownItemId_itemDescriptionIsReturned() {

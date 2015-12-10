@@ -70,7 +70,7 @@ $app->get(
 		);
 
 		if ( $label === null ) {
-			return $this->app->json( [
+			return $app->json( [
 				'message' => 'Not Found',
 				'code' => 404,
 			], 404 );
@@ -86,7 +86,7 @@ $app->get(
 		$itemRow = $apiFactory->getItemStore()->getItemRowByNumericItemId( (int)substr( $id, 1 ) );
 
 		if ( $itemRow === null ) {
-			return $this->app->json( [
+			return $app->json( [
 				'message' => 'Not Found',
 				'code' => 404,
 			], 404 );
@@ -100,7 +100,7 @@ $app->get(
 		);
 
 		if ( !$item->getFingerprint()->hasDescription( 'en' ) ) {
-			return $this->app->json( [
+			return $app->json( [
 				'message' => 'Not Found',
 				'code' => 404,
 			], 404 );
@@ -142,6 +142,16 @@ $app->get(
 		return ( new GetItemTypesEndpoint( $app, $apiFactory ) )->getResult( $request );
 	}
 );
+
+$invalidIdHandler = function() use ( $app, $apiFactory ) {
+	return $app->json( [
+		'message' => 'Invalid id',
+		'code' => 400,
+	], 400 );
+};
+
+$app->get( 'items/{item_id}', $invalidIdHandler );
+$app->get( 'items/{item_id}/{more_stuff}', $invalidIdHandler )->assert( 'more_stuff', '.+' );
 
 $app->get(
 	'properties',

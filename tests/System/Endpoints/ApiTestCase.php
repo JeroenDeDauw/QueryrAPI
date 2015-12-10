@@ -62,6 +62,20 @@ abstract class ApiTestCase extends WebTestCase {
 		$this->assertSame( 404, $response->getStatusCode() );
 	}
 
+	protected function assert400( Response $response, $expectedMessage ) {
+		$this->assertJson( $response->getContent(), 'response is json' );
+
+		$this->assertJsonResponse(
+			[
+				'message' => $expectedMessage,
+				'code' => 400,
+			],
+			$response
+		);
+
+		$this->assertSame( 400, $response->getStatusCode() );
+	}
+
 	private function assertJsonResponse( $expected, Response $response ) {
 		$this->assertSame(
 			json_encode( $expected, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES ),
