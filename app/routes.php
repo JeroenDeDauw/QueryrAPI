@@ -134,7 +134,7 @@ $app->get(
 	function( Application $app, string $item_id, string $property_id ) use ( $apiFactory ) {
 		return ( new GetItemPropertyDataEndpoint( $app, $apiFactory ) )->getResult( $item_id, $property_id );
 	}
-)->assert( 'item_id', $ITEM_ID_REGEX );
+)->assert( 'item_id', $ITEM_ID_REGEX )->assert( 'property_id', $PROPERTY_ID_REGEX );
 
 $app->get(
 	'items/types',

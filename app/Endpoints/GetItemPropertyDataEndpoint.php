@@ -15,13 +15,13 @@ use Silex\Application;
 class GetItemPropertyDataEndpoint {
 	use EndpointConstructor;
 
-	public function getResult( string $itemId, string $propertyLabel ) {
+	public function getResult( string $itemId, string $propertyId ) {
 		$listingRequest = new GetItemRequest( $itemId );
 
 		try {
 			$item = $this->apiFactory->newGetItemUseCase()->getItem( $listingRequest );
 			$json = $this->apiFactory->newSimpleItemSerializer()->serialize( $item );
-			$data = array_key_exists( $propertyLabel, $json['data'] ) ? $json['data'][$propertyLabel] : [];
+			$data = array_key_exists( $propertyId, $json['data'] ) ? $json['data'][$propertyId] : [];
 			return $this->app->json( $data, 200 );
 		}
 		catch ( NoNullableReturnTypesException $ex ) {

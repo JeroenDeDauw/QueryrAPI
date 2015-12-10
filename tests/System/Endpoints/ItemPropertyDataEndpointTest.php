@@ -31,6 +31,14 @@ class ItemPropertyDataEndpointTest extends ApiTestCase {
 		$this->assert400( $client->getResponse(), 'Invalid id' );
 	}
 
+	public function testGivenNonPropertyId_400isReturned() {
+		$client = $this->createClient();
+
+		$client->request( 'GET', '/items/Q1337/data/YouMadBro' );
+
+		$this->assert400( $client->getResponse(), 'Invalid id' );
+	}
+
 	public function testGivenKnownItemId_itemPropertyDataIsReturned() {
 		$this->testEnvironment->insertItem( ( new Wikidata() )->newItem() );
 		$this->testEnvironment->insertItem( ( new WikimediaProject() )->newItem() );
