@@ -90,12 +90,12 @@ class PropertyEndpointTest extends ApiTestCase {
 		$this->assertJson( $client->getResponse()->getContent(), 'response is json' );
 	}
 
-	public function testGivenNonPropertyId_404isReturned() {
+	public function testGivenNonPropertyId_400isReturned() {
 		$client = $this->createClient();
 
 		$client->request( 'GET', '/properties/YouMadBro' );
 
-		$this->assert404( $client->getResponse(), 'No route found for "GET /properties/YouMadBro"' );
+		$this->assert400( $client->getResponse(), 'Invalid id' );
 	}
 
 }

@@ -228,6 +228,9 @@ $app->get(
 	}
 )->assert( 'id', $PROPERTY_ID_REGEX );
 
+$app->get( 'properties/{property_id}', $invalidIdHandler );
+$app->get( 'properties/{property_id}/{more_stuff}', $invalidIdHandler )->assert( 'more_stuff', '.+' );
+
 $swaggerRoute = function( Request $request ) {
 	return str_replace(
 		[

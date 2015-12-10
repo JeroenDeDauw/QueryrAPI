@@ -72,6 +72,7 @@ When accessing the API via `web/index.dev.php`, profiling information will be ge
 ### Version 0.3 (dev)
 
 * Elements in the data section of the item and property GET response are now ordered by property id
+* Invalid item and property ids now cause a 400 response code instead of a 404 one
 
 ### Version 0.2 (2015-12-06)
 

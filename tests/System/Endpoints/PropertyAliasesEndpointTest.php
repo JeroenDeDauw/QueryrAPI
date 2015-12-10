@@ -20,12 +20,12 @@ class PropertyAliasesEndpointTest extends ApiTestCase {
 //		$this->assert404( $client->getResponse() );
 //	}
 
-	public function testGivenNonPropertyId_404isReturned() {
+	public function testGivenNonPropertyId_400isReturned() {
 		$client = $this->createClient();
 
 		$client->request( 'GET', '/properties/YouMadBro/aliases' );
 
-		$this->assert404( $client->getResponse(), 'No route found for "GET /properties/YouMadBro/aliases"' );
+		$this->assert400( $client->getResponse(), 'Invalid id' );
 	}
 
 	public function testGivenKnownPropertyId_propertyLabelIsReturned() {
