@@ -15,8 +15,8 @@ class PropertyListElement {
 	private $pageUrl;
 	private $apiUrl;
 
-	public function __construct( PropertyId $propertyId, string $propertyType, string $pageUrl, string $apiUrl ) {
-		$this->propertyId = $propertyId;
+	public function __construct( PropertyId $id, string $propertyType, string $pageUrl, string $apiUrl ) {
+		$this->propertyId = $id;
 		$this->propertyType = $propertyType;
 		$this->pageUrl = $pageUrl;
 		$this->apiUrl = $apiUrl;

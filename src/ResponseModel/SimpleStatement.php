@@ -3,7 +3,7 @@
 namespace Queryr\WebApi\ResponseModel;
 
 use DataValues\DataValue;
-use OhMyPhp\ValueObjectsInPhpStuckBalls;
+use OhMyPhp\ValueObjectsInPhpSuckBalls;
 use Wikibase\DataModel\Entity\PropertyId;
 
 /**
@@ -11,7 +11,7 @@ use Wikibase\DataModel\Entity\PropertyId;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class SimpleStatement {
-	use ValueObjectsInPhpStuckBalls;
+	use ValueObjectsInPhpSuckBalls;
 
 	public static function newInstance() {
 		return new self();

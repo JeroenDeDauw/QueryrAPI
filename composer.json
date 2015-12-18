@@ -28,7 +28,7 @@
 		"queryr/entity-store": "~1.0",
 		"queryr/term-store": "~1.0",
 
-		"jeroen/oh-my-php": "~0.1"
+		"jeroen/oh-my-php": "~0.2.0"
 	},
 	"require-dev": {
 		"ext-pdo_sqlite": "*",
