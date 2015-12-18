@@ -4,11 +4,11 @@ namespace Queryr\WebApi\Tests\Unit\UseCases\GetItem;
 
 use DataValues\StringValue;
 use Queryr\TermStore\LabelLookup;
-use Queryr\WebApi\UrlBuilder;
-use Queryr\WebApi\UseCases\GetItem\SimpleItemBuilder;
-use Queryr\WebApi\ResponseModel\SimpleStatementsBuilder;
-use Queryr\WebApi\UseCases\GetItem\SimpleItem;
 use Queryr\WebApi\ResponseModel\SimpleStatement;
+use Queryr\WebApi\ResponseModel\SimpleStatementsBuilder;
+use Queryr\WebApi\UrlBuilder;
+use Queryr\WebApi\UseCases\GetItem\SimpleItem;
+use Queryr\WebApi\UseCases\GetItem\SimpleItemBuilder;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SiteLinkList;

@@ -2,9 +2,9 @@
 
 namespace Tests\Queryr\Serialization;
 
+use Queryr\WebApi\Serializers\PropertyListSerializer;
 use Queryr\WebApi\UseCases\ListProperties\PropertyList;
 use Queryr\WebApi\UseCases\ListProperties\PropertyListElement;
-use Queryr\WebApi\Serializers\SerializerFactory;
 use Serializers\Exceptions\UnsupportedObjectException;
 use Wikibase\DataModel\Entity\PropertyId;
 
@@ -17,7 +17,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 class PropertyListSerializerTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGivenNonItem_exceptionIsThrown() {
-		$serializer = ( new SerializerFactory() )->newPropertyListSerializer();
+		$serializer = new PropertyListSerializer();
 
 		$this->setExpectedException( UnsupportedObjectException::class );
 		$serializer->serialize( null );
@@ -54,7 +54,7 @@ class PropertyListSerializerTest extends \PHPUnit_Framework_TestCase {
 			]
 		];
 
-		$output = ( new SerializerFactory() )->newPropertyListSerializer()->serialize( $input );
+		$output = ( new PropertyListSerializer() )->serialize( $input );
 
 		$this->assertSame( $expected, $output );
 	}

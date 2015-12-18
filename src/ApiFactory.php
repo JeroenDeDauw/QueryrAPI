@@ -20,9 +20,12 @@ use Queryr\TermStore\TermStoreConfig;
 use Queryr\TermStore\TermStoreFactory;
 use Queryr\TermStore\TermStoreInstaller;
 use Queryr\TermStore\TermStoreWriter;
-use Queryr\WebApi\Serializers\SerializerFactory as QueryrSerializerFactory;
+use Queryr\WebApi\Serializers\ItemListSerializer;
+use Queryr\WebApi\Serializers\ItemTypeSerializer;
+use Queryr\WebApi\Serializers\PropertyListSerializer;
 use Queryr\WebApi\Serializers\SimpleEntitySerializer;
 use Queryr\WebApi\Serializers\SimpleItemSerializer;
+use Queryr\WebApi\Serializers\SimplePropertySerializer;
 use Queryr\WebApi\Serializers\SimpleStatementSerializer;
 use Queryr\WebApi\UseCases\GetItem\GetItemUseCase;
 use Queryr\WebApi\UseCases\GetProperty\GetPropertyUseCase;
@@ -194,11 +197,11 @@ class ApiFactory {
 	}
 
 	public function newItemListSerializer(): Serializer {
-		return ( new QueryrSerializerFactory() )->newItemListSerializer();
+		return new ItemListSerializer();
 	}
 
 	public function newPropertyListSerializer(): Serializer {
-		return ( new QueryrSerializerFactory() )->newPropertyListSerializer();
+		return new PropertyListSerializer();
 	}
 
 	public function getEntitySerializer(): Serializer {
@@ -243,11 +246,13 @@ class ApiFactory {
 	}
 
 	public function newSimplePropertySerializer(): Serializer {
-		return ( new QueryrSerializerFactory() )->newSimplePropertySerializer();
+		return new SimplePropertySerializer(
+			new SimpleEntitySerializer( new SimpleStatementSerializer() )
+		);
 	}
 
 	public function getItemTypeSerializer(): Serializer {
-		return ( new QueryrSerializerFactory() )->newItemTypeSerializer();
+		return new ItemTypeSerializer();
 	}
 
 }

@@ -4,10 +4,9 @@ namespace Tests\Queryr\Serialization;
 
 use DataValues\NumberValue;
 use DataValues\StringValue;
+use Queryr\WebApi\ResponseModel\SimpleStatement;
 use Queryr\WebApi\Tests\TestEnvironment;
 use Queryr\WebApi\UseCases\GetItem\SimpleItem;
-use Queryr\WebApi\ResponseModel\SimpleStatement;
-use Queryr\WebApi\Serializers\SerializerFactory;
 use Serializers\Exceptions\UnsupportedObjectException;
 use Wikibase\DataModel\Entity\PropertyId;
 

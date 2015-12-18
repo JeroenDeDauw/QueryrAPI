@@ -5,8 +5,10 @@ namespace Tests\Queryr\Serialization;
 use DataValues\NumberValue;
 use DataValues\StringValue;
 use Queryr\WebApi\ResponseModel\SimpleStatement;
+use Queryr\WebApi\Serializers\SimpleEntitySerializer;
+use Queryr\WebApi\Serializers\SimplePropertySerializer;
+use Queryr\WebApi\Serializers\SimpleStatementSerializer;
 use Queryr\WebApi\UseCases\GetProperty\SimpleProperty;
-use Queryr\WebApi\Serializers\SerializerFactory;
 use Serializers\Exceptions\UnsupportedObjectException;
 use Wikibase\DataModel\Entity\PropertyId;
 
@@ -18,8 +20,14 @@ use Wikibase\DataModel\Entity\PropertyId;
  */
 class SimplePropertySerializerTest extends \PHPUnit_Framework_TestCase {
 
+	private function newSerializer() {
+		return new SimplePropertySerializer(
+			new SimpleEntitySerializer( new SimpleStatementSerializer() )
+		);
+	}
+
 	public function testGivenNonItem_exceptionIsThrown() {
-		$serializer = ( new SerializerFactory() )->newSimplePropertySerializer();
+		$serializer = $this->newSerializer();
 
 		$this->setExpectedException( UnsupportedObjectException::class );
 		$serializer->serialize( null );
@@ -65,8 +73,7 @@ class SimplePropertySerializerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testSerializationWithValueForTwoProperties() {
-		$serializer = ( new SerializerFactory() )->newSimplePropertySerializer();
-		$serialized = $serializer->serialize( $this->newSimpleProperty() );
+		$serialized = $this->newSerializer()->serialize( $this->newSimpleProperty() );
 
 		$expected = [
 			'id' => [

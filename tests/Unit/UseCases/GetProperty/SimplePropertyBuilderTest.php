@@ -5,8 +5,8 @@ namespace Queryr\WebApi\Tests\Unit\UseCases\GetProperty;
 use Queryr\TermStore\LabelLookup;
 use Queryr\WebApi\ResponseModel\SimpleStatementsBuilder;
 use Queryr\WebApi\UrlBuilder;
-use Queryr\WebApi\UseCases\GetProperty\SimplePropertyBuilder;
 use Queryr\WebApi\UseCases\GetProperty\SimpleProperty;
+use Queryr\WebApi\UseCases\GetProperty\SimplePropertyBuilder;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Term\Fingerprint;
 

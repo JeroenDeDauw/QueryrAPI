@@ -4,10 +4,10 @@ namespace Queryr\WebApi\Tests\Integration\UseCases;
 
 use Queryr\EntityStore\Data\PropertyInfo;
 use Queryr\EntityStore\Data\PropertyRow;
-use Queryr\WebApi\UseCases\ListProperties\PropertyList;
-use Queryr\WebApi\UseCases\ListProperties\PropertyListElement;
 use Queryr\WebApi\ApiFactory;
 use Queryr\WebApi\Tests\TestEnvironment;
+use Queryr\WebApi\UseCases\ListProperties\PropertyList;
+use Queryr\WebApi\UseCases\ListProperties\PropertyListElement;
 use Queryr\WebApi\UseCases\ListProperties\PropertyListingRequest;
 use Wikibase\DataModel\Entity\PropertyId;
 

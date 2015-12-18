@@ -2,11 +2,10 @@
 
 namespace Tests\Queryr\Serialization;
 
+use Queryr\WebApi\Serializers\ItemListSerializer;
 use Queryr\WebApi\UseCases\ListItems\ItemList;
 use Queryr\WebApi\UseCases\ListItems\ItemListElement;
-use Queryr\WebApi\Serializers\SerializerFactory;
 use Serializers\Exceptions\UnsupportedObjectException;
-use Serializers\Tests\Phpunit\Exceptions\UnsupportedObjectExceptionTest;
 use Wikibase\DataModel\Entity\ItemId;
 
 /**
@@ -18,7 +17,7 @@ use Wikibase\DataModel\Entity\ItemId;
 class ItemListSerializerTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGivenNonItem_exceptionIsThrown() {
-		$serializer = ( new SerializerFactory() )->newItemListSerializer();
+		$serializer = new ItemListSerializer();
 
 		$this->setExpectedException( UnsupportedObjectException::class );
 		$serializer->serialize( null );
@@ -58,7 +57,7 @@ class ItemListSerializerTest extends \PHPUnit_Framework_TestCase {
 			]
 		];
 
-		$output = ( new SerializerFactory() )->newItemListSerializer()->serialize( $input );
+		$output = ( new ItemListSerializer() )->serialize( $input );
 
 		$this->assertEquals( $expected, $output );
 	}
