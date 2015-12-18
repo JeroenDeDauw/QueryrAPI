@@ -67,7 +67,6 @@ class SimplePropertySerializerTest extends \PHPUnit_Framework_TestCase {
 		$property->aliasesUrl = 'http://aliases';
 		$property->dataUrl = 'http://data';
 		$property->wikidataUrl = 'http://wikidata';
-		$property->wikipediaHtmlUrl = 'http://wikipedia';
 
 		return $property;
 	}
