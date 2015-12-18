@@ -32,6 +32,7 @@ abstract class ApiTestCase extends WebTestCase {
 	}
 
 	public function createApplication() : Application {
+		/** @noinspection PhpUnusedLocalVariableInspection */
 		$apiFactory = $this->apiFactory;
 		$app = require __DIR__ . ' /../../../app/bootstrap.php';
 
