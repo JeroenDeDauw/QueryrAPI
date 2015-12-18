@@ -16,39 +16,26 @@ class ItemType {
 	private $apiUrl;
 	private $wikidataUrl;
 
-	/**
-	 * @param string $apiUrl
-	 */
-	public function setApiUrl( $apiUrl ) {
+	public function setApiUrl( string $apiUrl ) {
 		$this->apiUrl = $apiUrl;
 	}
 
-	/**
-	 * @param ItemId $itemId
-	 */
 	public function setItemId( ItemId $itemId ) {
 		$this->itemId = $itemId;
 	}
 
-	/**
-	 * @param string $label
-	 */
-	public function setLabel( $label ) {
+	public function setLabel( string $label ) {
 		$this->label = $label;
 	}
 
-	/**
-	 * @param string $wikidataUrl
-	 */
-	public function setWikidataUrl( $wikidataUrl ) {
+	public function setWikidataUrl( string $wikidataUrl ) {
 		$this->wikidataUrl = $wikidataUrl;
 	}
 
 	/**
-	 * @return string
 	 * @throws RuntimeException
 	 */
-	public function getApiUrl() {
+	public function getApiUrl(): string {
 		if ( $this->apiUrl === null ) {
 			throw new RuntimeException( 'Field not set' );
 		}
@@ -56,10 +43,9 @@ class ItemType {
 	}
 
 	/**
-	 * @return ItemId
 	 * @throws RuntimeException
 	 */
-	public function getItemId() {
+	public function getItemId(): ItemId {
 		if ( $this->itemId === null ) {
 			throw new RuntimeException( 'Field not set' );
 		}
@@ -67,10 +53,9 @@ class ItemType {
 	}
 
 	/**
-	 * @return string
 	 * @throws RuntimeException
 	 */
-	public function getLabel() {
+	public function getLabel(): string {
 		if ( $this->label === null ) {
 			throw new RuntimeException( 'Field not set' );
 		}
@@ -78,10 +63,9 @@ class ItemType {
 	}
 
 	/**
-	 * @return string
 	 * @throws RuntimeException
 	 */
-	public function getWikidataUrl() {
+	public function getWikidataUrl(): string {
 		if ( $this->wikidataUrl === null ) {
 			throw new RuntimeException( 'Field not set' );
 		}

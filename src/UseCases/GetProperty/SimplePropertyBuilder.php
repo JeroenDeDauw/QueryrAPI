@@ -34,7 +34,7 @@ class SimplePropertyBuilder {
 		$this->urlBuilder = $urlBuilder;
 	}
 
-	public function buildFromProperty( Property $property ) {
+	public function buildFromProperty( Property $property ): SimpleProperty {
 		$this->property = $property;
 		$this->simpleProperty = new SimpleProperty();
 

@@ -20,7 +20,7 @@ class ItemList {
 	/**
 	 * @return ItemListElement[]
 	 */
-	public function getElements() {
+	public function getElements(): array {
 		return $this->elements;
 	}
 

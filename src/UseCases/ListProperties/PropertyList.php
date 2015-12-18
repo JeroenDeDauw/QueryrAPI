@@ -20,7 +20,7 @@ class PropertyList {
 	/**
 	 * @return PropertyListElement[]
 	 */
-	public function getElements() {
+	public function getElements(): array {
 		return $this->elements;
 	}
 

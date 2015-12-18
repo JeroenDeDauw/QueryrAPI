@@ -34,7 +34,7 @@ class SimpleItemBuilder {
 		$this->urlBuilder = $urlBuilder;
 	}
 
-	public function buildFromItem( Item $item ) {
+	public function buildFromItem( Item $item ): SimpleItem {
 		$this->item = $item;
 		$this->simpleItem = new SimpleItem();
 
