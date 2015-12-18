@@ -60,16 +60,12 @@ class SimpleItemSerializerTest extends \PHPUnit_Framework_TestCase {
 		$item->aliasesUrl = 'http://aliases';
 		$item->dataUrl = 'http://data';
 		$item->wikidataUrl = 'http://wikidata';
-		$item->wikipediaHtmlUrl = 'http://wikipedia';
 
 		return $item;
 	}
 
-	public function testSerializationWithValueForTwoProperties() {
-		$serializer = TestEnvironment::newInstance()->getFactory()->newSimpleItemSerializer();
-		$serialized = $serializer->serialize( $this->newSimpleItem() );
-
-		$expected = [
+	private function newSimpleItemSerialization() {
+		return [
 			'id' => [
 				'wikidata' => 'Q1337',
 				'en.wikipedia' => 'Kitten',
@@ -106,11 +102,29 @@ class SimpleItemSerializerTest extends \PHPUnit_Framework_TestCase {
 					'values' => [ 'Jeroen', 'Abraham' ],
 					'type' => 'string'
 				],
-			],
-			'wikipedia_html_url' => 'http://wikipedia'
+			]
 		];
+	}
 
-		$this->assertEquals( $expected, $serialized );
+	public function testSerializationWithValueForTwoProperties() {
+		$serializer = TestEnvironment::newInstance()->getFactory()->newSimpleItemSerializer();
+
+		$this->assertEquals(
+			$this->newSimpleItemSerialization(),
+			$serializer->serialize( $this->newSimpleItem() )
+		);
+	}
+
+	public function testWithWikipediaHtmlUrl() {
+		$serializer = TestEnvironment::newInstance()->getFactory()->newSimpleItemSerializer();
+
+		$simpleItem = $this->newSimpleItem();
+		$simpleItem->wikipediaHtmlUrl = 'http://wikipedia';
+
+		$expected = $this->newSimpleItemSerialization();
+		$expected['wikipedia_html_url'] = 'http://wikipedia';
+
+		$this->assertEquals( $expected, $serializer->serialize( $simpleItem ) );
 	}
 
 }

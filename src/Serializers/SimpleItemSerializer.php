@@ -33,7 +33,9 @@ class SimpleItemSerializer implements Serializer {
 	private function serializeItem( SimpleItem $item ): array {
 		$serialization = $this->entitySerializer->serialize( $item );
 
-		$serialization['wikipedia_html_url'] = $item->wikipediaHtmlUrl;
+		if ( $item->wikipediaHtmlUrl !== '' ) {
+			$serialization['wikipedia_html_url'] = $item->wikipediaHtmlUrl;
+		}
 
 		return $serialization;
 	}
