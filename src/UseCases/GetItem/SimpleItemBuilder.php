@@ -60,9 +60,14 @@ class SimpleItemBuilder {
 	private function addIdLinkForLanguage( $languageCode ) {
 		$links = $this->item->getSiteLinkList();
 
-		if ( $links->hasLinkWithSiteId( $languageCode . 'wiki' ) ) {
-			$this->simpleItem->ids[$languageCode . '_wikipedia'] = $links->getBySiteId( $languageCode . 'wiki' )->getPageName();
+		if ( $links->hasLinkWithSiteId( $this->getWikiId( $languageCode ) ) ) {
+			$this->simpleItem->ids[$languageCode . '_wikipedia'] =
+				$links->getBySiteId( $this->getWikiId( $languageCode ) )->getPageName();
 		}
+	}
+
+	private function getWikiId( string $languageCode ): string {
+		return $languageCode . 'wiki';
 	}
 
 	private function addLabel() {
@@ -92,13 +97,25 @@ class SimpleItemBuilder {
 		$this->simpleItem->aliasesUrl = $builder->getApiItemAliasesUrl( $id );
 
 		$this->simpleItem->wikidataUrl = $builder->getWdEntityUrl( $id );
-		$this->simpleItem->wikipediaHtmlUrl = $builder->getSiteLinkBasedRerirectUrl( 'enwiki', $id );
+
+		$this->addWikipediaHtmlUrl();
 
 		$this->simpleItem->dataUrl = $builder->getApiItemDataUrl( $id );
 	}
 
 	private function addStatements() {
 		$this->simpleItem->statements = $this->statementsBuilder->buildFromStatements( $this->item->getStatements() );
+	}
+
+	private function addWikipediaHtmlUrl() {
+		$wikiId = $this->getWikiId( $this->languageCode );
+
+		if ( $this->item->getSiteLinkList()->hasLinkWithSiteId( $wikiId ) ) {
+			$this->simpleItem->wikipediaHtmlUrl = $this->urlBuilder->getSiteLinkBasedRerirectUrl(
+				$wikiId,
+				$this->item->getId()
+			);
+		}
 	}
 
 }

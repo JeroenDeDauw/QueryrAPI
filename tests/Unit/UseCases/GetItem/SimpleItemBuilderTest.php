@@ -95,7 +95,7 @@ class SimpleItemBuilderTest extends \PHPUnit_Framework_TestCase {
 		$expected->aliasesUrl = 'http://test/items/Q1337/aliases';
 		$expected->dataUrl = 'http://test/items/Q1337/data';
 		$expected->wikidataUrl = 'https://www.wikidata.org/entity/Q1337';
-		$expected->wikipediaHtmlUrl = 'https://www.wikidata.org/wiki/Special:GoToLinkedPage/enwiki/Q1337';
+		$expected->wikipediaHtmlUrl = 'https://www.wikidata.org/wiki/Special:GoToLinkedPage/dewiki/Q1337';
 
 		$this->assertEquals( $expected, $simpleItem );
 	}
@@ -169,7 +169,6 @@ class SimpleItemBuilderTest extends \PHPUnit_Framework_TestCase {
 		$expected->aliasesUrl = 'http://test/items/Q1337/aliases';
 		$expected->dataUrl = 'http://test/items/Q1337/data';
 		$expected->wikidataUrl = 'https://www.wikidata.org/entity/Q1337';
-		$expected->wikipediaHtmlUrl = 'https://www.wikidata.org/wiki/Special:GoToLinkedPage/enwiki/Q1337';
 
 		$this->assertEquals( $expected, $simpleItem );
 	}
