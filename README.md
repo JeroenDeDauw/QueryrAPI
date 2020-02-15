@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/JeroenDeDauw/QueryrAPI.svg)](https://travis-ci.org/JeroenDeDauw/QueryrAPI)
 
-QueryR API is an application that provides a REST webservice for accessing [Wikibase]
-(http://wikiba.se) data.
+QueryR API is an application that provides a REST webservice for accessing
+[Wikibase](http://wikiba.se) data.
 
 ## System dependencies
 
@@ -13,8 +13,8 @@ QueryR API is an application that provides a REST webservice for accessing [Wiki
     composer install
     cp app/config/db-example.json app/config/db.json
 
-The database schema can be initialized via the install command of the [Replicator CLI tool]
-(https://github.com/JeroenDeDauw/Replicator).
+The database schema can be initialized via the install command of the
+[Replicator CLI tool](https://github.com/JeroenDeDauw/Replicator).
 
 ## Running the API
 
